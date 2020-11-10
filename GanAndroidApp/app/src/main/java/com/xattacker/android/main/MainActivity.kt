@@ -27,7 +27,7 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
     private var _msgEdit: EditText? = null
     private var _receivedMsgEdit: EditText? = null
 
-    public override fun onCreate(savedInstanceState: Bundle)
+    public override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
 
@@ -35,7 +35,7 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
         {
             // 122.254.39.227 // home
             // 192.168.226.50 // office
-            GanClient.constructInstance("192.168.226.50", 5999, this)
+            GanClient.initial("192.168.226.36", 5999, this)
         }
         catch (ex: Exception)
         {
@@ -115,39 +115,24 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
                 val account = _accountEdit?.text.toString()
                 val pwd = _pwdEdit?.text.toString()
 
-                asyncRun(object : AsyncRunnable
+                asyncRun(
                 {
-                    @Throws(Exception::class)
-                    override fun run()
-                    {
                         val result: Boolean = GanClient.instance?.accountService?.login(account, pwd) ?: false
                         Log.i("aaa", "login $result")
                         showToast("login result: $result")
-                    }
-
-                    override fun onExceptionHappened(th: Throwable?)
-                    {
-                    }
                 })
             }
 
             2 ->
             {
-                asyncRun(object : AsyncRunnable
+                asyncRun(
                 {
-                    @Throws(Exception::class)
-                    override fun run()
-                    {
                         val result: Boolean = GanClient.instance?.accountService?.logout() ?: false
                         Log.i("aaa", "logout $result")
                         showToast("logout result: $result")
-                    }
-
-                    override fun onExceptionHappened(th: Throwable?)
-                    {
-                    }
                 })
-                _receivedMsgEdit!!.setText("")
+
+                _receivedMsgEdit?.setText("")
             }
 
             3 ->
@@ -155,29 +140,18 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
                 val receiver = _receiverEdit?.text.toString()
                 val msg = _msgEdit?.text.toString()
 
-                asyncRun(object : AsyncRunnable
+                asyncRun(
                 {
-                    @Throws(Exception::class)
-                    override fun run()
-                    {
                         val result: Boolean = GanClient.instance?.smsService?.sendMsg(receiver, msg) ?: false
                         Log.i("aaa", "send msg $result")
                         showToast("send msg result: $result")
-                    }
-
-                    override fun onExceptionHappened(th: Throwable?)
-                    {
-                    }
                 })
             }
 
             4 ->
             {
-                asyncRun(object : AsyncRunnable
+                asyncRun(
                 {
-                    @Throws(Exception::class)
-                    override fun run()
-                    {
                         val ip = GanClient.instance?.systemService?.getIPAddress()
                         if (ip != null)
                         {
@@ -188,21 +162,13 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
                         {
                             showToast("get IP failed ")
                         }
-                    }
-
-                    override fun onExceptionHappened(th: Throwable?)
-                    {
-                    }
                 })
             }
 
             5 ->
             {
-                asyncRun(object : AsyncRunnable
+                asyncRun(
                 {
-                    @Throws(Exception::class)
-                    override fun run()
-                    {
                         val time = GanClient.instance?.systemService?.getSystemTime()
                         if (time != null)
                         {
@@ -214,11 +180,6 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
                         {
                             showToast("get time failed")
                         }
-                    }
-
-                    override fun onExceptionHappened(th: Throwable?)
-                    {
-                    }
                 })
             }
         }
@@ -250,14 +211,7 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
         })
     }
 
-    interface AsyncRunnable
-    {
-        @Throws(Exception::class)
-        fun run()
-        fun onExceptionHappened(th: Throwable?)
-    }
-
-    protected fun asyncRun(run: AsyncRunnable, delay: Int = 0)
+    private fun asyncRun(run: () -> Unit, onError: ((th: Throwable) -> Unit)? = null, delay: Int = 0)
     {
         try
         {
@@ -272,12 +226,12 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
                         {
                             sleep(delay.toLong())
                         }
-                        run.run()
+                        run()
                     }
                     catch (th: Throwable)
                     {
                         showToast(if (th.localizedMessage != null) th.localizedMessage else th.toString())
-                        run.onExceptionHappened(th)
+                        onError?.invoke(th)
                     }
                 }
             }.start()
@@ -285,7 +239,7 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
         catch (th: Throwable)
         {
             showToast(th.localizedMessage)
-            run.onExceptionHappened(th)
+            onError?.invoke(th)
         }
     }
 
@@ -303,7 +257,7 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
             return version
         }
 
-    protected fun showToast(text: String?)
+    private fun showToast(text: String?)
     {
         if (isMainThread)
         {
@@ -321,13 +275,20 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
         }
     }
 
-    protected val isMainThread: Boolean
-        protected get() = (Looper.getMainLooper() == Looper.myLooper())
-    protected val isOnEmulator: Boolean
-        protected get()
+    private val isMainThread: Boolean
+         get() = (Looper.getMainLooper() == Looper.myLooper())
+
+    private val isOnEmulator: Boolean
+        get()
         {
             val android_id: String = Settings.Secure.ANDROID_ID
             val product = Build.PRODUCT
-            return ("sdk".equals(product, ignoreCase = true) || "google_sdk".equals(product, ignoreCase = true) || "sdk_x86".equals(product, ignoreCase = true) || "sdk_google_phone_x86".equals(product, ignoreCase = true) || "vbox86p".equals(product, ignoreCase = true) || (android_id == null) || android_id.equals("9774D56D682E549C", ignoreCase = true))
+            return ("sdk".equals(product, ignoreCase = true) ||
+                    "google_sdk".equals(product, ignoreCase = true) ||
+                    "sdk_x86".equals(product, ignoreCase = true) ||
+                    "sdk_google_phone_x86".equals(product, ignoreCase = true) ||
+                    "vbox86p".equals(product, ignoreCase = true) ||
+                    (android_id == null) ||
+                    android_id.equals("9774D56D682E549C", ignoreCase = true))
         }
 }

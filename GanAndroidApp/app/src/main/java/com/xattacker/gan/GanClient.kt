@@ -14,13 +14,15 @@ import com.xattacker.gan.service.SystemService
 import com.xattacker.util.IOUtility
 
 import java.io.ByteArrayOutputStream
+import java.lang.ref.WeakReference
 import java.net.InetSocketAddress
 import java.net.Socket
 
 class GanClient private constructor(private val _address: String, private val _port: Int, aListener: GanClientListener) : Runnable, GanAgent, AccountServiceListener
 {
     private var _socket: Socket? = null
-    private var _listener: GanClientListener?
+
+    private var _listener: WeakReference<GanClientListener>?
 
     override var account: String? = null
         private set
@@ -40,7 +42,7 @@ class GanClient private constructor(private val _address: String, private val _p
             private set
 
         @Throws(Exception::class)
-        fun constructInstance(aAddress: String, aPort: Int, aListener: GanClientListener)
+        fun initial(aAddress: String, aPort: Int, aListener: GanClientListener)
         {
             if (instance == null)
             {
@@ -57,7 +59,7 @@ class GanClient private constructor(private val _address: String, private val _p
 
     init
     {
-        _listener = aListener
+        _listener = WeakReference(aListener)
     }
 
     override fun run()
@@ -104,13 +106,13 @@ class GanClient private constructor(private val _address: String, private val _p
                                 val sender: String = binary.readString() ?: ""
                                 val time: Long = binary.readLong() ?: 0
                                 val msg: String = binary.readString() ?: ""
-                                _listener?.onSMSReceived(sender, time, msg)
+                                _listener?.get()?.onSMSReceived(sender, time, msg)
                             }
 
                             2 ->
                             {
                                 closeConnection()
-                                _listener?.onAccountClosed(account ?: "")
+                                _listener?.get()?.onAccountClosed(account ?: "")
                                 account = null
                                 sessionId = null
                             }
@@ -151,7 +153,7 @@ class GanClient private constructor(private val _address: String, private val _p
             _socket?.soTimeout = 0
             _socket?.oobInline = true
 
-            _listener?.onAccountLogined(account ?: "")
+            _listener?.get()?.onAccountLogined(account ?: "")
 
             start()
         }
