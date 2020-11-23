@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15C7E54AAA06F201AE455628 /* Pods_GanClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F309BB0F499F7866C31337 /* Pods_GanClient.framework */; };
 		687D6417256B826F00A90D48 /* GanClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 687D6415256B826F00A90D48 /* GanClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		68987BC6256B8AB500119088 /* OutputBinaryBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BBF256B8AB500119088 /* OutputBinaryBuffer.swift */; };
 		68987BC7256B8AB500119088 /* BinaryWritable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BC0256B8AB500119088 /* BinaryWritable.swift */; };
@@ -43,6 +44,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		26F44A6FD4FEBD47EA5C4718 /* Pods-GanClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GanClient.release.xcconfig"; path = "Target Support Files/Pods-GanClient/Pods-GanClient.release.xcconfig"; sourceTree = "<group>"; };
+		42F309BB0F499F7866C31337 /* Pods_GanClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GanClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		687D6412256B826F00A90D48 /* GanClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GanClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		687D6415256B826F00A90D48 /* GanClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GanClient.h; sourceTree = "<group>"; };
 		687D6416256B826F00A90D48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -78,6 +81,7 @@
 		68987C10256B8D1600119088 /* PackFormatChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackFormatChecker.swift; sourceTree = "<group>"; };
 		68987C13256B8D2300119088 /* RequestHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestHeader.swift; sourceTree = "<group>"; };
 		68987C16256B8D3000119088 /* ResponsePack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsePack.swift; sourceTree = "<group>"; };
+		6A7F2A1002A83AEA3BC49C27 /* Pods-GanClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GanClient.debug.xcconfig"; path = "Target Support Files/Pods-GanClient/Pods-GanClient.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15C7E54AAA06F201AE455628 /* Pods_GanClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +101,8 @@
 			children = (
 				687D6414256B826F00A90D48 /* GanClient */,
 				687D6413256B826F00A90D48 /* Products */,
+				C48274F6FEBDE5456954210A /* Pods */,
+				85D8523791EE5B7D6BF0C368 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -188,6 +195,24 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		85D8523791EE5B7D6BF0C368 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				42F309BB0F499F7866C31337 /* Pods_GanClient.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C48274F6FEBDE5456954210A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6A7F2A1002A83AEA3BC49C27 /* Pods-GanClient.debug.xcconfig */,
+				26F44A6FD4FEBD47EA5C4718 /* Pods-GanClient.release.xcconfig */,
+			);
+			name = Pods;
+			path = ../Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -206,6 +231,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 687D641A256B826F00A90D48 /* Build configuration list for PBXNativeTarget "GanClient" */;
 			buildPhases = (
+				1545AB34B404CA9788D890C6 /* [CP] Check Pods Manifest.lock */,
 				687D640D256B826F00A90D48 /* Headers */,
 				687D640E256B826F00A90D48 /* Sources */,
 				687D640F256B826F00A90D48 /* Frameworks */,
@@ -260,6 +286,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1545AB34B404CA9788D890C6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GanClient-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		687D640E256B826F00A90D48 /* Sources */ = {
@@ -428,6 +479,7 @@
 		};
 		687D641B256B826F00A90D48 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6A7F2A1002A83AEA3BC49C27 /* Pods-GanClient.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -452,6 +504,7 @@
 		};
 		687D641C256B826F00A90D48 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 26F44A6FD4FEBD47EA5C4718 /* Pods-GanClient.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;

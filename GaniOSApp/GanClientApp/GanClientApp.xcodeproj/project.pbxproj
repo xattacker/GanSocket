@@ -19,6 +19,7 @@
 		68B36F53235D9F7D005D0741 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 68B36F55235D9F7D005D0741 /* Localizable.strings */; };
 		68B36F59235DA30D005D0741 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 68B36F5B235DA30D005D0741 /* InfoPlist.strings */; };
 		68D6F13F232A243600F35374 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68D6F13D232A243600F35374 /* Launch Screen.storyboard */; };
+		7DE1F14C713C71C0A19E9039 /* Pods_GanClientApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 668F8CDD5B3574C89CA82D2E /* Pods_GanClientApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		6549F33C1B1CBFF6007B7EF6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		65528BB71B3F0AB600A611E4 /* CustomUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomUtility.swift; sourceTree = "<group>"; };
 		65FC25FB1E02ED5600F9E38A /* MacroDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacroDefine.swift; sourceTree = "<group>"; };
+		668F8CDD5B3574C89CA82D2E /* Pods_GanClientApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GanClientApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		68987BCE256B8AD800119088 /* GanClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GanClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		689B537C2421C13800BF4C2C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		68B36F54235D9F7D005D0741 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 			files = (
 				68987BCF256B8AD800119088 /* GanClient.framework in Frameworks */,
 				654611D01B2497B7007A6AD5 /* CoreFoundation.framework in Frameworks */,
+				7DE1F14C713C71C0A19E9039 /* Pods_GanClientApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				68987BCE256B8AD800119088 /* GanClient.framework */,
+				668F8CDD5B3574C89CA82D2E /* Pods_GanClientApp.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -248,12 +252,14 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-GanClientApp/Pods-GanClientApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",

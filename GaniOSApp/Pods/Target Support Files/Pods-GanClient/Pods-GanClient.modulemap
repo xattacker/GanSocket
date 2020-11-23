@@ -1,0 +1,6 @@
+framework module Pods_GanClient {
+  umbrella header "Pods-GanClient-umbrella.h"
+
+  export *
+  module * { export * }
+}

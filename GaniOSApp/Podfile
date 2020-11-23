@@ -12,6 +12,12 @@
   def gan_client_app_pods
      pod 'RxSwift',    '~> 5'
      pod 'RxCocoa',    '~> 5'
+
+     pod 'ObjectMapper'
+  end
+
+  def gan_client_pods
+     pod 'ObjectMapper'
   end
 
   target 'GanClientApp' do
@@ -19,7 +25,10 @@
      gan_client_app_pods
   end
 
-
+  target 'GanClient' do
+     project 'GanClient/GanClient.xcodeproj'
+     gan_client_pods
+  end
 
 # fixed compile warning:
 # The iOS Simulator deployment target 'IPHONEOS_DEPLOYMENT_TARGET' is set to 8.0, but the range of supported deployment target versions is 9.0 to 14.0.99.
