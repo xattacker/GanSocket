@@ -1,1 +1,2 @@
+include ':GanClient'
 include ':app'

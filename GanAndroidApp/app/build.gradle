@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "com.xattacker.android.gan"
-        minSdkVersion 8
+        minSdkVersion 16
         targetSdkVersion 28
     }
 
@@ -23,4 +23,5 @@ repositories {
 }
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation project(path: ':GanClient')
 }
