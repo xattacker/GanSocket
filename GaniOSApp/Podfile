@@ -1,14 +1,24 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-target 'GanClientTester' do
+
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-   pod 'RxSwift',    '~> 5'
-   pod 'RxCocoa',    '~> 5'
+  workspace 'GaniOSApp'
+  project 'GanClientApp/GanClientApp.xcodeproj'
+  project 'GanClient/GanClient.xcodeproj'
 
-end
+  def gan_client_app_pods
+     pod 'RxSwift',    '~> 5'
+     pod 'RxCocoa',    '~> 5'
+  end
+
+  target 'GanClientApp' do
+     project 'GanClientApp/GanClientApp.xcodeproj'
+     gan_client_app_pods
+  end
+
 
 
 # fixed compile warning:

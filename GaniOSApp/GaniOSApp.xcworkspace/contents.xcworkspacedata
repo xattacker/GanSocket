@@ -2,7 +2,10 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/tcci_mackbook_pro/Desktop/work/github/GanSocket/GaniOSApp/GanClientApp.xcodeproj">
+      location = "group:GanClientApp/GanClientApp.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:GanClient/GanClient.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

@@ -8,10 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6503D0F31E0D8B3500E813ED /* HomeMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6503D0F11E0D8B3500E813ED /* HomeMenuViewController.swift */; };
-		65382BF31B517DD20033E876 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65382BF21B517DD20033E876 /* MessageUI.framework */; };
 		654611D01B2497B7007A6AD5 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 654611CF1B2497B7007A6AD5 /* CoreFoundation.framework */; };
 		654856AE1B235160001922E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654856AC1B235160001922E1 /* AppDelegate.swift */; };
-		6548E4821B8384B4004FEF95 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6548E4811B8384B4004FEF95 /* WebKit.framework */; };
 		6549F33B1B1CBFF6007B7EF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6549F3391B1CBFF6007B7EF6 /* Main.storyboard */; };
 		6549F33D1B1CBFF6007B7EF6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6549F33C1B1CBFF6007B7EF6 /* Images.xcassets */; };
 		65528BB81B3F0AB600A611E4 /* CustomUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65528BB71B3F0AB600A611E4 /* CustomUtility.swift */; };
@@ -20,20 +18,15 @@
 		68B36F53235D9F7D005D0741 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 68B36F55235D9F7D005D0741 /* Localizable.strings */; };
 		68B36F59235DA30D005D0741 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 68B36F5B235DA30D005D0741 /* InfoPlist.strings */; };
 		68D6F13F232A243600F35374 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68D6F13D232A243600F35374 /* Launch Screen.storyboard */; };
-		D9FD49AA14CBF810C6CFC38E /* Pods_GanClientTester.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C2EBD426E7F19CEB30F86CF /* Pods_GanClientTester.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		296D9644A3D97B8254869883 /* Pods-ShrChiuan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShrChiuan.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShrChiuan/Pods-ShrChiuan.debug.xcconfig"; sourceTree = "<group>"; };
-		4C2EBD426E7F19CEB30F86CF /* Pods_GanClientTester.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GanClientTester.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6503D0F11E0D8B3500E813ED /* HomeMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeMenuViewController.swift; sourceTree = "<group>"; };
-		65382BF21B517DD20033E876 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		654611CF1B2497B7007A6AD5 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		654664DB1B332554003C9BBE /* GanClientApp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GanClientApp-Bridging-Header.h"; sourceTree = "<group>"; };
-		654664DC1B3325B0003C9BBE /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		654856AC1B235160001922E1 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6548E4811B8384B4004FEF95 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		6549F32D1B1CBFF6007B7EF6 /* GanClientTester.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GanClientTester.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6549F32D1B1CBFF6007B7EF6 /* GanClientApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GanClientApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6549F3311B1CBFF6007B7EF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6549F33A1B1CBFF6007B7EF6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6549F33C1B1CBFF6007B7EF6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -45,8 +38,10 @@
 		68B36F5A235DA30D005D0741 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		68B36F5C235DA30F005D0741 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		68D6F13E232A243600F35374 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Launch Screen.storyboard"; sourceTree = "<group>"; };
+		81B63F9745D1786F8414EFAE /* Pods-GanClientApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GanClientApp.release.xcconfig"; path = "../Pods/Target Support Files/Pods-GanClientApp/Pods-GanClientApp.release.xcconfig"; sourceTree = "<group>"; };
 		8D5E8E573999D5186BFA9559 /* Pods-ShrChiuan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShrChiuan.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShrChiuan/Pods-ShrChiuan.release.xcconfig"; sourceTree = "<group>"; };
 		B11330C2A606A9E9BF4B9804 /* Pods-GanClientTester.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GanClientTester.release.xcconfig"; path = "Pods/Target Support Files/Pods-GanClientTester/Pods-GanClientTester.release.xcconfig"; sourceTree = "<group>"; };
+		D9CAAAC9AA0A9234980EFBF9 /* Pods-GanClientApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GanClientApp.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-GanClientApp/Pods-GanClientApp.debug.xcconfig"; sourceTree = "<group>"; };
 		DAFAD5A6A35125724E7F6D7D /* Pods-GanClientTester.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GanClientTester.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GanClientTester/Pods-GanClientTester.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -55,10 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6548E4821B8384B4004FEF95 /* WebKit.framework in Frameworks */,
-				65382BF31B517DD20033E876 /* MessageUI.framework in Frameworks */,
 				654611D01B2497B7007A6AD5 /* CoreFoundation.framework in Frameworks */,
-				D9FD49AA14CBF810C6CFC38E /* Pods_GanClientTester.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,7 +60,6 @@
 		468A17BF6384F0AB0178A9C6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4C2EBD426E7F19CEB30F86CF /* Pods_GanClientTester.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -80,6 +71,8 @@
 				8D5E8E573999D5186BFA9559 /* Pods-ShrChiuan.release.xcconfig */,
 				DAFAD5A6A35125724E7F6D7D /* Pods-GanClientTester.debug.xcconfig */,
 				B11330C2A606A9E9BF4B9804 /* Pods-GanClientTester.release.xcconfig */,
+				D9CAAAC9AA0A9234980EFBF9 /* Pods-GanClientApp.debug.xcconfig */,
+				81B63F9745D1786F8414EFAE /* Pods-GanClientApp.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -87,9 +80,6 @@
 		65382BF11B517DAA0033E876 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
-				6548E4811B8384B4004FEF95 /* WebKit.framework */,
-				65382BF21B517DD20033E876 /* MessageUI.framework */,
-				654664DC1B3325B0003C9BBE /* CoreData.framework */,
 				654611CF1B2497B7007A6AD5 /* CoreFoundation.framework */,
 			);
 			name = Framework;
@@ -121,7 +111,7 @@
 		6549F32E1B1CBFF6007B7EF6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6549F32D1B1CBFF6007B7EF6 /* GanClientTester.app */,
+				6549F32D1B1CBFF6007B7EF6 /* GanClientApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -135,7 +125,7 @@
 				68D6F13D232A243600F35374 /* Launch Screen.storyboard */,
 				6549F3301B1CBFF6007B7EF6 /* Supporting Files */,
 			);
-			path = GanClientApp;
+			name = GanClientApp;
 			sourceTree = "<group>";
 		};
 		6549F3301B1CBFF6007B7EF6 /* Supporting Files */ = {
@@ -176,9 +166,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6549F32C1B1CBFF6007B7EF6 /* GanClientTester */ = {
+		6549F32C1B1CBFF6007B7EF6 /* GanClientApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6549F34F1B1CBFF6007B7EF6 /* Build configuration list for PBXNativeTarget "GanClientTester" */;
+			buildConfigurationList = 6549F34F1B1CBFF6007B7EF6 /* Build configuration list for PBXNativeTarget "GanClientApp" */;
 			buildPhases = (
 				95BEFDADC164D0A7838C17CC /* [CP] Check Pods Manifest.lock */,
 				6549F3291B1CBFF6007B7EF6 /* Sources */,
@@ -190,9 +180,9 @@
 			);
 			dependencies = (
 			);
-			name = GanClientTester;
+			name = GanClientApp;
 			productName = ShrChiuan;
-			productReference = 6549F32D1B1CBFF6007B7EF6 /* GanClientTester.app */;
+			productReference = 6549F32D1B1CBFF6007B7EF6 /* GanClientApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -226,7 +216,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6549F32C1B1CBFF6007B7EF6 /* GanClientTester */,
+				6549F32C1B1CBFF6007B7EF6 /* GanClientApp */,
 			);
 		};
 /* End PBXProject section */
@@ -253,7 +243,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GanClientTester/Pods-GanClientTester-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-GanClientApp/Pods-GanClientApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
@@ -266,7 +256,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GanClientTester/Pods-GanClientTester-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GanClientApp/Pods-GanClientApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		95BEFDADC164D0A7838C17CC /* [CP] Check Pods Manifest.lock */ = {
@@ -280,7 +270,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-GanClientTester-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-GanClientApp-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -452,16 +442,16 @@
 		};
 		6549F3501B1CBFF6007B7EF6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DAFAD5A6A35125724E7F6D7D /* Pods-GanClientTester.debug.xcconfig */;
+			baseConfigurationReference = D9CAAAC9AA0A9234980EFBF9 /* Pods-GanClientApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/GanClientApp/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.xattacker.GanClient.App;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xattacker.GanClientApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "GanClientApp/Classes/GanClientApp-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Classes/GanClientApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -470,16 +460,16 @@
 		};
 		6549F3511B1CBFF6007B7EF6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B11330C2A606A9E9BF4B9804 /* Pods-GanClientTester.release.xcconfig */;
+			baseConfigurationReference = 81B63F9745D1786F8414EFAE /* Pods-GanClientApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/GanClientApp/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.xattacker.GanClient.App;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xattacker.GanClientApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "GanClientApp/Classes/GanClientApp-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Classes/GanClientApp-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -497,7 +487,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6549F34F1B1CBFF6007B7EF6 /* Build configuration list for PBXNativeTarget "GanClientTester" */ = {
+		6549F34F1B1CBFF6007B7EF6 /* Build configuration list for PBXNativeTarget "GanClientApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6549F3501B1CBFF6007B7EF6 /* Debug */,

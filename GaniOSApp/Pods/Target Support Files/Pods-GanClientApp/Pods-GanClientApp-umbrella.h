@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_GanClientTesterVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_GanClientTesterVersionString[];
+FOUNDATION_EXPORT double Pods_GanClientAppVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_GanClientAppVersionString[];
 
