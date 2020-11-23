@@ -41,6 +41,7 @@
 		68987C11256B8D1600119088 /* PackFormatChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987C10256B8D1600119088 /* PackFormatChecker.swift */; };
 		68987C14256B8D2300119088 /* RequestHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987C13256B8D2300119088 /* RequestHeader.swift */; };
 		68987C17256B8D3000119088 /* ResponsePack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987C16256B8D3000119088 /* ResponsePack.swift */; };
+		68987C23256B8E5A00119088 /* MappableObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987C22256B8E5A00119088 /* MappableObj.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +82,7 @@
 		68987C10256B8D1600119088 /* PackFormatChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackFormatChecker.swift; sourceTree = "<group>"; };
 		68987C13256B8D2300119088 /* RequestHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestHeader.swift; sourceTree = "<group>"; };
 		68987C16256B8D3000119088 /* ResponsePack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsePack.swift; sourceTree = "<group>"; };
+		68987C22256B8E5A00119088 /* MappableObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MappableObj.swift; sourceTree = "<group>"; };
 		6A7F2A1002A83AEA3BC49C27 /* Pods-GanClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GanClient.debug.xcconfig"; path = "Target Support Files/Pods-GanClient/Pods-GanClient.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,6 +122,7 @@
 				68987BBE256B8AB500119088 /* Binary */,
 				68987BD1256B8B2300119088 /* Common */,
 				68987BF7256B8BC700119088 /* Gan */,
+				68987C21256B8E5A00119088 /* Json */,
 				687D6415256B826F00A90D48 /* GanClient.h */,
 				687D6416256B826F00A90D48 /* Info.plist */,
 			);
@@ -193,6 +196,14 @@
 				68987C0A256B8CF400119088 /* SystemService.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		68987C21256B8E5A00119088 /* Json */ = {
+			isa = PBXGroup;
+			children = (
+				68987C22256B8E5A00119088 /* MappableObj.swift */,
+			);
+			path = Json;
 			sourceTree = "<group>";
 		};
 		85D8523791EE5B7D6BF0C368 /* Frameworks */ = {
@@ -321,6 +332,7 @@
 				68987BEE256B8B2300119088 /* WeakDelegateBox.swift in Sources */,
 				68987BCA256B8AB500119088 /* TypeConverter.swift in Sources */,
 				68987BEA256B8B2300119088 /* NSObject.swift in Sources */,
+				68987C23256B8E5A00119088 /* MappableObj.swift in Sources */,
 				68987BFF256B8C6C00119088 /* GanAgent.swift in Sources */,
 				68987C11256B8D1600119088 /* PackFormatChecker.swift in Sources */,
 				68987BE8256B8B2300119088 /* CommonError.swift in Sources */,
