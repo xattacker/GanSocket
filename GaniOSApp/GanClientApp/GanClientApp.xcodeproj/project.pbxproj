@@ -14,6 +14,7 @@
 		6549F33D1B1CBFF6007B7EF6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6549F33C1B1CBFF6007B7EF6 /* Images.xcassets */; };
 		65528BB81B3F0AB600A611E4 /* CustomUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65528BB71B3F0AB600A611E4 /* CustomUtility.swift */; };
 		65FC25FC1E02ED5600F9E38A /* MacroDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FC25FB1E02ED5600F9E38A /* MacroDefine.swift */; };
+		68987BCF256B8AD800119088 /* GanClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68987BCE256B8AD800119088 /* GanClient.framework */; };
 		689B537D2421C13800BF4C2C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689B537C2421C13800BF4C2C /* BaseViewController.swift */; };
 		68B36F53235D9F7D005D0741 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 68B36F55235D9F7D005D0741 /* Localizable.strings */; };
 		68B36F59235DA30D005D0741 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 68B36F5B235DA30D005D0741 /* InfoPlist.strings */; };
@@ -32,6 +33,7 @@
 		6549F33C1B1CBFF6007B7EF6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		65528BB71B3F0AB600A611E4 /* CustomUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomUtility.swift; sourceTree = "<group>"; };
 		65FC25FB1E02ED5600F9E38A /* MacroDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacroDefine.swift; sourceTree = "<group>"; };
+		68987BCE256B8AD800119088 /* GanClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GanClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		689B537C2421C13800BF4C2C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		68B36F54235D9F7D005D0741 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		68B36F56235D9FB8005D0741 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -50,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68987BCF256B8AD800119088 /* GanClient.framework in Frameworks */,
 				654611D01B2497B7007A6AD5 /* CoreFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -60,6 +63,7 @@
 		468A17BF6384F0AB0178A9C6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				68987BCE256B8AD800119088 /* GanClient.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

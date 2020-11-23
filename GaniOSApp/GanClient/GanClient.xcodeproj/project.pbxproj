@@ -8,12 +8,76 @@
 
 /* Begin PBXBuildFile section */
 		687D6417256B826F00A90D48 /* GanClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 687D6415256B826F00A90D48 /* GanClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		68987BC6256B8AB500119088 /* OutputBinaryBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BBF256B8AB500119088 /* OutputBinaryBuffer.swift */; };
+		68987BC7256B8AB500119088 /* BinaryWritable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BC0256B8AB500119088 /* BinaryWritable.swift */; };
+		68987BC8256B8AB500119088 /* InputBinaryBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BC1256B8AB500119088 /* InputBinaryBuffer.swift */; };
+		68987BC9256B8AB500119088 /* BinaryBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BC2256B8AB500119088 /* BinaryBuffer.swift */; };
+		68987BCA256B8AB500119088 /* TypeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BC3256B8AB500119088 /* TypeConverter.swift */; };
+		68987BCB256B8AB500119088 /* BinarySerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BC4256B8AB500119088 /* BinarySerializable.swift */; };
+		68987BCC256B8AB500119088 /* BinaryReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BC5256B8AB500119088 /* BinaryReadable.swift */; };
+		68987BE2256B8B2300119088 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BD2256B8B2300119088 /* Date.swift */; };
+		68987BE3256B8B2300119088 /* GUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BD3256B8B2300119088 /* GUID.swift */; };
+		68987BE4256B8B2300119088 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BD4256B8B2300119088 /* Array.swift */; };
+		68987BE5256B8B2300119088 /* DateTimeUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BD5256B8B2300119088 /* DateTimeUtility.swift */; };
+		68987BE7256B8B2300119088 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BD7256B8B2300119088 /* Data.swift */; };
+		68987BE8256B8B2300119088 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BD8256B8B2300119088 /* CommonError.swift */; };
+		68987BE9256B8B2300119088 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BD9256B8B2300119088 /* Timer.swift */; };
+		68987BEA256B8B2300119088 /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BDA256B8B2300119088 /* NSObject.swift */; };
+		68987BEB256B8B2300119088 /* Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BDB256B8B2300119088 /* Number.swift */; };
+		68987BEC256B8B2300119088 /* MimeCodec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BDC256B8B2300119088 /* MimeCodec.swift */; };
+		68987BED256B8B2300119088 /* FileUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BDD256B8B2300119088 /* FileUtility.swift */; };
+		68987BEE256B8B2300119088 /* WeakDelegateBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BDE256B8B2300119088 /* WeakDelegateBox.swift */; };
+		68987BEF256B8B2300119088 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BDF256B8B2300119088 /* Dictionary.swift */; };
+		68987BF0256B8B2300119088 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BE0256B8B2300119088 /* String.swift */; };
+		68987BF1256B8B2300119088 /* AppProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BE1256B8B2300119088 /* AppProperties.swift */; };
+		68987BF9256B8BDB00119088 /* GanClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BF8256B8BDB00119088 /* GanClient.swift */; };
+		68987BFC256B8BF100119088 /* GanClientDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BFB256B8BF100119088 /* GanClientDelegate.swift */; };
+		68987BFF256B8C6C00119088 /* GanAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BFE256B8C6C00119088 /* GanAgent.swift */; };
+		68987C04256B8CD900119088 /* ServiceFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987C03256B8CD900119088 /* ServiceFoundation.swift */; };
+		68987C08256B8CE600119088 /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987C07256B8CE600119088 /* AccountService.swift */; };
+		68987C0B256B8CF400119088 /* SystemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987C0A256B8CF400119088 /* SystemService.swift */; };
+		68987C0E256B8D0600119088 /* FunctionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987C0D256B8D0600119088 /* FunctionType.swift */; };
+		68987C11256B8D1600119088 /* PackFormatChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987C10256B8D1600119088 /* PackFormatChecker.swift */; };
+		68987C14256B8D2300119088 /* RequestHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987C13256B8D2300119088 /* RequestHeader.swift */; };
+		68987C17256B8D3000119088 /* ResponsePack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987C16256B8D3000119088 /* ResponsePack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		687D6412256B826F00A90D48 /* GanClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GanClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		687D6415256B826F00A90D48 /* GanClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GanClient.h; sourceTree = "<group>"; };
 		687D6416256B826F00A90D48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		68987BBF256B8AB500119088 /* OutputBinaryBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputBinaryBuffer.swift; sourceTree = "<group>"; };
+		68987BC0256B8AB500119088 /* BinaryWritable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryWritable.swift; sourceTree = "<group>"; };
+		68987BC1256B8AB500119088 /* InputBinaryBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputBinaryBuffer.swift; sourceTree = "<group>"; };
+		68987BC2256B8AB500119088 /* BinaryBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryBuffer.swift; sourceTree = "<group>"; };
+		68987BC3256B8AB500119088 /* TypeConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeConverter.swift; sourceTree = "<group>"; };
+		68987BC4256B8AB500119088 /* BinarySerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinarySerializable.swift; sourceTree = "<group>"; };
+		68987BC5256B8AB500119088 /* BinaryReadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryReadable.swift; sourceTree = "<group>"; };
+		68987BD2256B8B2300119088 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		68987BD3256B8B2300119088 /* GUID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GUID.swift; sourceTree = "<group>"; };
+		68987BD4256B8B2300119088 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		68987BD5256B8B2300119088 /* DateTimeUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimeUtility.swift; sourceTree = "<group>"; };
+		68987BD7256B8B2300119088 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		68987BD8256B8B2300119088 /* CommonError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
+		68987BD9256B8B2300119088 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		68987BDA256B8B2300119088 /* NSObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObject.swift; sourceTree = "<group>"; };
+		68987BDB256B8B2300119088 /* Number.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Number.swift; sourceTree = "<group>"; };
+		68987BDC256B8B2300119088 /* MimeCodec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MimeCodec.swift; sourceTree = "<group>"; };
+		68987BDD256B8B2300119088 /* FileUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtility.swift; sourceTree = "<group>"; };
+		68987BDE256B8B2300119088 /* WeakDelegateBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeakDelegateBox.swift; sourceTree = "<group>"; };
+		68987BDF256B8B2300119088 /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
+		68987BE0256B8B2300119088 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		68987BE1256B8B2300119088 /* AppProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppProperties.swift; sourceTree = "<group>"; };
+		68987BF8256B8BDB00119088 /* GanClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GanClient.swift; sourceTree = "<group>"; };
+		68987BFB256B8BF100119088 /* GanClientDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GanClientDelegate.swift; sourceTree = "<group>"; };
+		68987BFE256B8C6C00119088 /* GanAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GanAgent.swift; sourceTree = "<group>"; };
+		68987C03256B8CD900119088 /* ServiceFoundation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFoundation.swift; sourceTree = "<group>"; };
+		68987C07256B8CE600119088 /* AccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
+		68987C0A256B8CF400119088 /* SystemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemService.swift; sourceTree = "<group>"; };
+		68987C0D256B8D0600119088 /* FunctionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionType.swift; sourceTree = "<group>"; };
+		68987C10256B8D1600119088 /* PackFormatChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackFormatChecker.swift; sourceTree = "<group>"; };
+		68987C13256B8D2300119088 /* RequestHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestHeader.swift; sourceTree = "<group>"; };
+		68987C16256B8D3000119088 /* ResponsePack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsePack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,10 +110,82 @@
 		687D6414256B826F00A90D48 /* GanClient */ = {
 			isa = PBXGroup;
 			children = (
+				68987BBE256B8AB500119088 /* Binary */,
+				68987BD1256B8B2300119088 /* Common */,
+				68987BF7256B8BC700119088 /* Gan */,
 				687D6415256B826F00A90D48 /* GanClient.h */,
 				687D6416256B826F00A90D48 /* Info.plist */,
 			);
 			path = GanClient;
+			sourceTree = "<group>";
+		};
+		68987BBE256B8AB500119088 /* Binary */ = {
+			isa = PBXGroup;
+			children = (
+				68987BBF256B8AB500119088 /* OutputBinaryBuffer.swift */,
+				68987BC0256B8AB500119088 /* BinaryWritable.swift */,
+				68987BC1256B8AB500119088 /* InputBinaryBuffer.swift */,
+				68987BC2256B8AB500119088 /* BinaryBuffer.swift */,
+				68987BC3256B8AB500119088 /* TypeConverter.swift */,
+				68987BC4256B8AB500119088 /* BinarySerializable.swift */,
+				68987BC5256B8AB500119088 /* BinaryReadable.swift */,
+			);
+			path = Binary;
+			sourceTree = "<group>";
+		};
+		68987BD1256B8B2300119088 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				68987BD2256B8B2300119088 /* Date.swift */,
+				68987BD3256B8B2300119088 /* GUID.swift */,
+				68987BD4256B8B2300119088 /* Array.swift */,
+				68987BD5256B8B2300119088 /* DateTimeUtility.swift */,
+				68987BD7256B8B2300119088 /* Data.swift */,
+				68987BD8256B8B2300119088 /* CommonError.swift */,
+				68987BD9256B8B2300119088 /* Timer.swift */,
+				68987BDA256B8B2300119088 /* NSObject.swift */,
+				68987BDB256B8B2300119088 /* Number.swift */,
+				68987BDC256B8B2300119088 /* MimeCodec.swift */,
+				68987BDD256B8B2300119088 /* FileUtility.swift */,
+				68987BDE256B8B2300119088 /* WeakDelegateBox.swift */,
+				68987BDF256B8B2300119088 /* Dictionary.swift */,
+				68987BE0256B8B2300119088 /* String.swift */,
+				68987BE1256B8B2300119088 /* AppProperties.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		68987BF7256B8BC700119088 /* Gan */ = {
+			isa = PBXGroup;
+			children = (
+				68987C01256B8C9100119088 /* Data */,
+				68987C02256B8C9600119088 /* Service */,
+				68987BF8256B8BDB00119088 /* GanClient.swift */,
+				68987BFB256B8BF100119088 /* GanClientDelegate.swift */,
+				68987BFE256B8C6C00119088 /* GanAgent.swift */,
+			);
+			path = Gan;
+			sourceTree = "<group>";
+		};
+		68987C01256B8C9100119088 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				68987C0D256B8D0600119088 /* FunctionType.swift */,
+				68987C10256B8D1600119088 /* PackFormatChecker.swift */,
+				68987C13256B8D2300119088 /* RequestHeader.swift */,
+				68987C16256B8D3000119088 /* ResponsePack.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		68987C02256B8C9600119088 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				68987C03256B8CD900119088 /* ServiceFoundation.swift */,
+				68987C07256B8CE600119088 /* AccountService.swift */,
+				68987C0A256B8CF400119088 /* SystemService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -130,6 +266,38 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68987C0B256B8CF400119088 /* SystemService.swift in Sources */,
+				68987BEE256B8B2300119088 /* WeakDelegateBox.swift in Sources */,
+				68987BCA256B8AB500119088 /* TypeConverter.swift in Sources */,
+				68987BEA256B8B2300119088 /* NSObject.swift in Sources */,
+				68987BFF256B8C6C00119088 /* GanAgent.swift in Sources */,
+				68987C11256B8D1600119088 /* PackFormatChecker.swift in Sources */,
+				68987BE8256B8B2300119088 /* CommonError.swift in Sources */,
+				68987BE4256B8B2300119088 /* Array.swift in Sources */,
+				68987C0E256B8D0600119088 /* FunctionType.swift in Sources */,
+				68987BED256B8B2300119088 /* FileUtility.swift in Sources */,
+				68987BEC256B8B2300119088 /* MimeCodec.swift in Sources */,
+				68987BE9256B8B2300119088 /* Timer.swift in Sources */,
+				68987C08256B8CE600119088 /* AccountService.swift in Sources */,
+				68987BC9256B8AB500119088 /* BinaryBuffer.swift in Sources */,
+				68987BCC256B8AB500119088 /* BinaryReadable.swift in Sources */,
+				68987BFC256B8BF100119088 /* GanClientDelegate.swift in Sources */,
+				68987BE2256B8B2300119088 /* Date.swift in Sources */,
+				68987C14256B8D2300119088 /* RequestHeader.swift in Sources */,
+				68987BEF256B8B2300119088 /* Dictionary.swift in Sources */,
+				68987BF1256B8B2300119088 /* AppProperties.swift in Sources */,
+				68987BF0256B8B2300119088 /* String.swift in Sources */,
+				68987C04256B8CD900119088 /* ServiceFoundation.swift in Sources */,
+				68987BEB256B8B2300119088 /* Number.swift in Sources */,
+				68987BC8256B8AB500119088 /* InputBinaryBuffer.swift in Sources */,
+				68987BCB256B8AB500119088 /* BinarySerializable.swift in Sources */,
+				68987BC7256B8AB500119088 /* BinaryWritable.swift in Sources */,
+				68987BE7256B8B2300119088 /* Data.swift in Sources */,
+				68987C17256B8D3000119088 /* ResponsePack.swift in Sources */,
+				68987BF9256B8BDB00119088 /* GanClient.swift in Sources */,
+				68987BE5256B8B2300119088 /* DateTimeUtility.swift in Sources */,
+				68987BC6256B8AB500119088 /* OutputBinaryBuffer.swift in Sources */,
+				68987BE3256B8B2300119088 /* GUID.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,7 +356,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -246,7 +414,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -273,7 +441,8 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = xattacker.GanClient;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xattacker.GanClient;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -296,7 +465,8 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = xattacker.GanClient;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xattacker.GanClient;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
