@@ -51,6 +51,7 @@ open class Socket {
 
 public enum SocketError: Error {
     case queryFailed
+    case responseFailed
     case connectionClosed
     case connectionTimeout
     case unknownError

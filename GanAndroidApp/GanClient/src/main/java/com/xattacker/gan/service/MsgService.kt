@@ -5,7 +5,8 @@ import com.xattacker.binary.BinaryBuffer
 import com.xattacker.gan.GanAgent
 import com.xattacker.gan.data.FunctionType
 
-abstract class MsgService protected constructor(aAgent: GanAgent?) : ServiceFoundation(aAgent)
+
+class MsgService internal constructor(agent: GanAgent) : ServiceFoundation(agent)
 {
     fun sendMsg(aReceiver: String, aMsg: String): Boolean
     {

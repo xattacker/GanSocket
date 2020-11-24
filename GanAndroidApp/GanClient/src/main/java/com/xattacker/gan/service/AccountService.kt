@@ -5,33 +5,33 @@ import com.xattacker.binary.BinaryBuffer
 import com.xattacker.gan.GanAgent
 import com.xattacker.gan.data.FunctionType
 
-abstract class AccountService protected constructor(aAgent: GanAgent?, private val _listener: AccountServiceListener?) : ServiceFoundation(aAgent)
+
+class AccountService internal constructor(agent: GanAgent, private val _listener: AccountServiceListener) : ServiceFoundation(agent)
 {
-    interface AccountServiceListener
+    internal interface AccountServiceListener
     {
-        fun onLoginSucceed(aAccount: String, aSessionId: String)
-        fun onLogout(aAccount: String)
+        fun onLoginSucceed(account: String, sessionId: String)
+        fun onLoggedOut(account: String)
     }
 
-    private var _account: String? = null
-    fun login(aAccount: String, aPassword: String): Boolean
+
+    fun login(account: String, password: String): Boolean
     {
         var result = false
         try
         {
             val buffer = BinaryBuffer()
-            buffer.writeString(aAccount)
-            buffer.writeString(aPassword)
+            buffer.writeString(account)
+            buffer.writeString(password)
 
             val response = send(FunctionType.LOGIN, buffer.data)
             if (response != null)
             {
                 result = response.result
-                if (result && response.response != null && _listener != null)
+                if (result && response.response != null)
                 {
                     val session_id = String(response.response!!)
-                    _account = aAccount
-                    _listener.onLoginSucceed(aAccount, session_id)
+                    _listener.onLoginSucceed(account, session_id)
                 }
             }
         }
@@ -48,7 +48,7 @@ abstract class AccountService protected constructor(aAgent: GanAgent?, private v
 
         try
         {
-            _account?.let {
+            this.agent.account?.let {
                 account ->
                     val buffer = BinaryBuffer()
                     buffer.writeString(account)
@@ -56,9 +56,8 @@ abstract class AccountService protected constructor(aAgent: GanAgent?, private v
                     val response = send(FunctionType.LOGOUT, buffer.data)
                     if (response != null && response.result)
                     {
-                        _listener?.onLogout(account)
+                        _listener.onLoggedOut(account)
                         result = true
-                        _account = null
                     }
             }
         }
@@ -70,25 +69,25 @@ abstract class AccountService protected constructor(aAgent: GanAgent?, private v
         return result
     }
 
-    fun isAccountExisted(aAccount: String?): Boolean
+    fun isAccountExisted(account: String): Boolean
     {
         return false
     }
 
-    fun registerAccount(aAccount: String, aPassword: String, aExtra: ByteArray?): Boolean
+    fun registerAccount(account: String, password: String, extra: ByteArray? = null): Boolean
     {
         var result = false
         try
         {
             val buffer= BinaryBuffer()
-            buffer.writeString(aAccount)
-            buffer.writeString(aPassword)
+            buffer.writeString(account)
+            buffer.writeString(password)
 
-            if (aExtra != null && aExtra.size > 0)
+            if (extra != null && extra.size > 0)
             {
-                val size = aExtra.size
+                val size = extra.size
                 buffer.writeInteger(size)
-                buffer.writeBinary(aExtra, 0, size)
+                buffer.writeBinary(extra, 0, size)
             }
             else
             {
@@ -96,15 +95,13 @@ abstract class AccountService protected constructor(aAgent: GanAgent?, private v
             }
 
             val response = send(FunctionType.REGISTER_ACCOUNT, buffer.data)
-            if (response != null)
-            {
-                result = response.result
-            }
+            result = response?.result ?: false
         }
         catch (ex: Exception)
         {
             Log.i("aaa", ex.toString())
         }
+
         return result
     }
 }

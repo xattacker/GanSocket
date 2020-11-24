@@ -30,9 +30,12 @@ class GanClient private constructor(private val _address: String, private val _p
     override var sessionId: String? = null
         private set
 
-    val accountService: AccountService by lazy { InnerAccountService(this, this) }
-    val msgService: MsgService by lazy { InnerMsgService(this) }
-    val systemService: SystemService by lazy { InnerSystemService(this) }
+    val isConnected: Boolean
+        get() = !this.account.isNullOrEmpty()
+
+    val accountService: AccountService by lazy { AccountService(this, this) }
+    val msgService: MsgService by lazy { MsgService(this) }
+    val systemService: SystemService by lazy { SystemService(this) }
 
     companion object
     {
@@ -71,10 +74,10 @@ class GanClient private constructor(private val _address: String, private val _p
             val obb = OutputBinaryBuffer(out)
 
             val header = RequestHeader()
-            header.type = (FunctionType.CONNECTION)
-            header.owner = (account)
-            header.sessionId = (sessionId)
-            obb.writeString(header.toJson() ?: "")
+            header.type = FunctionType.CONNECTION
+            header.owner = account
+            header.sessionId = sessionId
+            obb.writeString(header.toJson())
             obb.flush()
 
             Thread.sleep(500)
@@ -141,19 +144,19 @@ class GanClient private constructor(private val _address: String, private val _p
         return socket
     }
 
-    override fun onLoginSucceed(aAccount: String, aSessionId: String)
+    override fun onLoginSucceed(account: String, sessionId: String)
     {
         try
         {
-            account = aAccount
-            sessionId = aSessionId
+            this. account = account
+            this.sessionId = sessionId
 
             _socket = createSocket()
             _socket?.keepAlive = true
             _socket?.soTimeout = 0
             _socket?.oobInline = true
 
-            _listener?.get()?.onAccountLoggedIn(account ?: "")
+            _listener?.get()?.onAccountLoggedIn(account)
 
             start()
         }
@@ -162,10 +165,10 @@ class GanClient private constructor(private val _address: String, private val _p
         }
     }
 
-    override fun onLogout(aAccount: String)
+    override fun onLoggedOut(account: String)
     {
-        account = null
-        sessionId = null
+        this.account = null
+        this.sessionId = null
     }
 
     private fun start()

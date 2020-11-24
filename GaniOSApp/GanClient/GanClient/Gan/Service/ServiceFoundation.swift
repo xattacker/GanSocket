@@ -41,8 +41,13 @@ public class ServiceFoundation
                     case .success(()):
                         guard let data = client.read(1024*10) else
                         {
+                            client.close()
+                            
                             return .failure(SocketError.queryFailed)
                         }
+                        
+                        
+                        client.close()
                         
                         let buffer2 = BinaryBuffer(bytes: data, length: UInt(data.count))
                         
@@ -53,7 +58,7 @@ public class ServiceFoundation
                         }
                         else
                         {
-                            return .failure(SocketError.queryFailed)
+                            return .failure(SocketError.responseFailed)
                         }
                         
                     case .failure(let error):

@@ -185,14 +185,14 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
         }
     }
 
-    override fun onAccountLoggedIn(aAccount: String)
+    override fun onAccountLoggedIn(account: String)
     {
-        Log.i("aaa", "onAccountLogined $aAccount")
+        Log.i("aaa", "onAccountLogined $account")
     }
 
-    override fun onAccountLoggedOut(aAccount: String)
+    override fun onAccountLoggedOut(account: String)
     {
-        Log.i("aaa", "onAccountClosed $aAccount")
+        Log.i("aaa", "onAccountClosed $account")
     }
 
     override fun onMessageReceived(aSender: String, aTime: Long, aMsg: String)

@@ -14,19 +14,13 @@ import com.xattacker.util.IOUtility
 import java.io.ByteArrayOutputStream
 import java.net.Socket
 
-abstract class ServiceFoundation protected constructor(aAgent: GanAgent?)
+abstract class ServiceFoundation protected constructor(protected var agent: GanAgent)
 {
-    protected var _agent: GanAgent?
-
-    init
-    {
-        _agent = aAgent
-    }
-
     protected fun send(aType: FunctionType, aRequest: ByteArray?): ResponsePack?
     {
         var response: ResponsePack? = null
         var socket: Socket? = null
+
         try
         {
             socket = createSocket()
@@ -39,8 +33,8 @@ abstract class ServiceFoundation protected constructor(aAgent: GanAgent?)
 
                 val header = RequestHeader()
                 header.type = aType
-                header.owner = _agent?.account
-                header.sessionId = _agent?.sessionId
+                header.owner = agent.account
+                header.sessionId = agent.sessionId
                 obb.writeString(header.toJson())
 
                 if (aRequest != null && aRequest.size > 0)
@@ -91,6 +85,6 @@ abstract class ServiceFoundation protected constructor(aAgent: GanAgent?)
     @Throws(Exception::class)
     protected fun createSocket(): Socket?
     {
-        return _agent?.createSocket()
+        return agent.createSocket()
     }
 }

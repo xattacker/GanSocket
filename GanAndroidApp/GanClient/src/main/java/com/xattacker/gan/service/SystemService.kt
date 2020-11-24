@@ -6,7 +6,7 @@ import com.xattacker.gan.data.FunctionType
 import java.util.*
 
 
-abstract class SystemService protected constructor(aAgent: GanAgent?) : ServiceFoundation(aAgent)
+class SystemService internal constructor(agent: GanAgent) : ServiceFoundation(agent)
 {
     fun getIPAddress(): String?
     {

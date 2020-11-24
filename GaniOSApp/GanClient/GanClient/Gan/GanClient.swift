@@ -13,8 +13,14 @@ public final class GanClient
     private let address: String
     private let port: Int
     private weak var delegate: GanClientDelegate?
+    private var sessionInfo: SessionInfo?
     
-    public lazy var accountService: AccountService = AccountService(agent: self)
+    public var isConnected: Bool
+    {
+        return self.sessionInfo != nil
+    }
+    
+    public lazy var accountService: AccountService = AccountService(agent: self, delegate: self)
     public lazy var systemService: SystemService = SystemService(agent: self)
     
     public init(address: String, port: Int, delegate: GanClientDelegate)
@@ -26,6 +32,7 @@ public final class GanClient
     
     deinit
     {
+        self.sessionInfo = nil
         self.delegate = nil
     }
 }
@@ -55,5 +62,19 @@ extension GanClient: GanAgent
             case .failure(let error):
                 return .failure(error)
         }
+    }
+}
+
+
+extension GanClient: AccountServiceDelegate
+{
+    func onLoginSucceed(session: SessionInfo)
+    {
+        self.sessionInfo = session
+    }
+    
+    func onLoggedOut(account: String)
+    {
+        
     }
 }
