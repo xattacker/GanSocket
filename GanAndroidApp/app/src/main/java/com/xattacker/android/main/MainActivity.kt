@@ -142,7 +142,7 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
 
                 asyncRun(
                 {
-                        val result: Boolean = GanClient.instance?.smsService?.sendMsg(receiver, msg) ?: false
+                        val result: Boolean = GanClient.instance?.msgService?.sendMsg(receiver, msg) ?: false
                         Log.i("aaa", "send msg $result")
                         showToast("send msg result: $result")
                 })
@@ -185,17 +185,17 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
         }
     }
 
-    override fun onAccountLogined(aAccount: String)
+    override fun onAccountLoggedIn(aAccount: String)
     {
         Log.i("aaa", "onAccountLogined $aAccount")
     }
 
-    override fun onAccountClosed(aAccount: String)
+    override fun onAccountLoggedOut(aAccount: String)
     {
         Log.i("aaa", "onAccountClosed $aAccount")
     }
 
-    override fun onSMSReceived(aSender: String, aTime: Long, aMsg: String)
+    override fun onMessageReceived(aSender: String, aTime: Long, aMsg: String)
     {
         Log.i("aaa", "onSMSReceived $aSender, $aTime")
 

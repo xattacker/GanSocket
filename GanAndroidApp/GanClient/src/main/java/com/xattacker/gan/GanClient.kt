@@ -31,7 +31,7 @@ class GanClient private constructor(private val _address: String, private val _p
         private set
 
     val accountService: AccountService by lazy { InnerAccountService(this, this) }
-    val smsService: MsgService by lazy { InnerSmsService(this) }
+    val msgService: MsgService by lazy { InnerMsgService(this) }
     val systemService: SystemService by lazy { InnerSystemService(this) }
 
     companion object
@@ -106,13 +106,13 @@ class GanClient private constructor(private val _address: String, private val _p
                                 val sender: String = binary.readString() ?: ""
                                 val time: Long = binary.readLong() ?: 0
                                 val msg: String = binary.readString() ?: ""
-                                _listener?.get()?.onSMSReceived(sender, time, msg)
+                                _listener?.get()?.onMessageReceived(sender, time, msg)
                             }
 
                             2 ->
                             {
                                 closeConnection()
-                                _listener?.get()?.onAccountClosed(account ?: "")
+                                _listener?.get()?.onAccountLoggedOut(account ?: "")
                                 account = null
                                 sessionId = null
                             }
@@ -153,7 +153,7 @@ class GanClient private constructor(private val _address: String, private val _p
             _socket?.soTimeout = 0
             _socket?.oobInline = true
 
-            _listener?.get()?.onAccountLogined(account ?: "")
+            _listener?.get()?.onAccountLoggedIn(account ?: "")
 
             start()
         }

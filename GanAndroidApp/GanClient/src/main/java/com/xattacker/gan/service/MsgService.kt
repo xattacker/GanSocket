@@ -26,9 +26,6 @@ abstract class MsgService protected constructor(aAgent: GanAgent?) : ServiceFoun
         {
             Log.i("aaa", "aere $ex")
         }
-        finally
-        {
-        }
 
         return result
     }

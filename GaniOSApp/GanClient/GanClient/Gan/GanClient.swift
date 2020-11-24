@@ -10,13 +10,13 @@ import Foundation
 
 public final class GanClient
 {
-    public lazy var accountService: AccountService = AccountService(agent: self)
-    public lazy var systemService: SystemService = SystemService(agent: self)
-    
     private let address: String
     private let port: Int
     private weak var delegate: GanClientDelegate?
-
+    
+    public lazy var accountService: AccountService = AccountService(agent: self)
+    public lazy var systemService: SystemService = SystemService(agent: self)
+    
     public init(address: String, port: Int, delegate: GanClientDelegate)
     {
         self.address = address
