@@ -1,14 +1,23 @@
 package com.xattacker.gan.data;
 
-import org.json.JSONObject;
-
+import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.SerializedName;
+import com.xattacker.json.JsonBuilderVisitor;
 import com.xattacker.json.JsonSerializable;
+import com.xattacker.json.JsonUtility;
 
 public final class RequestHeader implements JsonSerializable
 {
+	@SerializedName("Type")
 	private FunctionType _type;
+	
+	@SerializedName("Owner")
 	private String _owner;
+	
+	@SerializedName("SessionId")
 	private String _sessionId;
+	
+	@SerializedName("DeviceType")
 	private int _deviceType;
 	
 	public FunctionType getType()
@@ -54,46 +63,14 @@ public final class RequestHeader implements JsonSerializable
 	@Override
 	public String toJson()
 	{
-		String json = null;
-		
-		try
-		{
-			JSONObject jobj = new JSONObject();
-			jobj.put("Type", _type.value());
-			jobj.put("Owner", _owner != null ? _owner : "");
-			jobj.put("SessionId", _sessionId != null ? _sessionId : "");
-			
-			json = jobj.toString();
-		}
-		catch (Exception ex)
-		{
-		}
-		
-		return json;
-	}
-
-	@Override
-	public boolean fromJson(String aJson)
-	{
-		boolean result = false;
-		
-		if (aJson != null && aJson.length() > 0)
-		{
-			try
+		return JsonUtility.createGson(
+			new JsonBuilderVisitor() 
 			{
-				JSONObject jobj = new JSONObject(aJson);
-				_type = FunctionType.parse(jobj.optInt("Type", 0));
-				_owner = jobj.optString("Owner", "");
-				_sessionId = jobj.optString("SessionId", "");
-				
-				result = true;
-			}
-			catch (Exception ex)
-			{
-				result = false;
-			}
-		}
-		
-		return result;
+				@Override
+				public void onBuilderPrepared(GsonBuilder aBuilder)
+				{
+					aBuilder.registerTypeAdapter(FunctionType.class, new FunctionTypeJsonSerializer());
+				}
+			}).toJson(this);
 	}
 }

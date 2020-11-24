@@ -6,17 +6,22 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import com.google.gson.GsonBuilder;
 import com.xattacker.binary.BinaryBuffer;
 import com.xattacker.binary.InputBinaryBuffer;
 import com.xattacker.binary.OutputBinaryBuffer;
 import com.xattacker.binary.TypeConverter;
 import com.xattacker.gan.account.SessionPool;
-import com.xattacker.gan.data.PackFormatChecker;
+import com.xattacker.gan.data.FunctionType;
+import com.xattacker.gan.data.FunctionTypeJsonSerializer;
+import com.xattacker.gan.data.PackChecker;
 import com.xattacker.gan.data.RequestHeader;
 import com.xattacker.gan.data.ResponsePack;
 import com.xattacker.gan.exception.ConnectEOFException;
 import com.xattacker.gan.msg.MsgData;
 import com.xattacker.gan.msg.MsgManager;
+import com.xattacker.json.JsonBuilderVisitor;
+import com.xattacker.json.JsonUtility;
 
 final class GanClientConnection extends Thread
 {
@@ -38,14 +43,24 @@ final class GanClientConnection extends Thread
 			{
 				in = _socket.getInputStream();
 				
-				if (PackFormatChecker.isValidPack(in, false))
+				if (PackChecker.isValidPack(in, false))
 				{
 					ResponsePack response = null;
 					InputBinaryBuffer ibb = new InputBinaryBuffer(in);
+					String json = ibb.readString();
 					
-					String json_str = ibb.readString();
-					RequestHeader request = new RequestHeader();
-					if (request.fromJson(json_str))
+					RequestHeader request = JsonUtility.fromJson(json, 
+													RequestHeader.class, 		
+													new JsonBuilderVisitor() 
+													{
+														@Override
+														public void onBuilderPrepared(GsonBuilder aBuilder)
+														{
+															aBuilder.registerTypeAdapter(FunctionType.class, new FunctionTypeJsonSerializer());
+														}
+													});
+					
+					if (request != null)
 					{
 						switch (request.getType())
 						{
@@ -212,7 +227,7 @@ final class GanClientConnection extends Thread
 					 response.setId(2);
 					 
 					 OutputStream out = _socket.getOutputStream();
-					 out.write(PackFormatChecker.HEAD_BYTE);
+					 out.write(PackChecker.HEAD_BYTE);
 					 
 					 OutputBinaryBuffer obb = new OutputBinaryBuffer(out);
 					 response.toBinary(obb);
@@ -231,7 +246,7 @@ final class GanClientConnection extends Thread
 						 for (MsgData sms : list)
 						 {
 							 OutputStream out = _socket.getOutputStream();
-							 out.write(PackFormatChecker.HEAD_BYTE);
+							 out.write(PackChecker.HEAD_BYTE);
 								
 							 ResponsePack response = new ResponsePack();
 							 response.setResult(true);

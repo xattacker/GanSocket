@@ -6,16 +6,21 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import com.google.gson.GsonBuilder;
 import com.xattacker.binary.BinaryBuffer;
 import com.xattacker.binary.InputBinaryBuffer;
 import com.xattacker.binary.OutputBinaryBuffer;
 import com.xattacker.binary.TypeConverter;
 import com.xattacker.gan.account.SessionPool;
 import com.xattacker.gan.data.DataDefine;
+import com.xattacker.gan.data.FunctionType;
+import com.xattacker.gan.data.FunctionTypeJsonSerializer;
 import com.xattacker.gan.data.RequestHeader;
 import com.xattacker.gan.data.ResponsePack;
 import com.xattacker.gan.sms.SmsData;
 import com.xattacker.gan.sms.SmsManager;
+import com.xattacker.json.JsonBuilderVisitor;
+import com.xattacker.json.JsonUtility;
 
 final class SocketProcess extends Thread
 {
@@ -40,11 +45,22 @@ final class SocketProcess extends Thread
 				if (DataDefine.isValidPack(in, false))
 				{
 					ResponsePack response = null;
-					InputBinaryBuffer ibb = new InputBinaryBuffer(in);
 					
-					String json_str = ibb.readString();
-					RequestHeader request = new RequestHeader();
-					if (request.fromJson(json_str))
+					InputBinaryBuffer ibb = new InputBinaryBuffer(in);
+					String json = ibb.readString();
+					
+					RequestHeader request = JsonUtility.fromJson(json, 
+													RequestHeader.class, 		
+													new JsonBuilderVisitor() 
+													{
+														@Override
+														public void onBuilderPrepared(GsonBuilder aBuilder)
+														{
+															aBuilder.registerTypeAdapter(FunctionType.class, new FunctionTypeJsonSerializer());
+														}
+													});
+					
+					if (request != null)
 					{
 						switch (request.getType())
 						{
@@ -118,6 +134,10 @@ final class SocketProcess extends Thread
 								response.setResult(true);
 								response.setContent(TypeConverter.longToByte(System.currentTimeMillis()));
 							}
+								break;
+								
+							default:
+								System.out.println("unhandled request type: " + request.getType());
 								break;
 						}
 						

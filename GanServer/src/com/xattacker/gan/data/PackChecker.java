@@ -6,7 +6,7 @@ import java.util.Arrays;
 import com.xattacker.binary.BinaryBuffer;
 import com.xattacker.gan.exception.ConnectEOFException;
 
-public final class PackFormatChecker
+public final class PackChecker
 {
 	public final static String HEAD = "<GAN_PACK>";
    public final static byte[] HEAD_BYTE = HEAD.getBytes();
@@ -57,7 +57,7 @@ public final class PackFormatChecker
       		 
 	          if (size > HEAD_BYTE.length)
 	          {
-	         	 if (aIn.markSupported())
+	         	 if (aIn.markSupported() && aMarkable)
 	         	 {
 	         		 aIn.mark(HEAD_BYTE.length);
 	         	 }
@@ -86,7 +86,7 @@ public final class PackFormatChecker
       {
    		try
    		{
-   			if (aIn.markSupported())
+   			if (aIn.markSupported() && aMarkable)
    			{
    				aIn.reset(); // return to marked index
    			}

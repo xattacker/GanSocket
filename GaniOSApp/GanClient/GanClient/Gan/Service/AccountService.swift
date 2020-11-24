@@ -58,4 +58,9 @@ public final class AccountService: ServiceFoundation
         
         return succeed
     }
+    
+    public func logout()
+    {
+        
+    }
 }

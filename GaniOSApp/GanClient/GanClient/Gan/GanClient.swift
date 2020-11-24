@@ -71,10 +71,12 @@ extension GanClient: AccountServiceDelegate
     func onLoginSucceed(session: SessionInfo)
     {
         self.sessionInfo = session
+        self.delegate?.onAccountLoggedIn(account: session.account)
     }
     
     func onLoggedOut(account: String)
     {
-        
+        self.delegate?.onAccountLoggedOut(account: account)
+        self.sessionInfo = nil
     }
 }
