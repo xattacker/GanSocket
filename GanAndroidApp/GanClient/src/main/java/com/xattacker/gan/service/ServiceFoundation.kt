@@ -6,7 +6,7 @@ import com.xattacker.binary.BinaryBuffer
 import com.xattacker.binary.OutputBinaryBuffer
 import com.xattacker.gan.GanAgent
 import com.xattacker.gan.data.FunctionType
-import com.xattacker.gan.data.PackFormatChecker
+import com.xattacker.gan.data.PackChecker
 import com.xattacker.gan.data.RequestHeader
 import com.xattacker.gan.data.ResponsePack
 import com.xattacker.util.IOUtility
@@ -32,10 +32,11 @@ abstract class ServiceFoundation protected constructor(aAgent: GanAgent?)
             socket = createSocket()
             if (socket != null)
             {
-                val baout = ByteArrayOutputStream()
+                val bout = ByteArrayOutputStream()
                 val out = socket.getOutputStream()
-                val obb = OutputBinaryBuffer(baout)
-                obb.writeBinary(PackFormatChecker.HEAD_BYTE, 0, PackFormatChecker.HEAD_BYTE.size)
+                val obb = OutputBinaryBuffer(bout)
+                obb.writeBinary(PackChecker.HEAD_BYTE, 0, PackChecker.HEAD_BYTE.size)
+
                 val header = RequestHeader()
                 header.type = aType
 
@@ -50,7 +51,7 @@ abstract class ServiceFoundation protected constructor(aAgent: GanAgent?)
                 {
                     header.sessionId = (session_id)
                 }
-                obb.writeString(header.toJson() ?: "")
+                obb.writeString(header.toJson())
 
                 if (aRequest != null && aRequest.size > 0)
                 {
@@ -59,7 +60,8 @@ abstract class ServiceFoundation protected constructor(aAgent: GanAgent?)
 
                 obb.flush()
                 //obb.close();
-                val packed = baout.toByteArray()
+
+                val packed = bout.toByteArray()
                 out.write(packed)
                 out.flush()
 

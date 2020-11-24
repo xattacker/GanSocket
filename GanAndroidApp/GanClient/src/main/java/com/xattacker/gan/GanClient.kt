@@ -4,7 +4,7 @@ import android.util.Log
 import com.xattacker.binary.BinaryBuffer
 import com.xattacker.binary.OutputBinaryBuffer
 import com.xattacker.gan.data.FunctionType
-import com.xattacker.gan.data.PackFormatChecker
+import com.xattacker.gan.data.PackChecker
 import com.xattacker.gan.data.RequestHeader
 import com.xattacker.gan.data.ResponsePack
 import com.xattacker.gan.service.AccountService
@@ -67,7 +67,7 @@ class GanClient private constructor(private val _address: String, private val _p
         try
         {
             val out = _socket!!.getOutputStream()
-            out.write(PackFormatChecker.HEAD_BYTE)
+            out.write(PackChecker.HEAD_BYTE)
             val obb = OutputBinaryBuffer(out)
 
             val header = RequestHeader()
@@ -88,7 +88,7 @@ class GanClient private constructor(private val _address: String, private val _p
                     _socket?.sendUrgentData(0xFF)
                 }
 
-                if (PackFormatChecker.isValidPack(_socket!!.getInputStream(), false))
+                if (PackChecker.isValidPack(_socket!!.getInputStream(), false))
                 {
                     val bos = ByteArrayOutputStream()
                     IOUtility.readResponse(_socket!!.getInputStream(), bos)

@@ -17,9 +17,19 @@ public class ServiceFoundation
         self.agent = agent
     }
     
-    internal func send(_ type: FunctionType)
+    internal func send(_ type: FunctionType) -> Result<ResponsePack, SocketError>
     {
-        
+        switch self.createSocket()
+        {
+            case .success(let client):
+                
+                
+                
+                return .failure(SocketError.queryFailed)
+                
+            case .failure(let error):
+                return .failure(error)
+        }
     }
     
     internal func createSocket() -> Result<TCPClient, SocketError>

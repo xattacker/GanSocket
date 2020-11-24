@@ -4,10 +4,10 @@ import com.xattacker.binary.BinaryBuffer
 import java.io.InputStream
 import java.util.*
 
-object PackFormatChecker
+object PackChecker
 {
     const val HEAD = "<GAN_PACK>"
-    val HEAD_BYTE = HEAD.toByteArray()
+     val HEAD_BYTE = HEAD.toByteArray()
 
     fun isValidPack(aContent: ByteArray): Boolean
     {
@@ -32,7 +32,7 @@ object PackFormatChecker
         return valid
     }
 
-    fun isValidPack(aIn: InputStream, aMarkable: Boolean): Boolean
+    fun isValidPack(aIn: InputStream, aMarkable: Boolean = false): Boolean
     {
         var valid = false
         try
@@ -42,9 +42,10 @@ object PackFormatChecker
                 {
                     throw Exception("EOF")
                 }
+
                 if (size > HEAD_BYTE.size)
                 {
-                    if (aIn.markSupported())
+                    if (aIn.markSupported() && aMarkable)
                     {
                         aIn.mark(HEAD_BYTE.size)
                     }
@@ -62,7 +63,7 @@ object PackFormatChecker
         {
             try
             {
-                if (aIn.markSupported())
+                if (aIn.markSupported() && aMarkable)
                 {
                     aIn.reset() // return to marked index
                 }
@@ -71,6 +72,7 @@ object PackFormatChecker
             {
             }
         }
+
         return valid
     }
 }

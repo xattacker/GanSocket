@@ -43,7 +43,7 @@
 		68987C08256B8CE600119088 /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987C07256B8CE600119088 /* AccountService.swift */; };
 		68987C0B256B8CF400119088 /* SystemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987C0A256B8CF400119088 /* SystemService.swift */; };
 		68987C0E256B8D0600119088 /* FunctionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987C0D256B8D0600119088 /* FunctionType.swift */; };
-		68987C11256B8D1600119088 /* PackFormatChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987C10256B8D1600119088 /* PackFormatChecker.swift */; };
+		68987C11256B8D1600119088 /* PackChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987C10256B8D1600119088 /* PackChecker.swift */; };
 		68987C14256B8D2300119088 /* RequestHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987C13256B8D2300119088 /* RequestHeader.swift */; };
 		68987C17256B8D3000119088 /* ResponsePack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987C16256B8D3000119088 /* ResponsePack.swift */; };
 		68987C23256B8E5A00119088 /* MappableObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987C22256B8E5A00119088 /* MappableObj.swift */; };
@@ -89,7 +89,7 @@
 		68987C07256B8CE600119088 /* AccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
 		68987C0A256B8CF400119088 /* SystemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemService.swift; sourceTree = "<group>"; };
 		68987C0D256B8D0600119088 /* FunctionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionType.swift; sourceTree = "<group>"; };
-		68987C10256B8D1600119088 /* PackFormatChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackFormatChecker.swift; sourceTree = "<group>"; };
+		68987C10256B8D1600119088 /* PackChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackChecker.swift; sourceTree = "<group>"; };
 		68987C13256B8D2300119088 /* RequestHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestHeader.swift; sourceTree = "<group>"; };
 		68987C16256B8D3000119088 /* ResponsePack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsePack.swift; sourceTree = "<group>"; };
 		68987C22256B8E5A00119088 /* MappableObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MappableObj.swift; sourceTree = "<group>"; };
@@ -204,7 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				68987C0D256B8D0600119088 /* FunctionType.swift */,
-				68987C10256B8D1600119088 /* PackFormatChecker.swift */,
+				68987C10256B8D1600119088 /* PackChecker.swift */,
 				68987C13256B8D2300119088 /* RequestHeader.swift */,
 				68987C16256B8D3000119088 /* ResponsePack.swift */,
 			);
@@ -357,7 +357,7 @@
 				68987BEA256B8B2300119088 /* NSObject.swift in Sources */,
 				68987C23256B8E5A00119088 /* MappableObj.swift in Sources */,
 				68987BFF256B8C6C00119088 /* GanAgent.swift in Sources */,
-				68987C11256B8D1600119088 /* PackFormatChecker.swift in Sources */,
+				68987C11256B8D1600119088 /* PackChecker.swift in Sources */,
 				68987BE8256B8B2300119088 /* CommonError.swift in Sources */,
 				6869D912256CA4E9001AE211 /* Socket.swift in Sources */,
 				68987BE4256B8B2300119088 /* Array.swift in Sources */,

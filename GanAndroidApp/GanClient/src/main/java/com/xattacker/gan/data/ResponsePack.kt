@@ -44,7 +44,7 @@ class ResponsePack : BinarySerializable2
         try
         {
             this.result = aReadable.readShort()?.toInt() == 1
-            id = aReadable.readInteger() ?: 0
+            this.id = aReadable.readInteger() ?: 0
 
             val size = aReadable.readInteger() ?: 0
             if (size > 0)
