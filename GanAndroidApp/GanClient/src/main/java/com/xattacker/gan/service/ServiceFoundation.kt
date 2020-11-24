@@ -39,18 +39,8 @@ abstract class ServiceFoundation protected constructor(aAgent: GanAgent?)
 
                 val header = RequestHeader()
                 header.type = aType
-
-                val account = _agent?.account
-                if (account != null)
-                {
-                    header.owner = (account)
-                }
-
-                val session_id = _agent?.sessionId
-                if (session_id != null)
-                {
-                    header.sessionId = (session_id)
-                }
+                header.owner = _agent?.account
+                header.sessionId = _agent?.sessionId
                 obb.writeString(header.toJson())
 
                 if (aRequest != null && aRequest.size > 0)

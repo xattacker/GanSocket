@@ -87,7 +87,7 @@ public final class AppProperties // Path related
     
     private class func checkPath(_ path: String)
     {
-        if !FileUtility.isDirExisted(path)
+        if !isDirExisted(path)
         {
             do
             {
@@ -100,6 +100,18 @@ public final class AppProperties // Path related
             {
             }
         }
+    }
+    
+    private class func isDirExisted(_ dirPath: String?) -> Bool
+    {
+        var result = ObjCBool(false)
+        
+        if let dirPath = dirPath, dirPath.length > 0
+        {
+            FileManager.default.fileExists(atPath: dirPath, isDirectory: &result)
+        }
+        
+        return result.boolValue
     }
 }
 

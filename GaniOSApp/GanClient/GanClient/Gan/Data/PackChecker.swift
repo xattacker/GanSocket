@@ -10,8 +10,8 @@ import Foundation
 
 internal final class PackChecker
 {
-    private static let HEAD = "<GAN_PACK>"
-    private static let HEAD_BYTE = HEAD.data(using: String.Encoding.utf8)
+    internal static let HEAD = "<GAN_PACK>"
+    internal static let HEAD_BYTE = HEAD.data(using: String.Encoding.utf8)!
 
     static func isValidPack(_ aIn: InputStream, aMarkable: Bool = false) -> Bool
     {

@@ -8,7 +8,7 @@
 import Foundation
 
 
-public class AccountService: ServiceFoundation
+public final class AccountService: ServiceFoundation
 {
     
 }

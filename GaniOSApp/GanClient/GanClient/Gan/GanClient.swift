@@ -8,14 +8,15 @@
 import Foundation
 
 
-
 public final class GanClient
 {
+    public lazy var accountService: AccountService = AccountService(agent: self)
+    public lazy var systemService: SystemService = SystemService(agent: self)
+    
     private let address: String
     private let port: Int
-    
     private weak var delegate: GanClientDelegate?
-    
+
     public init(address: String, port: Int, delegate: GanClientDelegate)
     {
         self.address = address
@@ -32,6 +33,16 @@ public final class GanClient
 
 extension GanClient: GanAgent
 {
+    var account: String?
+    {
+        return nil
+    }
+    
+    var sessionId: String?
+    {
+        return nil
+    }
+    
     func createSocket() -> Result<TCPClient, SocketError>
     {
         let client = TCPClient(address: self.address, port: Int32(self.port))
