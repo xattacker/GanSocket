@@ -8,7 +8,7 @@ class ResponsePack : BinarySerializable2
 {
     var result = false
     var id = 0
-    var content: ByteArray? = null
+    var response: ByteArray? = null
 
     constructor()
     {
@@ -21,11 +21,11 @@ class ResponsePack : BinarySerializable2
             aWritable.writeShort(if (result) 1.toShort() else 0.toShort())
             aWritable.writeInteger(id)
 
-            if (content != null && content!!.size > 0)
+            if (response?.size ?: 0 > 0)
             {
-                val size = content!!.size
+                val size = response!!.size
                 aWritable.writeInteger(size)
-                aWritable.writeBinary(content!!, 0, size)
+                aWritable.writeBinary(response!!, 0, size)
             }
             else
             {
@@ -39,28 +39,30 @@ class ResponsePack : BinarySerializable2
 
     override fun fromBinary(aReadable: BinaryReadable): Boolean
     {
-        var result = false
+        var succeed = false
 
         try
         {
             this.result = aReadable.readShort()?.toInt() == 1
             id = aReadable.readInteger() ?: 0
-            val size: Int = aReadable.readInteger() ?: 0
+
+            val size = aReadable.readInteger() ?: 0
             if (size > 0)
             {
-                content = aReadable.readBinary(size)
+                response = aReadable.readBinary(size)
             }
             else
             {
-                content = null
+                response = null
             }
-            result = true
+
+            succeed = true
         }
         catch (ex: Exception)
         {
-            result = false
+            succeed = false
         }
 
-        return result
+        return succeed
     }
 }

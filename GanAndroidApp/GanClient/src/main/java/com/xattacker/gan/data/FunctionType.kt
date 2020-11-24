@@ -3,7 +3,7 @@ package com.xattacker.gan.data
 
 enum class FunctionType(private val _value: Int)
 {
-    UNKNOWN_TYPE(-1),
+    UNKNOWN(-1),
 
     LOGIN(1),
     LOGOUT(2),
@@ -16,9 +16,8 @@ enum class FunctionType(private val _value: Int)
     GET_IP(7),
     GET_SYSTEM_TIME(8),
 
-    GET_FRIEND_LIST(9),
-    ADD_FRIEND(10),
-    CHECK_ACCOUNT(11);
+    GET_ACCOUNT_LIST(9),
+    CHECK_ACCOUNT(10);
 
     fun value(): Int
     {
@@ -36,7 +35,8 @@ enum class FunctionType(private val _value: Int)
                     return type
                 }
             }
-            return UNKNOWN_TYPE
+
+            return UNKNOWN
         }
     }
 }

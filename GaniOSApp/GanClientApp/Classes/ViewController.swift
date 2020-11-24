@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 
-class HomeMenuViewController: BaseViewController
+class ViewController: BaseViewController
 {
     private let disposeBag = DisposeBag()
     

@@ -80,7 +80,7 @@ class GanClient private constructor(private val _address: String, private val _p
             Thread.sleep(500)
 
             var count = 0
-            while (account != null)
+            while (account != null && _socket != null)
             {
                 if (count >= 20)
                 {
@@ -90,7 +90,7 @@ class GanClient private constructor(private val _address: String, private val _p
 
                 if (PackFormatChecker.isValidPack(_socket!!.getInputStream(), false))
                 {
-                    var bos = ByteArrayOutputStream()
+                    val bos = ByteArrayOutputStream()
                     IOUtility.readResponse(_socket!!.getInputStream(), bos)
 
                     var binary = BinaryBuffer(bos.toByteArray())
@@ -102,7 +102,7 @@ class GanClient private constructor(private val _address: String, private val _p
                         {
                             1 ->
                             {
-                                binary = BinaryBuffer(response.content!!)
+                                binary = BinaryBuffer(response.response!!)
                                 val sender: String = binary.readString() ?: ""
                                 val time: Long = binary.readLong() ?: 0
                                 val msg: String = binary.readString() ?: ""

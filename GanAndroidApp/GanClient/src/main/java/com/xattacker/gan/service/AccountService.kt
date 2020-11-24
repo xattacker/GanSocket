@@ -27,9 +27,9 @@ abstract class AccountService protected constructor(aAgent: GanAgent?, private v
             if (response != null)
             {
                 result = response.result
-                if (result && response.content != null && _listener != null)
+                if (result && response.response != null && _listener != null)
                 {
-                    val session_id: String = String(response.content!!)
+                    val session_id = String(response.response!!)
                     _account = aAccount
                     _listener.onLoginSucceed(aAccount, session_id)
                 }

@@ -3,7 +3,6 @@ package com.xattacker.gan.service
 import com.xattacker.binary.TypeConverter
 import com.xattacker.gan.GanAgent
 import com.xattacker.gan.data.FunctionType
-import com.xattacker.gan.data.ResponsePack
 import java.util.*
 
 
@@ -15,18 +14,16 @@ abstract class SystemService protected constructor(aAgent: GanAgent?) : ServiceF
         try
         {
             val response = send(FunctionType.GET_IP, null)
-            if (response != null && response.result && response.content != null)
+            if (response != null && response.result && response.response != null)
             {
-                    ip = String(response.content!!)
+                    ip = String(response.response!!)
             }
         }
         catch (ex: Exception)
         {
             ip = null
         }
-        finally
-        {
-        }
+
         return ip
     }
 
@@ -36,9 +33,9 @@ abstract class SystemService protected constructor(aAgent: GanAgent?) : ServiceF
         try
         {
             val response = send(FunctionType.GET_SYSTEM_TIME, null)
-            if (response != null && response.result && response.content != null)
+            if (response != null && response.result && response.response != null)
             {
-                val timestamp: Long = TypeConverter.byteToLong(response.content!!)
+                val timestamp: Long = TypeConverter.byteToLong(response.response!!)
                 time = Date(timestamp)
             }
         }
@@ -46,9 +43,7 @@ abstract class SystemService protected constructor(aAgent: GanAgent?) : ServiceF
         {
             time = null
         }
-        finally
-        {
-        }
+
         return time
     }
 }

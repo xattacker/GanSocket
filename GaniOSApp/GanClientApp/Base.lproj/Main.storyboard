@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--HomeMenuViewController-->
+        <!--ViewController-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController title="TODAY_PROJECTION" id="vXZ-lx-hvc" userLabel="HomeMenuViewController" customClass="HomeMenuViewController" customModule="GanClientTester" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="TODAY_PROJECTION" id="vXZ-lx-hvc" userLabel="ViewController" customClass="ViewController" customModule="GanClientApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
