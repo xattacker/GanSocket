@@ -48,7 +48,7 @@ public class GanServer extends Thread
 				socket.setOOBInline(true);
 				socket.setKeepAlive(true);
 				
-				GanClientConnection process = new GanClientConnection(socket);
+				GanClientConnectionProcess process = new GanClientConnectionProcess(socket);
 				process.start();
 				System.out.println("got connection");
 				

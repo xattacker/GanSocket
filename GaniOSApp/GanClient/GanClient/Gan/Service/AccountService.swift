@@ -52,7 +52,8 @@ public final class AccountService: ServiceFoundation
                 }
                 break
                 
-            case .failure(_):
+            case .failure(let error):
+                print(error)
                 break
         }
         

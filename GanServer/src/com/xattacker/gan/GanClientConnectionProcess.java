@@ -12,21 +12,22 @@ import com.xattacker.binary.InputBinaryBuffer;
 import com.xattacker.binary.OutputBinaryBuffer;
 import com.xattacker.binary.TypeConverter;
 import com.xattacker.gan.account.SessionPool;
-import com.xattacker.gan.data.DataDefine;
 import com.xattacker.gan.data.FunctionType;
 import com.xattacker.gan.data.FunctionTypeJsonSerializer;
+import com.xattacker.gan.data.PackChecker;
 import com.xattacker.gan.data.RequestHeader;
 import com.xattacker.gan.data.ResponsePack;
-import com.xattacker.gan.sms.SmsData;
-import com.xattacker.gan.sms.SmsManager;
+import com.xattacker.gan.exception.ConnectEOFException;
+import com.xattacker.gan.msg.MsgData;
+import com.xattacker.gan.msg.MsgManager;
 import com.xattacker.json.JsonBuilderVisitor;
 import com.xattacker.json.JsonUtility;
 
-final class SocketProcess extends Thread
+final class GanClientConnectionProcess extends Thread
 {
 	private Socket _socket = null;
 
-	public SocketProcess(Socket aSocket)
+	public GanClientConnectionProcess(Socket aSocket)
 	{
 		_socket = aSocket;
 	}
@@ -42,10 +43,9 @@ final class SocketProcess extends Thread
 			{
 				in = _socket.getInputStream();
 				
-				if (DataDefine.isValidPack(in, false))
+				if (PackChecker.isValidPack(in, false))
 				{
 					ResponsePack response = null;
-					
 					InputBinaryBuffer ibb = new InputBinaryBuffer(in);
 					String json = ibb.readString();
 					
@@ -78,8 +78,9 @@ final class SocketProcess extends Thread
 								
 								if (result)
 								{
-									String temp = session_id.toString();
-									response.setContent(temp.getBytes());
+									String id = session_id.toString();
+									response.setContent(id.getBytes());
+									System.out.println("create session id [" + id + "] for account [" + account + "]");
 								}
 							}
 								break;
@@ -105,12 +106,11 @@ final class SocketProcess extends Thread
 								String receiver = ibb.readString();
 								String msg = ibb.readString();
 								
-								SmsData sms = new SmsData();
+								MsgData sms = new MsgData();
 								sms.setSender(request.getOwner());
 								sms.setMessage(msg);
 								sms.setTime(System.currentTimeMillis());
-								
-								SmsManager.instance().addSms(receiver, sms);
+								MsgManager.instance().addSms(receiver, sms);
 								
 								response = new ResponsePack();
 								response.setResult(true);
@@ -135,10 +135,6 @@ final class SocketProcess extends Thread
 								response.setContent(TypeConverter.longToByte(System.currentTimeMillis()));
 							}
 								break;
-								
-							default:
-								System.out.println("unhandled request type: " + request.getType());
-								break;
 						}
 						
 						if (response != null)
@@ -159,6 +155,13 @@ final class SocketProcess extends Thread
 						System.out.println("invalid request pack, just ignore it");
 					}
 				}
+			}
+			catch (ConnectEOFException ex)
+			{
+				System.out.println("got ConnectEOFException");
+				ex.printStackTrace();
+
+				break;
 			}
 			catch (Exception ex)
 			{
@@ -225,7 +228,7 @@ final class SocketProcess extends Thread
 					 response.setId(2);
 					 
 					 OutputStream out = _socket.getOutputStream();
-					 out.write(DataDefine.HEAD_BYTE);
+					 out.write(PackChecker.HEAD_BYTE);
 					 
 					 OutputBinaryBuffer obb = new OutputBinaryBuffer(out);
 					 response.toBinary(obb);
@@ -236,15 +239,15 @@ final class SocketProcess extends Thread
 					 break;
 				 }
 				
-				 if (SmsManager.instance() != null && SmsManager.instance().hasSms(aAccount))
+				 if (MsgManager.instance() != null && MsgManager.instance().hasSms(aAccount))
 				 {
-					 ArrayList<SmsData> list = SmsManager.instance().getSms(aAccount);
+					 ArrayList<MsgData> list = MsgManager.instance().getSms(aAccount);
 					 if (list != null && !list.isEmpty())
 					 {
-						 for (SmsData sms : list)
+						 for (MsgData sms : list)
 						 {
 							 OutputStream out = _socket.getOutputStream();
-							 out.write(DataDefine.HEAD_BYTE);
+							 out.write(PackChecker.HEAD_BYTE);
 								
 							 ResponsePack response = new ResponsePack();
 							 response.setResult(true);
