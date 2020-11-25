@@ -1,4 +1,4 @@
-# Gan
+# GanSocket
 Gan Socket Project, includes:<br>
 GanServer: implemented by Java<br>
 GanClient Android: implemented by Kotlin<br>
