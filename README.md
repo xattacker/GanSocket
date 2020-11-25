@@ -1,5 +1,5 @@
 # Gan
-Gan Socket Project, includes:
-GanServer: implemented by Java
-GanClient Android: implemented by Kotlin
+Gan Socket Project, includes:<br>
+GanServer: implemented by Java<br>
+GanClient Android: implemented by Kotlin<br>
 GanClient iOS: implemented by Swift
