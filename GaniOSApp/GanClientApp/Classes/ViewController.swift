@@ -65,7 +65,8 @@ class ViewController: BaseViewController
             return
         }
         
-        client.accountService.logout()
+        
+        _ = client.accountService.logout()
     }
     
     @IBAction func onGetIPAction(_ sender: AnyObject)
@@ -76,6 +77,16 @@ class ViewController: BaseViewController
             
             return
         }
+        
+        
+        if let ip = client.systemService.getIP()
+        {
+            print("got ip: " + ip)
+        }
+        else
+        {
+            print("got ip failed")
+        }
     }
     
     @IBAction func onGetTimeAction(_ sender: AnyObject)
@@ -85,6 +96,16 @@ class ViewController: BaseViewController
             print("GanClient is not initial !!")
             
             return
+        }
+        
+        
+        if let time = client.systemService.getSystemTime()
+        {
+            print("got time: " + time.getDateTimeString(DateTimeFormatType.datetime_complete))
+        }
+        else
+        {
+            print("got time failed")
         }
     }
     

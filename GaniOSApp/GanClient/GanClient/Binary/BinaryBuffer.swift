@@ -11,7 +11,7 @@ import Foundation
 
 public final class BinaryBuffer
 {
-    private var dataPri: NSMutableData = NSMutableData()
+    private var dataPri = NSMutableData()
     private var index: UInt = 0
     
     init()

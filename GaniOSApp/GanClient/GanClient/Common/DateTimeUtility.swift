@@ -81,6 +81,16 @@ public final class DateTimeUtility
 
 extension Date
 {
+    public init(timestamp: UInt64)
+    {
+        self.init(timeIntervalSince1970: TimeInterval(timestamp/1000))
+    }
+    
+    public init(timestamp: Int64)
+    {
+        self.init(timestamp: UInt64(timestamp))
+    }
+    
     public func getDateTimeString(_ type: DateTimeFormatType, timeZone: TimeZone? = nil) -> String
     {
         return DateTimeUtility.getDateTimeString(type.rawValue, date: self, timeZone: timeZone)

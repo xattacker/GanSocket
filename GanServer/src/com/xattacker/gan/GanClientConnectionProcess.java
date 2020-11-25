@@ -135,6 +135,10 @@ final class GanClientConnectionProcess extends Thread
 								response.setContent(TypeConverter.longToByte(System.currentTimeMillis()));
 							}
 								break;
+								
+							default:
+								System.out.println("unhandled request type: " + request.getType());
+								break;
 						}
 						
 						if (response != null)
@@ -158,7 +162,7 @@ final class GanClientConnectionProcess extends Thread
 			}
 			catch (ConnectEOFException ex)
 			{
-				System.out.println("got ConnectEOFException");
+				System.out.println("got ConnectEOFException:");
 				ex.printStackTrace();
 
 				break;

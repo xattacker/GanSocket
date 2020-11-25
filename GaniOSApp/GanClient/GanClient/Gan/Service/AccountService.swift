@@ -44,8 +44,7 @@ public final class AccountService: ServiceFoundation
         {
             case .success(let response):
                 if response.result,
-                   let data = response.response,
-                   let session_id = String(data: data, encoding: .utf8)
+                   let session_id = response.responseString
                 {
                     self.delegate.onLoginSucceed(session: SessionInfo(account: account, sessionId: session_id))
                     succeed = true
@@ -60,8 +59,31 @@ public final class AccountService: ServiceFoundation
         return succeed
     }
     
-    public func logout()
+    public func logout() -> Bool
     {
+        var succeed = false
         
+        if let account = self.agent.account
+        {
+            let buffer = BinaryBuffer()
+            buffer.writeString(account)
+            
+            switch self.send(FunctionType.logout, request: buffer.data)
+            {
+                case .success(let response):
+                    if response.result
+                    {
+                        self.delegate.onLoggedOut(account: account)
+                        succeed = true
+                    }
+                    break
+                    
+                case .failure(let error):
+                    print(error)
+                    break
+            }
+        }
+
+        return succeed
     }
 }

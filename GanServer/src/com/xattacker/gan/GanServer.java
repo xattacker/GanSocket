@@ -34,13 +34,15 @@ public class GanServer extends Thread
 		catch (Exception ex)
 		{
 		}
+		
+		_server = null;
 	}
 
 	public void run()
 	{
 		Socket socket = null;
 
-		while (true)
+		while (_server != null)
 		{
 			try
 			{

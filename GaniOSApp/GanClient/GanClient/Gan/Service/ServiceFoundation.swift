@@ -39,6 +39,8 @@ public class ServiceFoundation
                 switch client.send(data: buffer.data)
                 {
                     case .success(()):
+                        Thread.sleep(forTimeInterval: 0.3)
+                        
                         guard let data = client.read(1024*10, timeout: 5) else
                         {
                             client.close()

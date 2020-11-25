@@ -14,6 +14,16 @@ internal class ResponsePack: BinarySerializable2
     var id: Int = 0
     var response: Data?
     
+    var responseString: String?
+    {
+        if let data = self.response
+        {
+            return String(data: data, encoding: .utf8)
+        }
+        
+        return nil
+    }
+    
     func toBinaryWriteable<T>(_ writable: T) where T : BinaryWritable
     {
         _ = writable.writeShort(self.result ? 1 : 0).writeInteger(Int32(self.id))

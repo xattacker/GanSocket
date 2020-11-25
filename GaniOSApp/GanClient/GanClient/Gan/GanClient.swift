@@ -42,12 +42,12 @@ extension GanClient: GanAgent
 {
     var account: String?
     {
-        return nil
+        return self.sessionInfo?.account
     }
     
     var sessionId: String?
     {
-        return nil
+        return self.sessionInfo?.sessionId
     }
     
     func createSocket() -> Result<TCPClient, SocketError>

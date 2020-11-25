@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="192.168.226.44" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c41-3g-eaZ">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="192.168.226.41" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c41-3g-eaZ">
                                 <rect key="frame" x="20" y="68" width="374" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="l46-59-8DP"/>
@@ -43,6 +43,25 @@
                                     <action selector="onLogoutAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="0dz-eq-rET"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="48a-x1-WKL">
+                                <rect key="frame" x="20" y="237" width="374" height="80"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EZh-91-4sL">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="30"/>
+                                        <state key="normal" title="Get IP"/>
+                                        <connections>
+                                            <action selector="onGetIPAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="TTC-aI-eKL"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sHJ-bj-SYZ">
+                                        <rect key="frame" x="0.0" y="50" width="374" height="30"/>
+                                        <state key="normal" title="Get Time"/>
+                                        <connections>
+                                            <action selector="onGetTimeAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="mau-eR-H2A"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BT3-fZ-4aK"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -52,7 +71,9 @@
                             <constraint firstItem="NXG-2i-Csf" firstAttribute="height" secondItem="55g-a2-5zs" secondAttribute="height" id="Bql-Im-COm"/>
                             <constraint firstItem="2G8-Lt-9aM" firstAttribute="height" secondItem="c41-3g-eaZ" secondAttribute="height" id="PLa-Rm-dTV"/>
                             <constraint firstItem="BT3-fZ-4aK" firstAttribute="trailing" secondItem="55g-a2-5zs" secondAttribute="trailing" constant="20" id="R5w-3e-IwF"/>
+                            <constraint firstItem="48a-x1-WKL" firstAttribute="trailing" secondItem="2G8-Lt-9aM" secondAttribute="trailing" id="Tjv-Er-UqR"/>
                             <constraint firstItem="NXG-2i-Csf" firstAttribute="width" secondItem="55g-a2-5zs" secondAttribute="width" id="bsG-z4-EyJ"/>
+                            <constraint firstItem="48a-x1-WKL" firstAttribute="top" secondItem="NXG-2i-Csf" secondAttribute="bottom" constant="27" id="euL-Rr-Qrh"/>
                             <constraint firstItem="NXG-2i-Csf" firstAttribute="leading" secondItem="BT3-fZ-4aK" secondAttribute="leading" constant="20" id="ewU-eK-vmd"/>
                             <constraint firstItem="55g-a2-5zs" firstAttribute="top" secondItem="2G8-Lt-9aM" secondAttribute="bottom" constant="24" id="jaN-0F-nEk"/>
                             <constraint firstItem="2G8-Lt-9aM" firstAttribute="top" secondItem="c41-3g-eaZ" secondAttribute="bottom" constant="20" id="juF-FP-gmr"/>
@@ -61,6 +82,7 @@
                             <constraint firstItem="BT3-fZ-4aK" firstAttribute="trailing" secondItem="c41-3g-eaZ" secondAttribute="trailing" constant="20" id="oYZ-wT-Gi6"/>
                             <constraint firstItem="BT3-fZ-4aK" firstAttribute="trailing" secondItem="2G8-Lt-9aM" secondAttribute="trailing" constant="20" id="pPt-cj-aDf"/>
                             <constraint firstItem="c41-3g-eaZ" firstAttribute="top" secondItem="BT3-fZ-4aK" secondAttribute="top" constant="24" id="uK7-R1-vRB"/>
+                            <constraint firstItem="48a-x1-WKL" firstAttribute="leading" secondItem="2G8-Lt-9aM" secondAttribute="leading" id="v0U-xX-lVi"/>
                             <constraint firstItem="NXG-2i-Csf" firstAttribute="top" secondItem="55g-a2-5zs" secondAttribute="top" id="zts-cY-I9i"/>
                         </constraints>
                     </view>
