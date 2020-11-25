@@ -1,12 +1,21 @@
 package com.xattacker.gan.msg;
 
+import com.google.gson.annotations.SerializedName;
+import com.xattacker.json.JsonObject;
 import com.xattacker.util.GUID;
 
-public class MsgData
+public final class MsgData extends JsonObject
 {
+	@SerializedName("id")
 	private String _id;
-	private String _sender; 
+	
+	@SerializedName("sender")
+	private String _sender;
+	
+	@SerializedName("time")
 	private long _time;
+	
+	@SerializedName("message")
 	private String _message;
 	
 	public MsgData()

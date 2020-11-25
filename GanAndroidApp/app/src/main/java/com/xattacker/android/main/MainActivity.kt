@@ -15,6 +15,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import com.xattacker.gan.GanClient
 import com.xattacker.gan.GanClientListener
+import com.xattacker.gan.data.MessageData
 import com.xattacker.util.DateTimeUtility
 import com.xattacker.util.DateTimeUtility.DateTimeFormatType
 import java.util.*
@@ -35,7 +36,7 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
         {
             // 122.254.39.227 // home
             // 192.168.226.50 // office
-            GanClient.initial("192.168.226.36", 5999, this)
+            GanClient.initial("192.168.226.41", 5999, this)
         }
         catch (ex: Exception)
         {
@@ -142,7 +143,7 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
 
                 asyncRun(
                 {
-                        val result: Boolean = GanClient.instance?.msgService?.sendMsg(receiver, msg) ?: false
+                        val result: Boolean = GanClient.instance?._messageService?.sendMessage(receiver, msg) ?: false
                         Log.i("aaa", "send msg $result")
                         showToast("send msg result: $result")
                 })
@@ -195,18 +196,18 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
         Log.i("aaa", "onAccountClosed $account")
     }
 
-    override fun onMessageReceived(aSender: String, aTime: Long, aMsg: String)
+    override fun onMessageReceived(message: MessageData)
     {
-        Log.i("aaa", "onSMSReceived $aSender, $aTime")
+        Log.i("aaa", "onMessageReceived $message")
 
         runOnUiThread(Runnable {
             if (_receivedMsgEdit != null)
             {
                 _receivedMsgEdit?.setText("")
 
-                val date = Date(aTime)
+                val date = Date(message.time ?: 0)
                 _receivedMsgEdit?.append(DateTimeUtility.getDateTimeString(date, DateTimeFormatType.DATETIME_COMPLETE))
-                _receivedMsgEdit?.append("\n" + aMsg)
+                _receivedMsgEdit?.append("\n" + message.message)
             }
         })
     }

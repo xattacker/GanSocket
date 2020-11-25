@@ -11,6 +11,6 @@ public protocol GanClientDelegate : class
 {
     func onAccountLoggedIn(account: String)
     func onAccountLoggedOut(account: String)
-    func onMessageReceived(sender: String, time: UInt64, msg: String)
+    func onMessageReceived(message: MessageData)
 }
 

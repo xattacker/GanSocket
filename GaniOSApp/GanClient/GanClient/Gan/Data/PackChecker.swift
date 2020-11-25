@@ -17,10 +17,10 @@ internal final class PackChecker
     {
         var valid = false
         
-        if data.count > HEAD_BYTE.count,
-           data.array.elementsEqual(HEAD_BYTE.array)
+        if data.count >= HEAD_BYTE.count
         {
-            valid = true
+            let compare = data.subdata(in: 0 ..< HEAD_BYTE.count)
+            valid = compare.array.elementsEqual(HEAD_BYTE.array)
         }
         
         return valid

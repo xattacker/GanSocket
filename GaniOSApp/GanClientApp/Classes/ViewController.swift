@@ -109,6 +109,26 @@ class ViewController: BaseViewController
         }
     }
     
+    @IBAction func onSendMsgAction(_ sender: AnyObject)
+    {
+        guard let client = self.ganClient else
+        {
+            print("GanClient is not initial !!")
+            
+            return
+        }
+        
+        
+        if client.messageService.sendMessage("test", message: "aaafdsafad中文字")
+        {
+            print("sendMessage succeed")
+        }
+        else
+        {
+            print("sendMessage failed")
+        }
+    }
+    
     deinit
     {
         _ = self.ganClient?.accountService.logout()
@@ -129,8 +149,8 @@ extension ViewController: GanClientDelegate
         self.title = "(loggedOut)"
     }
     
-    func onMessageReceived(sender: String, time: UInt64, msg: String)
+    func onMessageReceived(message: MessageData)
     {
-        print("onMessageReceived: \(msg)")
+        print("onMessageReceived: \(message.message)")
     }
 }

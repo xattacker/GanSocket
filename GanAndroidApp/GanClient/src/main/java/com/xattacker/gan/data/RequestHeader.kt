@@ -2,10 +2,11 @@ package com.xattacker.gan.data
 
 import com.google.gson.GsonBuilder
 import com.google.gson.annotations.SerializedName
+import com.xattacker.json.JsonObject
 import com.xattacker.json.JsonSerializable
 import com.xattacker.json.JsonUtility
 
-internal class RequestHeader : JsonSerializable
+internal class RequestHeader : JsonObject()
 {
     @SerializedName("Type")
     var type: FunctionType? = null
@@ -19,11 +20,8 @@ internal class RequestHeader : JsonSerializable
     @SerializedName("DeviceType")
     var deviceType = 0
 
-    override fun toJson(): String
+    override fun onBuilderPrepared(builder: GsonBuilder)
     {
-        return JsonUtility.createGson {
-            builder: GsonBuilder ->
-            builder.registerTypeAdapter(FunctionType::class.java, FunctionTypeSerializer())
-        }.toJson(this)
+        builder.registerTypeAdapter(FunctionType::class.java, FunctionTypeSerializer())
     }
 }

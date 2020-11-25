@@ -44,6 +44,8 @@
 		68C98C6A256E01BD004E21BB /* CallbackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C98C69256E01BD004E21BB /* CallbackService.swift */; };
 		68C98C72256E02CF004E21BB /* ThreadBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C98C70256E02CF004E21BB /* ThreadBase.swift */; };
 		68C98C73256E02CF004E21BB /* ImpThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C98C71256E02CF004E21BB /* ImpThread.swift */; };
+		68C98C77256E3DE3004E21BB /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C98C76256E3DE3004E21BB /* MessageService.swift */; };
+		68C98C7B256E4DD9004E21BB /* MessageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C98C7A256E4DD9004E21BB /* MessageData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +89,8 @@
 		68C98C69256E01BD004E21BB /* CallbackService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallbackService.swift; sourceTree = "<group>"; };
 		68C98C70256E02CF004E21BB /* ThreadBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadBase.swift; sourceTree = "<group>"; };
 		68C98C71256E02CF004E21BB /* ImpThread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImpThread.swift; sourceTree = "<group>"; };
+		68C98C76256E3DE3004E21BB /* MessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
+		68C98C7A256E4DD9004E21BB /* MessageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageData.swift; sourceTree = "<group>"; };
 		6A7F2A1002A83AEA3BC49C27 /* Pods-GanClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GanClient.debug.xcconfig"; path = "Target Support Files/Pods-GanClient/Pods-GanClient.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -196,6 +200,7 @@
 				68987C10256B8D1600119088 /* PackChecker.swift */,
 				68987C13256B8D2300119088 /* RequestHeader.swift */,
 				68987C16256B8D3000119088 /* ResponsePack.swift */,
+				68C98C7A256E4DD9004E21BB /* MessageData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -207,6 +212,7 @@
 				68987C07256B8CE600119088 /* AccountService.swift */,
 				68987C0A256B8CF400119088 /* SystemService.swift */,
 				68C98C69256E01BD004E21BB /* CallbackService.swift */,
+				68C98C76256E3DE3004E21BB /* MessageService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -365,6 +371,7 @@
 				6869D911256CA4E9001AE211 /* UDPClient.swift in Sources */,
 				68987BEC256B8B2300119088 /* MimeCodec.swift in Sources */,
 				68987C08256B8CE600119088 /* AccountService.swift in Sources */,
+				68C98C77256E3DE3004E21BB /* MessageService.swift in Sources */,
 				68987BC9256B8AB500119088 /* BinaryBuffer.swift in Sources */,
 				68987BCC256B8AB500119088 /* BinaryReadable.swift in Sources */,
 				68C98C72256E02CF004E21BB /* ThreadBase.swift in Sources */,
@@ -372,6 +379,7 @@
 				68987C14256B8D2300119088 /* RequestHeader.swift in Sources */,
 				68987BEF256B8B2300119088 /* Dictionary.swift in Sources */,
 				6869D910256CA4E9001AE211 /* TCPClient.swift in Sources */,
+				68C98C7B256E4DD9004E21BB /* MessageData.swift in Sources */,
 				68987BF0256B8B2300119088 /* String.swift in Sources */,
 				68987C04256B8CD900119088 /* ServiceFoundation.swift in Sources */,
 				68987BC8256B8AB500119088 /* InputBinaryBuffer.swift in Sources */,

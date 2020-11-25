@@ -6,9 +6,9 @@ import com.xattacker.gan.GanAgent
 import com.xattacker.gan.data.FunctionType
 
 
-class MsgService internal constructor(agent: GanAgent) : ServiceFoundation(agent)
+class MessageService internal constructor(agent: GanAgent) : ServiceFoundation(agent)
 {
-    fun sendMsg(aReceiver: String, aMsg: String): Boolean
+    fun sendMessage(aReceiver: String, aMsg: String): Boolean
     {
         var result = false
         try

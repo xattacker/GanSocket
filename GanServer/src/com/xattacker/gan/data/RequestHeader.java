@@ -2,11 +2,9 @@ package com.xattacker.gan.data;
 
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
-import com.xattacker.json.JsonBuilderVisitor;
-import com.xattacker.json.JsonSerializable;
-import com.xattacker.json.JsonUtility;
+import com.xattacker.json.JsonObject;
 
-public final class RequestHeader implements JsonSerializable
+public final class RequestHeader extends JsonObject
 {
 	@SerializedName("Type")
 	private FunctionType _type;
@@ -59,18 +57,10 @@ public final class RequestHeader implements JsonSerializable
 	{
 		_deviceType = aType;
 	}
-
+	
 	@Override
-	public String toJson()
-	{
-		return JsonUtility.createGson(
-			new JsonBuilderVisitor() 
-			{
-				@Override
-				public void onBuilderPrepared(GsonBuilder aBuilder)
-				{
-					aBuilder.registerTypeAdapter(FunctionType.class, new FunctionTypeJsonSerializer());
-				}
-			}).toJson(this);
+	public void onBuilderPrepared(GsonBuilder aBuilder)
+	{	
+		aBuilder.registerTypeAdapter(FunctionType.class, new FunctionTypeJsonSerializer());
 	}
 }

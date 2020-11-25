@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 import com.google.gson.GsonBuilder;
@@ -22,6 +23,8 @@ import com.xattacker.gan.msg.MsgData;
 import com.xattacker.gan.msg.MsgManager;
 import com.xattacker.json.JsonBuilderVisitor;
 import com.xattacker.json.JsonUtility;
+
+import sun.awt.CharsetString;
 
 final class GanClientConnectionProcess extends Thread
 {
@@ -221,13 +224,15 @@ final class GanClientConnectionProcess extends Thread
 		{
 			while (true)
 			{
-				 Thread.sleep(2000);
+				 Thread.sleep(800);
 				 
 				 if (SessionPool.instance() != null && !SessionPool.instance().checkSession(aAccount, aSessionId))
 				 {
+					 // session id 失效了, 結束前一個 connection
 					 ResponsePack response = new ResponsePack();
 					 response.setResult(true);
 					 response.setId(FunctionType.LOGOUT.value());
+					 response.setContent(aAccount.getBytes());
 					 
 					 OutputStream out = _socket.getOutputStream();
 					 out.write(PackChecker.HEAD_BYTE);
@@ -246,28 +251,18 @@ final class GanClientConnectionProcess extends Thread
 					 ArrayList<MsgData> list = MsgManager.instance().getMsgs(aAccount);
 					 if (list != null && !list.isEmpty())
 					 {
-						 for (MsgData sms : list)
+						 for (MsgData msg : list)
 						 {
-							 OutputStream out = _socket.getOutputStream();
-							 out.write(PackChecker.HEAD_BYTE);
-								
 							 ResponsePack response = new ResponsePack();
 							 response.setResult(true);
 							 response.setId(FunctionType.RECEIVE_SMS.value());
+							 response.setContent(msg.toJson().getBytes("UTF8"));
 							 
-							 BinaryBuffer buffer = new BinaryBuffer();
-							 buffer.writeString(sms.getSender());
-							 buffer.writeLong(sms.getTime());
-							 buffer.writeString(sms.getMessage());
-							 response.setContent(buffer.getData());
-							 
-							 OutputBinaryBuffer obb = new OutputBinaryBuffer(out);
+							 OutputBinaryBuffer obb = new OutputBinaryBuffer(_socket.getOutputStream());
+							 obb.writeBinary(PackChecker.HEAD_BYTE, 0, PackChecker.HEAD_BYTE.length);
 							 response.toBinary(obb);
 								
 							 obb.flush();
-							 response = null;
-						    buffer = null;
-							 
 							 Thread.sleep(500);
 						 }
 						 

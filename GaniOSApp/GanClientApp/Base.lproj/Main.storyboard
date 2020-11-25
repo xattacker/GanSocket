@@ -44,7 +44,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="48a-x1-WKL">
-                                <rect key="frame" x="20" y="237" width="374" height="80"/>
+                                <rect key="frame" x="20" y="237" width="374" height="130"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EZh-91-4sL">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="30"/>
@@ -58,6 +58,13 @@
                                         <state key="normal" title="Get Time"/>
                                         <connections>
                                             <action selector="onGetTimeAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="mau-eR-H2A"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IlW-FP-Yqy">
+                                        <rect key="frame" x="0.0" y="100" width="374" height="30"/>
+                                        <state key="normal" title="Send Message"/>
+                                        <connections>
+                                            <action selector="onSendMsgAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="xTv-me-Tef"/>
                                         </connections>
                                     </button>
                                 </subviews>

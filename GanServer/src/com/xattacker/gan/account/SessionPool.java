@@ -41,19 +41,21 @@ public final class SessionPool
 		
 		if (_sessions != null)
 		{
-			if (_sessions.containsKey(aAccount))
+			synchronized(_sessions)
 			{
-				_sessions.remove(aAccount);
-				System.out.println("account [" + aAccount + "]  was login by another connection, remove it from session pool");
+				if (_sessions.containsKey(aAccount))
+				{
+					_sessions.remove(aAccount);
+					System.out.println("account [" + aAccount + "]  was login by another connection, remove it from session pool");
+				}
+				
+				SessionInfo session = new SessionInfo(aAccount);
+				_sessions.put(aAccount, session);
+				
+				aSessionId.append(session.getSessionId());
+				
+				result = true;
 			}
-			
-			SessionInfo session = new SessionInfo(aAccount);
-			_sessions.put(aAccount, session);
-			
-			aSessionId.append(session.getSessionId());
-			
-			result = true;
-			session = null;
 		}
 		
 		return result;
@@ -65,18 +67,21 @@ public final class SessionPool
 		
 		if (aSessionId != null && aSessionId.length() > 0 && _sessions != null)
 		{
-			if (_sessions.containsKey(aAccount))
+			synchronized(_sessions)
 			{
-				SessionInfo session = _sessions.get(aAccount);
-				result = session._sessionId.equals(aSessionId);
-			}
-			else
-			{
-				SessionInfo session = new SessionInfo(aAccount);
-				session.setSessionId(aSessionId);
-				_sessions.put(aAccount, session);
-				
-				result = true;
+				if (_sessions.containsKey(aAccount))
+				{
+					SessionInfo session = _sessions.get(aAccount);
+					result = session._sessionId.equals(aSessionId);
+				}
+				else
+				{
+					SessionInfo session = new SessionInfo(aAccount);
+					session.setSessionId(aSessionId);
+					_sessions.put(aAccount, session);
+					
+					result = true;
+				}
 			}
 		}
 		
@@ -85,9 +90,12 @@ public final class SessionPool
 	
 	public void removeSession(String aAccount)
 	{
-		if (_sessions != null && _sessions.containsKey(aAccount))
+		if (_sessions != null)
 		{
-			_sessions.remove(aAccount);
+			synchronized(_sessions)
+			{
+				_sessions.remove(aAccount);
+			}
 		}
 	}
 	

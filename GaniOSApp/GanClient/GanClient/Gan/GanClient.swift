@@ -21,7 +21,9 @@ public final class GanClient
     }
     
     public lazy var accountService: AccountService = AccountService(agent: self, delegate: self)
+    public lazy var messageService: MessageService = MessageService(agent: self)
     public lazy var systemService: SystemService = SystemService(agent: self)
+    private lazy var callbackService = CallbackService(agent: self, delegate: self)
     
     public init(address: String, port: Int, delegate: GanClientDelegate)
     {
@@ -66,17 +68,32 @@ extension GanClient: GanAgent
 }
 
 
-extension GanClient: AccountServiceDelegate
+extension GanClient: AccountServiceDelegate, CallbackServiceDelegate
 {
     func onLoginSucceed(session: SessionInfo)
     {
-        self.sessionInfo = session
-        self.delegate?.onAccountLoggedIn(account: session.account)
+        self.sessionInfo = session // must be set first
+        
+        if self.callbackService.connect()
+        {
+            self.delegate?.onAccountLoggedIn(account: session.account)
+        }
+        else
+        {
+            self.sessionInfo = nil
+        }
     }
     
     func onLoggedOut(account: String)
     {
         self.delegate?.onAccountLoggedOut(account: account)
+        self.callbackService.disconnect()
         self.sessionInfo = nil
+    }
+    
+    func onMessageReceived(message: MessageData)
+    {
+        // bypass to another delegate
+        self.delegate?.onMessageReceived(message: message)
     }
 }

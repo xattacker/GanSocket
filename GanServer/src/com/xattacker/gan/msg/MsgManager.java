@@ -77,7 +77,6 @@ public final class MsgManager
 			if (_messages.containsKey(aReceiver))
 			{
 				ArrayList<MsgData> existed = _messages.get(aReceiver);
-				
 				list = new ArrayList<MsgData>(existed);
 				
 				existed.clear();

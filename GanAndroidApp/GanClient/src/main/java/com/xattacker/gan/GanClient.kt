@@ -3,20 +3,20 @@ package com.xattacker.gan
 import android.util.Log
 import com.xattacker.binary.BinaryBuffer
 import com.xattacker.binary.OutputBinaryBuffer
-import com.xattacker.gan.data.FunctionType
-import com.xattacker.gan.data.PackChecker
+import com.xattacker.gan.data.*
 import com.xattacker.gan.data.RequestHeader
-import com.xattacker.gan.data.ResponsePack
 import com.xattacker.gan.service.AccountService
 import com.xattacker.gan.service.AccountService.AccountServiceListener
-import com.xattacker.gan.service.MsgService
+import com.xattacker.gan.service.MessageService
 import com.xattacker.gan.service.SystemService
+import com.xattacker.json.JsonUtility
 import com.xattacker.util.IOUtility
 
 import java.io.ByteArrayOutputStream
 import java.lang.ref.WeakReference
 import java.net.InetSocketAddress
 import java.net.Socket
+import java.nio.charset.Charset
 
 class GanClient private constructor(private val _address: String, private val _port: Int, aListener: GanClientListener) : Runnable, GanAgent, AccountServiceListener
 {
@@ -33,7 +33,7 @@ class GanClient private constructor(private val _address: String, private val _p
         get() = !this.account.isNullOrEmpty()
 
     val accountService: AccountService by lazy { AccountService(this, this) }
-    val msgService: MsgService by lazy { MsgService(this) }
+    val _messageService: MessageService by lazy { MessageService(this) }
     val systemService: SystemService by lazy { SystemService(this) }
 
     companion object
@@ -105,11 +105,11 @@ class GanClient private constructor(private val _address: String, private val _p
                         {
                             FunctionType.RECEIVE_SMS ->
                             {
-                                binary = BinaryBuffer(response.response!!)
-                                val sender: String = binary.readString() ?: ""
-                                val time: Long = binary.readLong() ?: 0
-                                val msg: String = binary.readString() ?: ""
-                                _listener?.get()?.onMessageReceived(sender, time, msg)
+                                response.response?.let {
+                                    val json = String(it, Charsets.UTF_8)
+                                    val msg = JsonUtility.fromJson(json, MessageData::class.java)
+                                    _listener?.get()?.onMessageReceived(msg)
+                                }
                             }
 
                             FunctionType.LOGOUT ->
@@ -127,7 +127,7 @@ class GanClient private constructor(private val _address: String, private val _p
 
                     bos.close()
                 }
-                
+
                 count++
             }
         }
