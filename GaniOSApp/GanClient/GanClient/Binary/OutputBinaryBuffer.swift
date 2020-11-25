@@ -1,6 +1,6 @@
 //
 //  OutputBinaryBuffer.swift
-//  UtilToolKit
+//  GanClient
 //
 //  Created by tao on 2016/4/6.
 //  Copyright © 2016年 Xattacker. All rights reserved.

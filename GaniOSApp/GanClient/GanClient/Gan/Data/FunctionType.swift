@@ -12,14 +12,13 @@ internal enum FunctionType: Int
     case login = 1
     case logout = 2
     case register_account = 3
-    case connection = 4
+    case create_callback_connection = 4
+    case get_account_list = 5
+    case check_account = 6
     
-    case send_sms = 5
-    case receive_sms = 6
+    case send_sms = 101
+    case receive_sms = 102
     
-    case get_ip = 7
-    case get_system_time = 8
-    
-    case get_account_list = 9
-    case check_account = 10
+    case get_ip = 901
+    case get_system_time = 902
 }

@@ -1,6 +1,6 @@
 //
 //  DateTimeUtility.swift
-//  UtilToolKit
+//  GanClient
 //
 //  Created by xattacker on 2015/7/12.
 //  Copyright (c) 2015年 xattacker. All rights reserved.

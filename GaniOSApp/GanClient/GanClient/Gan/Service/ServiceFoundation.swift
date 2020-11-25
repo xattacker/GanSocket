@@ -22,21 +22,9 @@ public class ServiceFoundation
         switch self.createSocket()
         {
             case .success(let client):
-                let buffer = BinaryBuffer()
-                buffer.writeData(PackChecker.HEAD_BYTE)
+                let request_data = self.createRequestPack(type, request: request)
                 
-                let header = RequestHeader()
-                header.type = type
-                header.owner = self.agent.account
-                header.sessionId = self.agent.sessionId
-                buffer.writeString(header.toJSONString() ?? "")
-                
-                if let request = request, request.count > 0
-                {
-                    buffer.writeData(request)
-                }
-                
-                switch client.send(data: buffer.data)
+                switch client.send(data: request_data)
                 {
                     case .success(()):
                         Thread.sleep(forTimeInterval: 0.3)
@@ -72,6 +60,25 @@ public class ServiceFoundation
                 print(error)
                 return nil
         }
+    }
+    
+    internal func createRequestPack(_ type: FunctionType, request: Data? = nil) -> Data
+    {
+        let buffer = BinaryBuffer()
+        buffer.writeData(PackChecker.HEAD_BYTE)
+        
+        let header = RequestHeader()
+        header.type = type
+        header.owner = self.agent.account
+        header.sessionId = self.agent.sessionId
+        buffer.writeString(header.toJSONString() ?? "")
+        
+        if let request = request, request.count > 0
+        {
+            buffer.writeData(request)
+        }
+        
+        return buffer.data
     }
     
     internal func createSocket() -> Result<TCPClient, SocketError>

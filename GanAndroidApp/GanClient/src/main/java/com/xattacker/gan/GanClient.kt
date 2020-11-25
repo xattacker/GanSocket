@@ -21,7 +21,6 @@ import java.net.Socket
 class GanClient private constructor(private val _address: String, private val _port: Int, aListener: GanClientListener) : Runnable, GanAgent, AccountServiceListener
 {
     private var _socket: Socket? = null
-
     private var _listener: WeakReference<GanClientListener>?
 
     override var account: String? = null
@@ -74,17 +73,17 @@ class GanClient private constructor(private val _address: String, private val _p
             val obb = OutputBinaryBuffer(out)
 
             val header = RequestHeader()
-            header.type = FunctionType.CONNECTION
+            header.type = FunctionType.CREATE_CALLBACK_CONNECTION
             header.owner = account
             header.sessionId = sessionId
             obb.writeString(header.toJson())
             obb.flush()
 
-            Thread.sleep(500)
-
             var count = 0
             while (account != null && _socket != null)
             {
+                Thread.sleep(500)
+
                 if (count >= 20)
                 {
                     count = 0
@@ -99,11 +98,12 @@ class GanClient private constructor(private val _address: String, private val _p
                     var binary = BinaryBuffer(bos.toByteArray())
                     val response = ResponsePack()
                     response.fromBinary(binary)
+
                     if (response.result)
                     {
-                        when (response.id)
+                        when (FunctionType.parse(response.id))
                         {
-                            1 ->
+                            FunctionType.RECEIVE_SMS ->
                             {
                                 binary = BinaryBuffer(response.response!!)
                                 val sender: String = binary.readString() ?: ""
@@ -112,20 +112,22 @@ class GanClient private constructor(private val _address: String, private val _p
                                 _listener?.get()?.onMessageReceived(sender, time, msg)
                             }
 
-                            2 ->
+                            FunctionType.LOGOUT ->
                             {
                                 closeConnection()
                                 _listener?.get()?.onAccountLoggedOut(account ?: "")
+
                                 account = null
                                 sessionId = null
                             }
+
+                            else -> android.util.Log.d("aaa", "unknown callback response id: " + response.id)
                         }
                     }
 
                     bos.close()
                 }
-
-                Thread.sleep(500)
+                
                 count++
             }
         }

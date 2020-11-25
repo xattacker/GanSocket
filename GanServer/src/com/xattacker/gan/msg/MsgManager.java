@@ -29,47 +29,67 @@ public final class MsgManager
 	
 	public static void release()
 	{
+		if (_instance != null)
+		{
+			_instance.doRelease();
+		}
 		
+		_instance = null;
 	}
 	
-	public void addSms(String aReceiver, MsgData aSms)
+	public void addMsg(String aReceiver, MsgData aMsg)
 	{
-		if (aReceiver != null && aSms != null)
+		if (aReceiver != null && aMsg != null)
 		{
-			ArrayList<MsgData> list = null;
-			
-			if (!_messages.containsKey(aReceiver))
+			synchronized(_messages)
 			{
-				list = new ArrayList<MsgData>();
-				_messages.put(aReceiver, list);
+				ArrayList<MsgData> list = null;
+				
+				if (!_messages.containsKey(aReceiver))
+				{
+					list = new ArrayList<MsgData>();
+					_messages.put(aReceiver, list);
+				}
+				else
+				{
+					list = _messages.get(aReceiver);
+				}
+				
+				list.add(aMsg);
 			}
-			else
-			{
-				list = _messages.get(aReceiver);
-			}
-			
-			list.add(aSms);
 		}
 	}
 	
-	public boolean hasSms(String aReceiver)
+	public boolean hasMsg(String aReceiver)
 	{
-		return _messages != null ? _messages.containsKey(aReceiver) : false;
+		synchronized(_messages)
+		{
+			return _messages != null ? _messages.containsKey(aReceiver) : false;
+		}
 	}
 	
-	public ArrayList<MsgData> getSms(String aReceiver)
+	public ArrayList<MsgData> getMsgs(String aReceiver)
 	{
 		ArrayList<MsgData> list = null; 
 		
-		if (_messages.containsKey(aReceiver))
+		synchronized(_messages)
 		{
-			ArrayList<MsgData> existed = _messages.get(aReceiver);
-			
-			list = new ArrayList<MsgData>(existed);
-			
-			existed.clear();
+			if (_messages.containsKey(aReceiver))
+			{
+				ArrayList<MsgData> existed = _messages.get(aReceiver);
+				
+				list = new ArrayList<MsgData>(existed);
+				
+				existed.clear();
+			}
 		}
-	
+		
 		return list;
+	}
+	
+	private void doRelease()
+	{
+		_messages.clear();
+		_messages = null;
 	}
 }

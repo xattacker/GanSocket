@@ -1,6 +1,6 @@
 //
 //  AppProperties.swift
-//  UtilToolKit
+//  GanClient
 //
 //  Created by xattacker on 2018/8/22.
 //  Copyright © 2018年 xattacker. All rights reserved.

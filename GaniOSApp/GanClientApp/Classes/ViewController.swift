@@ -111,7 +111,7 @@ class ViewController: BaseViewController
     
     deinit
     {
-        self.ganClient?.accountService.logout()
+        _ = self.ganClient?.accountService.logout()
         self.ganClient = nil
     }
 }

@@ -9,29 +9,6 @@ object PackChecker
     const val HEAD = "<GAN_PACK>"
      val HEAD_BYTE = HEAD.toByteArray()
 
-    fun isValidPack(aContent: ByteArray): Boolean
-    {
-        var valid = false
-        try
-        {
-            if (aContent.size > HEAD.length)
-            {
-                val buffer = BinaryBuffer(aContent)
-                if (buffer.readShort()?.toInt() == HEAD.length)
-                {
-                    buffer.seekToHead()
-                    valid = buffer.readString().equals(HEAD)
-                }
-            }
-        }
-        catch (ex: Exception)
-        {
-            valid = false
-        }
-
-        return valid
-    }
-
     fun isValidPack(aIn: InputStream, aMarkable: Boolean = false): Boolean
     {
         var valid = false

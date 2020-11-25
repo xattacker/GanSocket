@@ -1,6 +1,6 @@
 //
 //  MimeCodec.swift
-//  UtilToolKit
+//  GanClient
 //
 //  Created by xattacker on 2016/2/12.
 //  Copyright © 2016年 xattacker. All rights reserved.

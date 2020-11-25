@@ -16,7 +16,7 @@ import java.net.Socket
 
 abstract class ServiceFoundation protected constructor(protected var agent: GanAgent)
 {
-    protected fun send(aType: FunctionType, aRequest: ByteArray?): ResponsePack?
+    protected fun send(aType: FunctionType, aRequest: ByteArray? = null): ResponsePack?
     {
         var response: ResponsePack? = null
         var socket: Socket? = null

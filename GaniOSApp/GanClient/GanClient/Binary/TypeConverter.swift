@@ -1,6 +1,6 @@
 //
 //  TypeConverter.swift
-//  UtilToolKit
+//  GanClient
 //
 //  Created by tao on 2016/8/15.
 //  Copyright © 2016年 Xattacker. All rights reserved.

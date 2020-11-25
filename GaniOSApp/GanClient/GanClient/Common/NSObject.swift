@@ -1,6 +1,6 @@
 //
 //  NSObject.swift
-//  UtilToolKit
+//  GanClient
 //
 //  Created by tao on 2016/8/7.
 //  Copyright © 2016年 xattacker. All rights reserved.

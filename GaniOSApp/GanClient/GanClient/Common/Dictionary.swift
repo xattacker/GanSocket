@@ -1,6 +1,6 @@
 //
 //  Dictionary.swift
-//  UtilToolKit
+//  GanClient
 //
 //  Created by xattacker on 2020/5/7.
 //  Copyright © 2018年 xattacker. All rights reserved.

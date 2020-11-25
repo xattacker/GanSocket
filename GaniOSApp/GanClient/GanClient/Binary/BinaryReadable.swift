@@ -1,6 +1,6 @@
 //
 //  BinaryReadable.swift
-//  UtilToolKit
+//  GanClient
 //
 //  Created by tao on 2016/4/1.
 //  Copyright © 2016年 Xattacker. All rights reserved.

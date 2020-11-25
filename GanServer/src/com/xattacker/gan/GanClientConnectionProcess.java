@@ -85,10 +85,8 @@ final class GanClientConnectionProcess extends Thread
 							}
 								break;
 								
-							case CONNECTION:
-							{
+							case CREATE_CALLBACK_CONNECTION:
 								handleConnection(request.getOwner(), request.getSessionId());
-							}
 								break;
 								
 							case LOGOUT:
@@ -110,7 +108,7 @@ final class GanClientConnectionProcess extends Thread
 								sms.setSender(request.getOwner());
 								sms.setMessage(msg);
 								sms.setTime(System.currentTimeMillis());
-								MsgManager.instance().addSms(receiver, sms);
+								MsgManager.instance().addMsg(receiver, sms);
 								
 								response = new ResponsePack();
 								response.setResult(true);
@@ -229,7 +227,7 @@ final class GanClientConnectionProcess extends Thread
 				 {
 					 ResponsePack response = new ResponsePack();
 					 response.setResult(true);
-					 response.setId(2);
+					 response.setId(FunctionType.LOGOUT.value());
 					 
 					 OutputStream out = _socket.getOutputStream();
 					 out.write(PackChecker.HEAD_BYTE);
@@ -243,9 +241,9 @@ final class GanClientConnectionProcess extends Thread
 					 break;
 				 }
 				
-				 if (MsgManager.instance() != null && MsgManager.instance().hasSms(aAccount))
+				 if (MsgManager.instance() != null && MsgManager.instance().hasMsg(aAccount))
 				 {
-					 ArrayList<MsgData> list = MsgManager.instance().getSms(aAccount);
+					 ArrayList<MsgData> list = MsgManager.instance().getMsgs(aAccount);
 					 if (list != null && !list.isEmpty())
 					 {
 						 for (MsgData sms : list)
@@ -255,7 +253,7 @@ final class GanClientConnectionProcess extends Thread
 								
 							 ResponsePack response = new ResponsePack();
 							 response.setResult(true);
-							 response.setId(1);
+							 response.setId(FunctionType.RECEIVE_SMS.value());
 							 
 							 BinaryBuffer buffer = new BinaryBuffer();
 							 buffer.writeString(sms.getSender());

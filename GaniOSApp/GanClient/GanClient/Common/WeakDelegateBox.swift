@@ -1,6 +1,6 @@
 //
 //  WeakDelegateBox.swift
-//  UtilToolKit
+//  GanClient
 //
 //  Created by xattacker on 2015/11/27.
 //  Copyright © 2015年 xattacker. All rights reserved.
