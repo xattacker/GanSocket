@@ -14,18 +14,9 @@ public final class SystemService: ServiceFoundation
     {
         var ip: String?
         
-        switch self.send(FunctionType.get_ip)
+        if let response = self.send(FunctionType.get_ip), response.result
         {
-            case .success(let response):
-                if response.result
-                {
-                    ip = response.responseString
-                }
-                break
-                
-            case .failure(let error):
-                print(error)
-                break
+            ip = response.responseString
         }
 
         return ip
@@ -35,20 +26,13 @@ public final class SystemService: ServiceFoundation
     {
         var time: Date?
         
-        switch self.send(FunctionType.get_system_time)
+        if let response = self.send(FunctionType.get_system_time), response.result
         {
-            case .success(let response):
-                if response.result,
-                   let data = response.response,
-                   let timestamp = BinaryBuffer(data: data).readLongLong()
-                {
-                    time = Date(timestamp: timestamp)
-                }
-                break
-                
-            case .failure(let error):
-                print(error)
-                break
+            if let data = response.response,
+               let timestamp = BinaryBuffer(data: data).readLongLong()
+            {
+                time = Date(timestamp: timestamp)
+            }
         }
 
         return time

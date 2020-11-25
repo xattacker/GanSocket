@@ -17,7 +17,7 @@ public class ServiceFoundation
         self.agent = agent
     }
     
-    internal func send(_ type: FunctionType, request: Data? = nil) -> Result<ResponsePack, SocketError>
+    internal func send(_ type: FunctionType, request: Data? = nil) -> ResponsePack?
     {
         switch self.createSocket()
         {
@@ -45,7 +45,7 @@ public class ServiceFoundation
                         {
                             client.close()
                             
-                            return .failure(SocketError.queryFailed)
+                            return nil
                         }
                         
                         
@@ -56,19 +56,21 @@ public class ServiceFoundation
                         let response = ResponsePack()
                         if response.fromBinaryReadable(buffer2)
                         {
-                            return .success(response)
+                            return response
                         }
                         else
                         {
-                            return .failure(SocketError.responseFailed)
+                            return nil
                         }
                         
                     case .failure(let error):
-                        return .failure(error)
+                        print(error)
+                        return nil
                 }
                 
             case .failure(let error):
-                return .failure(error)
+                print(error)
+                return nil
         }
     }
     

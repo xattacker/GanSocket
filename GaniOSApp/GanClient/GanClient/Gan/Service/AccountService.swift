@@ -40,20 +40,13 @@ public final class AccountService: ServiceFoundation
         buffer.writeString(account)
         buffer.writeString(password)
         
-        switch self.send(FunctionType.login, request: buffer.data)
+        if let response = self.send(FunctionType.login, request: buffer.data), response.result
         {
-            case .success(let response):
-                if response.result,
-                   let session_id = response.responseString
-                {
-                    self.delegate.onLoginSucceed(session: SessionInfo(account: account, sessionId: session_id))
-                    succeed = true
-                }
-                break
-                
-            case .failure(let error):
-                print(error)
-                break
+            if let session_id = response.responseString
+            {
+                self.delegate.onLoginSucceed(session: SessionInfo(account: account, sessionId: session_id))
+                succeed = true
+            }
         }
         
         return succeed
@@ -68,19 +61,10 @@ public final class AccountService: ServiceFoundation
             let buffer = BinaryBuffer()
             buffer.writeString(account)
             
-            switch self.send(FunctionType.logout, request: buffer.data)
+            if let response = self.send(FunctionType.logout, request: buffer.data), response.result
             {
-                case .success(let response):
-                    if response.result
-                    {
-                        self.delegate.onLoggedOut(account: account)
-                        succeed = true
-                    }
-                    break
-                    
-                case .failure(let error):
-                    print(error)
-                    break
+                self.delegate.onLoggedOut(account: account)
+                succeed = true
             }
         }
 
