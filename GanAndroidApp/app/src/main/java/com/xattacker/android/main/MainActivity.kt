@@ -34,9 +34,7 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
 
         try
         {
-            // 122.254.39.227 // home
-            // 192.168.226.50 // office
-            GanClient.initial("192.168.226.41", 5999, this)
+            GanClient.initial("192.168.226.29", 5999, this)
         }
         catch (ex: Exception)
         {
@@ -94,16 +92,17 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
         layout.addView(button)
 
         _receivedMsgEdit = EditText(this)
-        _receivedMsgEdit!!.gravity = Gravity.TOP
-        _receivedMsgEdit!!.setTextColor(Color.BLUE)
-        _receivedMsgEdit!!.isEnabled = false
-        _receivedMsgEdit!!.setLines(3)
+        _receivedMsgEdit?.gravity = Gravity.TOP
+        _receivedMsgEdit?.setTextColor(Color.BLUE)
+        _receivedMsgEdit?.isEnabled = false
+        _receivedMsgEdit?.setLines(3)
         layout.addView(_receivedMsgEdit)
     }
 
     public override fun onDestroy()
     {
         super.onDestroy()
+
         GanClient.release()
     }
 
@@ -139,7 +138,7 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
             3 ->
             {
                 val receiver = _receiverEdit?.text.toString()
-                val msg = _msgEdit?.text.toString()
+                val msg = _msgEdit?.text.toString() + System.currentTimeMillis()
 
                 asyncRun(
                 {

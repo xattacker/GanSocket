@@ -1,18 +1,27 @@
 package com.xattacker.gan.data;
 
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Arrays;
 
+import com.xattacker.binary.InputBinaryBuffer;
+import com.xattacker.binary.TypeConverter;
 import com.xattacker.gan.exception.ConnectEOFException;
 
 public final class PackChecker
 {
-	public final static String HEAD = "<GAN_PACK>";
-   public final static byte[] HEAD_BYTE = HEAD.getBytes();
+	private final static String HEAD = "<GAN_PACK>";
+   private final static byte[] HEAD_BYTE = HEAD.getBytes();
+   
+	public class ValidResult
+	{
+		public boolean valid = false;
+		public int length = 0;
+	}
 
-   public static boolean isValidPack(InputStream aIn, boolean aMarkable) throws ConnectEOFException
+   public static ValidResult isValidPack(InputStream aIn, boolean aMarkable) throws ConnectEOFException
    {
-   	boolean valid = false;
+   	ValidResult result = new PackChecker().new ValidResult();
 
       try
       {
@@ -38,7 +47,14 @@ public final class PackChecker
 	         		 throw new ConnectEOFException();
 	         	 }
 	         	 
-	         	 valid = Arrays.equals(HEAD_BYTE, temp);
+	         	 result.valid = Arrays.equals(HEAD_BYTE, temp);
+	         	 
+	 	         if (result.valid)
+		         {
+		         	InputBinaryBuffer buffer = new InputBinaryBuffer(aIn);
+		         	result.length = buffer.readInteger();
+		         }
+	 	         
 	         	 temp = null;
 	          }
       	 }
@@ -49,7 +65,7 @@ public final class PackChecker
       }
       catch (Exception ex)
       {
-      	valid = false;
+      	result.valid = false;
       }
       finally
       {
@@ -65,6 +81,12 @@ public final class PackChecker
          }
       }
 
-      return valid;
+      return result;
+   }
+   
+   public static void addHeaderPack(int dataLength, OutputStream out) throws Exception
+   {
+		 out.write(PackChecker.HEAD_BYTE);
+		 out.write(TypeConverter.intToByte(dataLength));
    }
 }

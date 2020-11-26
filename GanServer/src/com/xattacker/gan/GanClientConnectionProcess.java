@@ -4,10 +4,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 import com.google.gson.GsonBuilder;
+
 import com.xattacker.binary.BinaryBuffer;
 import com.xattacker.binary.InputBinaryBuffer;
 import com.xattacker.binary.OutputBinaryBuffer;
@@ -23,8 +23,6 @@ import com.xattacker.gan.msg.MsgData;
 import com.xattacker.gan.msg.MsgManager;
 import com.xattacker.json.JsonBuilderVisitor;
 import com.xattacker.json.JsonUtility;
-
-import sun.awt.CharsetString;
 
 final class GanClientConnectionProcess extends Thread
 {
@@ -46,8 +44,22 @@ final class GanClientConnectionProcess extends Thread
 			{
 				in = _socket.getInputStream();
 				
-				if (PackChecker.isValidPack(in, false))
+				PackChecker.ValidResult valid = PackChecker.isValidPack(in, false);
+				if (valid.valid && valid.length > 0)
 				{
+					int wait_count = 0;
+		      	while (in.available() < valid.length && wait_count < 20)
+		      	{
+		      		wait_count++;
+		      		Thread.sleep(50);
+		      	}
+		      	
+		      	if (in.available() < valid.length)
+		      	{
+		      		throw new Exception("request data length not enough");
+		      	}
+		      	
+		      	
 					ResponsePack response = null;
 					InputBinaryBuffer ibb = new InputBinaryBuffer(in);
 					String json = ibb.readString();
@@ -71,7 +83,7 @@ final class GanClientConnectionProcess extends Thread
 							{
 								String account = ibb.readString();
 								String password = ibb.readString();
-								System.out.println(account + ", " + password);
+								System.out.println("login account: " + account + "/" + password);
 								
 								StringBuilder session_id = new StringBuilder();
 								boolean result = SessionPool.instance().addSession(account, session_id);
@@ -96,6 +108,7 @@ final class GanClientConnectionProcess extends Thread
 							{
 								String account = ibb.readString();
 								SessionPool.instance().removeSession(account);
+								System.out.println("account logged out: " + account);
 								
 								response = new ResponsePack();
 								response.setResult(true);
@@ -112,6 +125,7 @@ final class GanClientConnectionProcess extends Thread
 								sms.setMessage(msg);
 								sms.setTime(System.currentTimeMillis());
 								MsgManager.instance().addMsg(receiver, sms);
+								System.out.println("got message: " + msg);
 								
 								response = new ResponsePack();
 								response.setResult(true);
@@ -234,15 +248,15 @@ final class GanClientConnectionProcess extends Thread
 					 response.setId(FunctionType.LOGOUT.value());
 					 response.setContent(aAccount.getBytes());
 					 
-					 OutputStream out = _socket.getOutputStream();
-					 out.write(PackChecker.HEAD_BYTE);
+					 BinaryBuffer buffer = new BinaryBuffer();
+					 response.toBinary(buffer);
 					 
-					 OutputBinaryBuffer obb = new OutputBinaryBuffer(out);
-					 response.toBinary(obb);
-						
+					 PackChecker.addHeaderPack((int)buffer.getLength(), _socket.getOutputStream());
+					 
+					 OutputBinaryBuffer obb = new OutputBinaryBuffer(_socket.getOutputStream());
+					 obb.writeBinary(buffer.getData(), 0, (int)buffer.getLength());
 					 obb.flush();
-					 response = null;
-					 
+
 					 break;
 				 }
 				
@@ -257,12 +271,17 @@ final class GanClientConnectionProcess extends Thread
 							 response.setResult(true);
 							 response.setId(FunctionType.RECEIVE_SMS.value());
 							 response.setContent(msg.toJson().getBytes("UTF8"));
+
+							 BinaryBuffer buffer = new BinaryBuffer();
+							 response.toBinary(buffer);
+							 
+							 PackChecker.addHeaderPack((int)buffer.getLength(), _socket.getOutputStream());
 							 
 							 OutputBinaryBuffer obb = new OutputBinaryBuffer(_socket.getOutputStream());
-							 obb.writeBinary(PackChecker.HEAD_BYTE, 0, PackChecker.HEAD_BYTE.length);
-							 response.toBinary(obb);
-								
+							 obb.writeBinary(buffer.getData(), 0, (int)buffer.getLength());
 							 obb.flush();
+							 
+							 System.out.println("send msg: " + msg.getMessage());
 							 Thread.sleep(500);
 						 }
 						 

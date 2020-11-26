@@ -65,18 +65,21 @@ public class ServiceFoundation
     internal func createRequestPack(_ type: FunctionType, request: Data? = nil) -> Data
     {
         let buffer = BinaryBuffer()
-        buffer.writeData(PackChecker.HEAD_BYTE)
-        
+
+        let data_buffer = BinaryBuffer()
         let header = RequestHeader()
         header.type = type
         header.owner = self.agent.account
         header.sessionId = self.agent.sessionId
-        buffer.writeString(header.toJSONString() ?? "")
+        data_buffer.writeString(header.toJSONString() ?? "")
         
         if let request = request, request.count > 0
         {
-            buffer.writeData(request)
+            data_buffer.writeData(request)
         }
+        
+        PackChecker.addHeader(data_buffer.length, buffer: buffer)
+        buffer.writeBuffer(data_buffer)
         
         return buffer.data
     }

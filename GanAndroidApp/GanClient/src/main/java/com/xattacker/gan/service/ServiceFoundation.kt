@@ -12,6 +12,7 @@ import com.xattacker.gan.data.ResponsePack
 import com.xattacker.util.IOUtility
 
 import java.io.ByteArrayOutputStream
+import java.io.InputStream
 import java.net.Socket
 
 abstract class ServiceFoundation protected constructor(protected var agent: GanAgent)
@@ -26,40 +27,35 @@ abstract class ServiceFoundation protected constructor(protected var agent: GanA
             socket = createSocket()
             if (socket != null)
             {
-                val bout = ByteArrayOutputStream()
                 val out = socket.getOutputStream()
-                val obb = OutputBinaryBuffer(bout)
-                obb.writeBinary(PackChecker.HEAD_BYTE, 0, PackChecker.HEAD_BYTE.size)
 
+                val buffer = BinaryBuffer()
                 val header = RequestHeader()
                 header.type = aType
                 header.owner = agent.account
                 header.sessionId = agent.sessionId
-                obb.writeString(header.toJson())
+                buffer.writeString(header.toJson())
 
                 if (aRequest != null && aRequest.size > 0)
                 {
-                    obb.writeBinary(aRequest, 0, aRequest.size)
+                    buffer.writeBinary(aRequest, 0, aRequest.size)
                 }
 
-                obb.flush()
-                //obb.close();
-
-                val packed = bout.toByteArray()
-                out.write(packed)
+                PackChecker.pack(buffer.data, out)
                 out.flush()
 
                 Thread.sleep(200)
 
                 val bos = ByteArrayOutputStream()
                 IOUtility.readResponse(socket.getInputStream(), bos)
+
                 val binary = BinaryBuffer(bos.toByteArray())
                 response = ResponsePack()
                 if (!response.fromBinary(binary))
                 {
                     response = null
                 }
-                obb.close()
+
                 bos.close()
             }
         }
@@ -86,5 +82,21 @@ abstract class ServiceFoundation protected constructor(protected var agent: GanA
     protected fun createSocket(): Socket?
     {
         return agent.createSocket()
+    }
+
+    @Throws(Exception::class)
+    protected fun wait(aIn: InputStream, aLength: Int, aMaxTry: Int)
+    {
+        var try_count = 0
+        do
+        {
+            Thread.sleep(50)
+            try_count++
+        } while (aIn.available() < aLength && try_count < aMaxTry)
+
+        if (aIn.available() < aLength)
+        {
+            throw Exception("request length not enough")
+        }
     }
 }

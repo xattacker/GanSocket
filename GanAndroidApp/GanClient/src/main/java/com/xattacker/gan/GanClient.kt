@@ -2,6 +2,7 @@ package com.xattacker.gan
 
 import android.util.Log
 import com.xattacker.binary.BinaryBuffer
+import com.xattacker.binary.InputBinaryBuffer
 import com.xattacker.binary.OutputBinaryBuffer
 import com.xattacker.gan.data.*
 import com.xattacker.gan.data.RequestHeader
@@ -13,6 +14,7 @@ import com.xattacker.json.JsonUtility
 import com.xattacker.util.IOUtility
 
 import java.io.ByteArrayOutputStream
+import java.io.InputStream
 import java.lang.ref.WeakReference
 import java.net.InetSocketAddress
 import java.net.Socket
@@ -68,16 +70,24 @@ class GanClient private constructor(private val _address: String, private val _p
     {
         try
         {
-            val out = _socket!!.getOutputStream()
-            out.write(PackChecker.HEAD_BYTE)
-            val obb = OutputBinaryBuffer(out)
+            val out = _socket?.getOutputStream()
+            val ins = _socket?.getInputStream()
+            if (out == null || ins == null)
+            {
+                return
+            }
+
+
+            val buffer = BinaryBuffer()
 
             val header = RequestHeader()
             header.type = FunctionType.CREATE_CALLBACK_CONNECTION
             header.owner = account
             header.sessionId = sessionId
-            obb.writeString(header.toJson())
-            obb.flush()
+            buffer.writeString(header.toJson())
+
+            PackChecker.pack(buffer.data, out)
+            out.flush()
 
             var count = 0
             while (account != null && _socket != null)
@@ -90,12 +100,15 @@ class GanClient private constructor(private val _address: String, private val _p
                     _socket?.sendUrgentData(0xFF)
                 }
 
-                if (PackChecker.isValidPack(_socket!!.getInputStream(), false))
+                val valid = PackChecker.isValidPack(ins, false)
+                if (valid.valid && valid.length > 0)
                 {
-                    val bos = ByteArrayOutputStream()
-                    IOUtility.readResponse(_socket!!.getInputStream(), bos)
+                    if (!wait(ins, valid.length, 50))
+                    {
+                        continue
+                    }
 
-                    var binary = BinaryBuffer(bos.toByteArray())
+                    val binary = InputBinaryBuffer(ins)
                     val response = ResponsePack()
                     response.fromBinary(binary)
 
@@ -124,8 +137,6 @@ class GanClient private constructor(private val _address: String, private val _p
                             else -> android.util.Log.d("aaa", "unknown callback response id: " + response.id)
                         }
                     }
-
-                    bos.close()
                 }
 
                 count++
@@ -198,5 +209,18 @@ class GanClient private constructor(private val _address: String, private val _p
         account = null
         sessionId = null
         _listener = null
+    }
+
+    @Throws(Exception::class)
+    private fun wait(aIn: InputStream, aLength: Int, aMaxTry: Int): Boolean
+    {
+        var try_count = 0
+        do
+        {
+            Thread.sleep(50)
+            try_count++
+        } while (aIn.available() < aLength && try_count < aMaxTry)
+
+        return aIn.available() >= aLength
     }
 }

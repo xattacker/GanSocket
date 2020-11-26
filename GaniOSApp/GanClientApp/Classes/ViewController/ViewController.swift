@@ -57,7 +57,7 @@ class ViewController: BaseViewController
         }
         
         
-        self.ganClient?.accountService.logout()
+        _ = self.ganClient?.accountService.logout()
         self.ganClient = nil
         
         self.ganClient = GanClient(address: ip, port: port, delegate: self)
@@ -135,9 +135,10 @@ class ViewController: BaseViewController
         }
         
         
-        if client.messageService.sendMessage("test", message: "aaafdsafad中文字")
+        let msg = "aaafdsafad中文字 " + DateTimeUtility.getTimeStamp().toString()
+        if client.messageService.sendMessage("test", message: msg)
         {
-            print("sendMessage succeed")
+            print("sendMessage succeed: \(msg)")
         }
         else
         {
@@ -167,6 +168,6 @@ extension ViewController: GanClientDelegate
     
     func onMessageReceived(message: MessageData)
     {
-        print("onMessageReceived: \(message.message)")
+        print("onMessageReceived: \(message.message ?? "")")
     }
 }

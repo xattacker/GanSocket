@@ -89,17 +89,25 @@ internal final class CallbackReceivingTask: ImpThread
         {
             self.sleep(0.3)
             
-            guard let data = self.client?.read(1024*10, timeout: 2) else
+            guard (self.client?.bytesAvailable() ?? 0) >= PackChecker.headerLength(),
+                  let data = self.client?.read(PackChecker.headerLength(), timeout: 1) else
             {
                 continue
             }
             
             
-            let buffer = BinaryBuffer(bytes: data, length: UInt(data.count))
-            if PackChecker.isValidPack(buffer.data)
+            var buffer = BinaryBuffer(bytes: data, length: UInt(data.count))
+            let valid = PackChecker.isValidPack(buffer)
+            if valid.valid && valid.length > 0
             {
-                buffer.seekTo(UInt(PackChecker.HEAD_BYTE.count))
+                guard let data2 = self.client?.read(valid.length, timeout: 3) else
+                {
+                    print("read timeout, available: \(self.client?.bytesAvailable() ?? 0)")
+                    continue
+                }
                 
+                
+                buffer = BinaryBuffer(bytes: data2, length: UInt(data2.count))
                 let response = ResponsePack()
                 if response.fromBinaryReadable(buffer)
                 {

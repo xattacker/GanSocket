@@ -30,9 +30,6 @@ extension UserDefaults
 // 本機端帳號儲存資訊
 internal class DataSetting: NSObject
 {
-    private let key = "tcci_crm_crm_@#$"
-    private let iv = "tcci_crm_!@#$%&*"
-    
     private(set) static var instance: DataSetting?
     
     var ip: String?
