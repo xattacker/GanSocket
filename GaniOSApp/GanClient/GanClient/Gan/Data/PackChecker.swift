@@ -19,6 +19,7 @@ internal final class PackChecker
         
         if data.count >= HEAD_BYTE.count
         {
+            print("pack size: \(data.count)")
             let compare = data.subdata(in: 0 ..< HEAD_BYTE.count)
             valid = compare.array.elementsEqual(HEAD_BYTE.array)
         }

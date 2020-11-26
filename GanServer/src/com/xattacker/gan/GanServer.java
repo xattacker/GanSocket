@@ -22,7 +22,7 @@ public class GanServer extends Thread
 		SessionPool.initial();
 		MsgManager.constructInstance();
 		
-		_server = new ServerSocket(5999, 1);
+		_server = new ServerSocket(5999, 30);
 	}
 
 	public void terminate()

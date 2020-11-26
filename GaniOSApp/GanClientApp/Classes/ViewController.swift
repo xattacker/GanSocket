@@ -26,6 +26,15 @@ class ViewController: BaseViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        DataSetting.initial()
+        
+        if let ip = DataSetting.instance?.ip,
+           let port = DataSetting.instance?.port
+        {
+            self.ipTextField.text = ip
+            self.portTextField.text = port.toString()
+        }
     }
 
     override func viewDidAppear(_ animated: Bool)
@@ -54,6 +63,13 @@ class ViewController: BaseViewController
         self.ganClient = GanClient(address: ip, port: port, delegate: self)
         let succeed = self.ganClient?.accountService.login("test", password: "test")
         print("login: \(succeed)")
+        
+        if succeed == true
+        {
+            DataSetting.instance?.ip = ip
+            DataSetting.instance?.port = port
+            DataSetting.instance?.save()
+        }
     }
     
     @IBAction func onLogoutAction(_ sender: AnyObject)

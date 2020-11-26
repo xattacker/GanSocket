@@ -14,6 +14,8 @@
 		6549F33D1B1CBFF6007B7EF6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6549F33C1B1CBFF6007B7EF6 /* Images.xcassets */; };
 		65528BB81B3F0AB600A611E4 /* CustomUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65528BB71B3F0AB600A611E4 /* CustomUtility.swift */; };
 		65FC25FC1E02ED5600F9E38A /* MacroDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FC25FB1E02ED5600F9E38A /* MacroDefine.swift */; };
+		681B747C256F49DD005E9309 /* DataSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681B747A256F49DD005E9309 /* DataSetting.swift */; };
+		681B747D256F49DD005E9309 /* UserDefaultSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681B747B256F49DD005E9309 /* UserDefaultSettable.swift */; };
 		68987BCF256B8AD800119088 /* GanClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68987BCE256B8AD800119088 /* GanClient.framework */; };
 		689B537D2421C13800BF4C2C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689B537C2421C13800BF4C2C /* BaseViewController.swift */; };
 		68B36F53235D9F7D005D0741 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 68B36F55235D9F7D005D0741 /* Localizable.strings */; };
@@ -35,6 +37,8 @@
 		65528BB71B3F0AB600A611E4 /* CustomUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomUtility.swift; sourceTree = "<group>"; };
 		65FC25FB1E02ED5600F9E38A /* MacroDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacroDefine.swift; sourceTree = "<group>"; };
 		668F8CDD5B3574C89CA82D2E /* Pods_GanClientApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GanClientApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		681B747A256F49DD005E9309 /* DataSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSetting.swift; sourceTree = "<group>"; };
+		681B747B256F49DD005E9309 /* UserDefaultSettable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultSettable.swift; sourceTree = "<group>"; };
 		68987BCE256B8AD800119088 /* GanClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GanClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		689B537C2421C13800BF4C2C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		68B36F54235D9F7D005D0741 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -96,6 +100,7 @@
 		654856AB1B235160001922E1 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				681B7479256F49DD005E9309 /* Data */,
 				656D8FEC1B385D74007640AD /* ViewController */,
 				654856AC1B235160001922E1 /* AppDelegate.swift */,
 				6503D0F11E0D8B3500E813ED /* ViewController.swift */,
@@ -161,6 +166,15 @@
 				65528BB61B3F0A9E00A611E4 /* Custom */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		681B7479256F49DD005E9309 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				681B747A256F49DD005E9309 /* DataSetting.swift */,
+				681B747B256F49DD005E9309 /* UserDefaultSettable.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		689B537B2421C12200BF4C2C /* Base */ = {
@@ -297,7 +311,9 @@
 				689B537D2421C13800BF4C2C /* BaseViewController.swift in Sources */,
 				65FC25FC1E02ED5600F9E38A /* MacroDefine.swift in Sources */,
 				654856AE1B235160001922E1 /* AppDelegate.swift in Sources */,
+				681B747D256F49DD005E9309 /* UserDefaultSettable.swift in Sources */,
 				65528BB81B3F0AB600A611E4 /* CustomUtility.swift in Sources */,
+				681B747C256F49DD005E9309 /* DataSetting.swift in Sources */,
 				6503D0F31E0D8B3500E813ED /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
