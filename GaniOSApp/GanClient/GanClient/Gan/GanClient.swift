@@ -70,18 +70,11 @@ extension GanClient: GanAgent
 
 extension GanClient: AccountServiceDelegate, CallbackServiceDelegate
 {
-    func onLoginSucceed(session: SessionInfo)
+    func onLoginSucceed(session: SessionInfo, connection: TCPClient)
     {
         self.sessionInfo = session // must be set first
-        
-        if self.callbackService.connect()
-        {
-            self.delegate?.onAccountLoggedIn(account: session.account)
-        }
-        else
-        {
-            self.sessionInfo = nil
-        }
+        self.callbackService.handleConnection(connection)
+        self.delegate?.onAccountLoggedIn(account: session.account)
     }
     
     func onLoggedOut(account: String)

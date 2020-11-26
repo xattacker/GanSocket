@@ -27,36 +27,10 @@ internal final class CallbackService: ServiceFoundation
         super.init(agent: agent)
     }
     
-    internal func connect() -> Bool
+    internal func handleConnection(_ connection: TCPClient)
     {
-        var succeed = false
-        
-        switch self.createSocket()
-        {
-            case .success(let client):
-                let request_data = self.createRequestPack(FunctionType.create_callback_connection)
-                
-                switch client.send(data: request_data)
-                {
-                    case .success(()):
-                        self.task = CallbackReceivingTask(client: client, callback: self.delegate)
-                        self.task?.start()
-                        
-                        succeed = true
-                        break
-                        
-                    case .failure(let error):
-                        print(error)
-                        break
-                }
-                break
-                
-            case .failure(let error):
-                print(error)
-                break
-        }
-        
-        return succeed
+        self.task = CallbackReceivingTask(client: connection, callback: self.delegate)
+        self.task?.start()
     }
     
     internal func disconnect()

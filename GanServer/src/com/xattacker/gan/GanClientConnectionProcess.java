@@ -4,11 +4,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.util.ArrayList;
 
 import com.google.gson.GsonBuilder;
 
-import com.xattacker.binary.BinaryBuffer;
 import com.xattacker.binary.InputBinaryBuffer;
 import com.xattacker.binary.OutputBinaryBuffer;
 import com.xattacker.binary.TypeConverter;
@@ -24,7 +22,7 @@ import com.xattacker.gan.msg.MsgManager;
 import com.xattacker.json.JsonBuilderVisitor;
 import com.xattacker.json.JsonUtility;
 
-final class GanClientConnectionProcess extends Thread
+public final class GanClientConnectionProcess extends Thread
 {
 	private Socket _socket = null;
 
@@ -86,7 +84,7 @@ final class GanClientConnectionProcess extends Thread
 								System.out.println("login account: " + account + "/" + password);
 								
 								StringBuilder session_id = new StringBuilder();
-								boolean result = SessionPool.instance().addSession(account, session_id);
+								boolean result = SessionPool.instance().addSession(account, new CallbackConnectionProcess(account, _socket), session_id);
 								
 								response = new ResponsePack();
 								response.setResult(result);
@@ -98,10 +96,6 @@ final class GanClientConnectionProcess extends Thread
 									System.out.println("create session id [" + id + "] for account [" + account + "]");
 								}
 							}
-								break;
-								
-							case CREATE_CALLBACK_CONNECTION:
-								handleConnection(request.getOwner(), request.getSessionId());
 								break;
 								
 							case LOGOUT:
@@ -232,68 +226,19 @@ final class GanClientConnectionProcess extends Thread
 		System.out.println("_socket closed");
 	}
 	
-	private void handleConnection(String aAccount, String aSessionId)
+	public void close()
 	{
-		try
+		if (_socket != null)
 		{
-			while (true)
+			try
 			{
-				 Thread.sleep(800);
-				 
-				 if (SessionPool.instance() != null && !SessionPool.instance().checkSession(aAccount, aSessionId))
-				 {
-					 // session id 失效了, 結束前一個 connection
-					 ResponsePack response = new ResponsePack();
-					 response.setResult(true);
-					 response.setId(FunctionType.LOGOUT.value());
-					 response.setContent(aAccount.getBytes());
-					 
-					 BinaryBuffer buffer = new BinaryBuffer();
-					 response.toBinary(buffer);
-					 
-					 PackChecker.addHeaderPack((int)buffer.getLength(), _socket.getOutputStream());
-					 
-					 OutputBinaryBuffer obb = new OutputBinaryBuffer(_socket.getOutputStream());
-					 obb.writeBinary(buffer.getData(), 0, (int)buffer.getLength());
-					 obb.flush();
-
-					 break;
-				 }
-				
-				 if (MsgManager.instance() != null && MsgManager.instance().hasMsg(aAccount))
-				 {
-					 ArrayList<MsgData> list = MsgManager.instance().getMsgs(aAccount);
-					 if (list != null && !list.isEmpty())
-					 {
-						 for (MsgData msg : list)
-						 {
-							 ResponsePack response = new ResponsePack();
-							 response.setResult(true);
-							 response.setId(FunctionType.RECEIVE_SMS.value());
-							 response.setContent(msg.toJson().getBytes("UTF8"));
-
-							 BinaryBuffer buffer = new BinaryBuffer();
-							 response.toBinary(buffer);
-							 
-							 PackChecker.addHeaderPack((int)buffer.getLength(), _socket.getOutputStream());
-							 
-							 OutputBinaryBuffer obb = new OutputBinaryBuffer(_socket.getOutputStream());
-							 obb.writeBinary(buffer.getData(), 0, (int)buffer.getLength());
-							 obb.flush();
-							 
-							 System.out.println("send msg: " + msg.getMessage());
-							 Thread.sleep(500);
-						 }
-						 
-						 list.clear();
-						 list = null;
-						 System.gc();
-					 }
-				 }
+				_socket.close();
 			}
-		}
-		catch (Exception ex)
-		{
+			catch (Exception ex)
+			{
+			}
+			
+			_socket = null;
 		}
 	}
 }

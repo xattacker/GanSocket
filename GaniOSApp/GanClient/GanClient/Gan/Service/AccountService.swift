@@ -16,7 +16,7 @@ internal struct SessionInfo
 
 internal protocol AccountServiceDelegate
 {
-    func onLoginSucceed(session: SessionInfo)
+    func onLoginSucceed(session: SessionInfo, connection: TCPClient)
     func onLoggedOut(account: String)
 }
 
@@ -40,12 +40,16 @@ public final class AccountService: ServiceFoundation
         buffer.writeString(account)
         buffer.writeString(password)
         
-        if let response = self.send(FunctionType.login, request: buffer.data), response.result
+        if let response = self.send(FunctionType.login, closeConnection: false, request: buffer.data)
         {
-            if let session_id = response.responseString
+            if response.result, let session_id = response.responseString
             {
-                self.delegate.onLoginSucceed(session: SessionInfo(account: account, sessionId: session_id))
+                self.delegate.onLoginSucceed(session: SessionInfo(account: account, sessionId: session_id), connection: response.connection!)
                 succeed = true
+            }
+            else
+            {
+                response.connection?.close()
             }
         }
         

@@ -12,9 +12,8 @@ internal enum FunctionType: Int
     case login = 1
     case logout = 2
     case register_account = 3
-    case create_callback_connection = 4
-    case get_account_list = 5
-    case check_account = 6
+    case get_account_list = 4
+    case check_account = 5
     
     case send_sms = 101
     case receive_sms = 102

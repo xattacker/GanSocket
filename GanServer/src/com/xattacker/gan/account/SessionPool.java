@@ -2,6 +2,8 @@ package com.xattacker.gan.account;
 
 import java.util.Hashtable;
 
+import com.xattacker.gan.CallbackConnectionProcess;
+
 public final class SessionPool
 {
 	private static SessionPool _instance;
@@ -35,7 +37,7 @@ public final class SessionPool
 		return _instance;
 	}
 	
-	public boolean addSession(String aAccount, StringBuilder aSessionId)
+	public boolean addSession(String aAccount, CallbackConnectionProcess aProcess, StringBuilder aSessionId)
 	{
 		boolean result = false;
 		
@@ -45,12 +47,16 @@ public final class SessionPool
 			{
 				if (_sessions.containsKey(aAccount))
 				{
-					_sessions.remove(aAccount);
+					SessionInfo session = _sessions.remove(aAccount);
+					session.getProcess().close();
 					System.out.println("account [" + aAccount + "]  was login by another connection, remove it from session pool");
 				}
 				
 				SessionInfo session = new SessionInfo(aAccount);
+				aProcess.setSessionId(session._sessionId);
+				session.setProcess(aProcess);
 				_sessions.put(aAccount, session);
+				aProcess.start();
 				
 				aSessionId.append(session.getSessionId());
 				

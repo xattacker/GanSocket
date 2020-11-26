@@ -13,6 +13,7 @@ internal class ResponsePack: BinarySerializable2
     var result: Bool = false
     var id: Int = 0
     var response: Data?
+    var connection: TCPClient?
     
     var responseString: String?
     {
@@ -66,5 +67,6 @@ internal class ResponsePack: BinarySerializable2
     deinit
     {
         self.response = nil
+        self.connection = nil
     }
 }

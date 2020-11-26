@@ -17,7 +17,7 @@ public class ServiceFoundation
         self.agent = agent
     }
     
-    internal func send(_ type: FunctionType, request: Data? = nil) -> ResponsePack?
+    internal func send(_ type: FunctionType, closeConnection: Bool = true, request: Data? = nil) -> ResponsePack?
     {
         switch self.createSocket()
         {
@@ -37,13 +37,21 @@ public class ServiceFoundation
                         }
                         
                         
-                        client.close()
+                        if closeConnection
+                        {
+                            client.close()
+                        }
                         
                         let buffer2 = BinaryBuffer(bytes: data, length: UInt(data.count))
                         
                         let response = ResponsePack()
                         if response.fromBinaryReadable(buffer2)
                         {
+                            if !closeConnection
+                            {
+                                response.connection = client
+                            }
+                            
                             return response
                         }
                         else

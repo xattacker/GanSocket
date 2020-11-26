@@ -1,5 +1,6 @@
 package com.xattacker.gan.account;
 
+import com.xattacker.gan.CallbackConnectionProcess;
 import com.xattacker.util.GUID;
 
 public final class SessionInfo
@@ -7,6 +8,7 @@ public final class SessionInfo
 	String _account;
 	String _sessionId;
 	long _loginTime;
+	CallbackConnectionProcess _process;
 	
 	SessionInfo(String aAccount)
 	{
@@ -43,5 +45,15 @@ public final class SessionInfo
 	public void setLoginTime(long aTime)
 	{
 		_loginTime = aTime;
+	}
+
+	public CallbackConnectionProcess getProcess()
+	{
+		return _process;
+	}
+
+	public void setProcess(CallbackConnectionProcess aProcess)
+	{
+		_process = aProcess;
 	}
 }
