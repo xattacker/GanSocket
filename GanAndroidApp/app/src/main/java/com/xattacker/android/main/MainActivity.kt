@@ -45,7 +45,7 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
         val layout = LinearLayout(this)
         layout.orientation = LinearLayout.VERTICAL
         setContentView(layout)
-        
+
         _accountEdit = EditText(this)
         _accountEdit?.setText("test")
         layout.addView(_accountEdit)
