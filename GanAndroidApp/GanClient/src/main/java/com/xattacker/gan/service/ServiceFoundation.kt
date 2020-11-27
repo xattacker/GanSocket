@@ -3,21 +3,18 @@ package com.xattacker.gan.service
 import android.util.Log
 
 import com.xattacker.binary.BinaryBuffer
-import com.xattacker.binary.OutputBinaryBuffer
 import com.xattacker.gan.GanAgent
 import com.xattacker.gan.data.FunctionType
 import com.xattacker.gan.data.PackChecker
 import com.xattacker.gan.data.RequestHeader
 import com.xattacker.gan.data.ResponsePack
-import com.xattacker.util.IOUtility
-
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
 import java.net.Socket
 
 abstract class ServiceFoundation protected constructor(protected var agent: GanAgent)
 {
-    protected fun send(aType: FunctionType, aRequest: ByteArray? = null): ResponsePack?
+    protected fun send(aType: FunctionType, aRequest: ByteArray? = null, closeConnection: Boolean = true): ResponsePack?
     {
         var response: ResponsePack? = null
         var socket: Socket? = null
@@ -47,7 +44,7 @@ abstract class ServiceFoundation protected constructor(protected var agent: GanA
                 Thread.sleep(200)
 
                 val bos = ByteArrayOutputStream()
-                IOUtility.readResponse(socket.getInputStream(), bos)
+                readResponse(socket.getInputStream(), bos)
 
                 val binary = BinaryBuffer(bos.toByteArray())
                 response = ResponsePack()
@@ -57,6 +54,11 @@ abstract class ServiceFoundation protected constructor(protected var agent: GanA
                 }
 
                 bos.close()
+
+                if (!closeConnection)
+                {
+                    response?.connection = socket
+                }
             }
         }
         catch (ex: Exception)
@@ -66,12 +68,15 @@ abstract class ServiceFoundation protected constructor(protected var agent: GanA
         }
         finally
         {
-            try
+            if (closeConnection || response == null || response.result == false)
             {
-                socket?.close()
-            }
-            catch (ex: Exception)
-            {
+                try
+                {
+                    socket?.close()
+                }
+                catch (ex: Exception)
+                {
+                }
             }
         }
 
@@ -85,7 +90,24 @@ abstract class ServiceFoundation protected constructor(protected var agent: GanA
     }
 
     @Throws(Exception::class)
-    protected fun wait(aIn: InputStream, aLength: Int, aMaxTry: Int)
+    protected fun readResponse(aIn: InputStream, aBos: ByteArrayOutputStream)
+    {
+        val temp = ByteArray(256)
+        var index = -1
+        do
+        {
+            while (aIn.read(temp).also {index = it} != -1)
+            {
+                aBos.write(temp, 0, index)
+                if (index < temp.size)
+                {
+                    break
+                }
+            }
+        } while (aBos.size() == 0)
+    }
+
+    protected fun wait(aIn: InputStream, aLength: Int, aMaxTry: Int): Boolean
     {
         var try_count = 0
         do
@@ -94,9 +116,6 @@ abstract class ServiceFoundation protected constructor(protected var agent: GanA
             try_count++
         } while (aIn.available() < aLength && try_count < aMaxTry)
 
-        if (aIn.available() < aLength)
-        {
-            throw Exception("request length not enough")
-        }
+        return aIn.available() >= aLength
     }
 }

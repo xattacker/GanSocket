@@ -8,9 +8,8 @@ enum class FunctionType(private val _value: Int)
     LOGIN(1),
     LOGOUT(2),
     REGISTER_ACCOUNT(3),
-    CREATE_CALLBACK_CONNECTION(4),
-    GET_ACCOUNT_LIST(5),
-    CHECK_ACCOUNT(6),
+    GET_ACCOUNT_LIST(4),
+    CHECK_ACCOUNT(5),
 
     SEND_SMS(101),
     RECEIVE_SMS(102),

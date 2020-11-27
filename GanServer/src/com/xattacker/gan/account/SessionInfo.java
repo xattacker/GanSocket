@@ -1,6 +1,5 @@
 package com.xattacker.gan.account;
 
-import com.xattacker.gan.CallbackConnectionProcess;
 import com.xattacker.util.GUID;
 
 public final class SessionInfo

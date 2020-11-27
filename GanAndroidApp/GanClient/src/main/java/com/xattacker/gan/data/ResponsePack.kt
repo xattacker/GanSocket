@@ -3,16 +3,14 @@ package com.xattacker.gan.data
 import com.xattacker.binary.BinaryReadable
 import com.xattacker.binary.BinarySerializable2
 import com.xattacker.binary.BinaryWritable
+import java.net.Socket
 
-class ResponsePack : BinarySerializable2
+class ResponsePack() : BinarySerializable2
 {
     var result = false
     var id = 0
     var response: ByteArray? = null
-
-    constructor()
-    {
-    }
+    var connection: Socket? = null
 
     override fun <ByteArray>toBinary(aWritable: BinaryWritable<ByteArray>)
     {

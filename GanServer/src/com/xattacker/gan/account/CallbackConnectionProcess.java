@@ -1,18 +1,17 @@
-package com.xattacker.gan;
+package com.xattacker.gan.account;
 
 import java.net.Socket;
 import java.util.ArrayList;
 
 import com.xattacker.binary.BinaryBuffer;
 import com.xattacker.binary.OutputBinaryBuffer;
-import com.xattacker.gan.account.SessionPool;
 import com.xattacker.gan.data.FunctionType;
 import com.xattacker.gan.data.PackChecker;
 import com.xattacker.gan.data.ResponsePack;
 import com.xattacker.gan.msg.MsgData;
 import com.xattacker.gan.msg.MsgManager;
 
-public final class CallbackConnectionProcess extends Thread
+final class CallbackConnectionProcess extends Thread
 {
 	public interface CallbackConnectionProcessListener
 	{
@@ -24,15 +23,11 @@ public final class CallbackConnectionProcess extends Thread
 	private String _sessionId;
 	private Socket _socket = null;
 
-	public CallbackConnectionProcess(String anAccount, Socket aSocket)
+	public CallbackConnectionProcess(String anAccount, String aSessionId, Socket aSocket)
 	{
 		_account = anAccount;
-		_socket = aSocket;
-	}
-	
-	public void setSessionId(String aSessionId)
-	{
 		_sessionId = aSessionId;
+		_socket = aSocket;
 	}
 	
 	public void run()
@@ -99,7 +94,7 @@ public final class CallbackConnectionProcess extends Thread
 		{
 		}
 		
-		System.out.println("CallbackConnectionProcess end");
+		System.out.println("CallbackConnectionProcess end for account: " + _account + ", session: " + _sessionId);
 	}
 
 	public void close()

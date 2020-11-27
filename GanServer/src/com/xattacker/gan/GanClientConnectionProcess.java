@@ -2,7 +2,6 @@ package com.xattacker.gan;
 
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.InetAddress;
 import java.net.Socket;
 
 import com.google.gson.GsonBuilder;
@@ -35,6 +34,7 @@ public final class GanClientConnectionProcess extends Thread
 	{
 		InputStream in = null;
 		OutputStream out = null;
+		boolean close_connection = true;
 
 		while (true)
 		{
@@ -84,13 +84,15 @@ public final class GanClientConnectionProcess extends Thread
 								System.out.println("login account: " + account + "/" + password);
 								
 								StringBuilder session_id = new StringBuilder();
-								boolean result = SessionPool.instance().addSession(account, new CallbackConnectionProcess(account, _socket), session_id);
+								boolean result = SessionPool.instance().addSession(account, _socket, session_id);
 								
 								response = new ResponsePack();
 								response.setResult(result);
 								
 								if (result)
 								{
+									close_connection = false;
+									
 									String id = session_id.toString();
 									response.setContent(id.getBytes());
 									System.out.println("create session id [" + id + "] for account [" + account + "]");
@@ -128,8 +130,7 @@ public final class GanClientConnectionProcess extends Thread
 								
 							case GET_IP:
 							{
-								InetAddress addr = _socket.getInetAddress();
-								String ip = addr.getHostAddress();
+								String ip = _socket.getInetAddress().getHostAddress();
 								
 								response = new ResponsePack();
 								response.setResult(true);
@@ -169,13 +170,6 @@ public final class GanClientConnectionProcess extends Thread
 					}
 				}
 			}
-			catch (ConnectEOFException ex)
-			{
-				System.out.println("got ConnectEOFException:");
-				ex.printStackTrace();
-
-				break;
-			}
 			catch (Exception ex)
 			{
 				ex.printStackTrace();
@@ -184,43 +178,9 @@ public final class GanClientConnectionProcess extends Thread
 			}
 		}
 		
-		if (in != null)
+		if (close_connection)
 		{
-			try
-			{
-				in.close();
-			}
-			catch (Exception ex)
-			{
-			}
-			
-			in = null;
-		}
-		
-		if (out != null)
-		{
-			try
-			{
-				out.close();
-			}
-			catch (Exception ex)
-			{
-			}
-			
-			out = null;
-		}
-		
-		if (_socket != null)
-		{
-			try
-			{
-				_socket.close();
-			}
-			catch (Exception ex)
-			{
-			}
-			
-			_socket = null;
+			close();
 		}
 		
 		System.out.println("_socket closed");

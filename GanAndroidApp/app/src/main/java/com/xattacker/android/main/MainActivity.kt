@@ -24,6 +24,7 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
 {
     private var _accountEdit: EditText? = null
     private var _pwdEdit: EditText? = null
+
     private var _receiverEdit: EditText? = null
     private var _msgEdit: EditText? = null
     private var _receivedMsgEdit: EditText? = null
@@ -34,7 +35,7 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
 
         try
         {
-            GanClient.initial("192.168.226.29", 5999, this)
+            GanClient.initial("192.168.226.41", 5999, this)
         }
         catch (ex: Exception)
         {
@@ -44,12 +45,13 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
         val layout = LinearLayout(this)
         layout.orientation = LinearLayout.VERTICAL
         setContentView(layout)
+        
         _accountEdit = EditText(this)
-        _accountEdit!!.setText("test")
+        _accountEdit?.setText("test")
         layout.addView(_accountEdit)
 
         _pwdEdit = EditText(this)
-        _pwdEdit!!.setText("123")
+        _pwdEdit?.setText("123")
         layout.addView(_pwdEdit)
         val layout2 = LinearLayout(this)
         layout2.orientation = LinearLayout.HORIZONTAL
@@ -73,16 +75,16 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
         layout2.addView(button)
 
         button = Button(this)
-        button.text = "get server time"
+        button.text = "get time"
         button.id = 5
         button.setOnClickListener(this)
         layout2.addView(button)
 
         _receiverEdit = EditText(this)
-        _receiverEdit!!.setText("test")
+        _receiverEdit?.setText("test")
         layout.addView(_receiverEdit)
         _msgEdit = EditText(this)
-        _msgEdit!!.setText("1231234")
+        _msgEdit?.setText("1231234")
         layout.addView(_msgEdit)
 
         button = Button(this)
@@ -142,7 +144,7 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
 
                 asyncRun(
                 {
-                        val result: Boolean = GanClient.instance?._messageService?.sendMessage(receiver, msg) ?: false
+                        val result: Boolean = GanClient.instance?.messageService?.sendMessage(receiver, msg) ?: false
                         Log.i("aaa", "send msg $result")
                         showToast("send msg result: $result")
                 })

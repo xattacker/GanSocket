@@ -4,17 +4,17 @@ import android.util.Log
 import com.xattacker.binary.BinaryBuffer
 import com.xattacker.gan.GanAgent
 import com.xattacker.gan.data.FunctionType
+import java.net.Socket
+
+internal interface AccountServiceListener
+{
+    fun onLoginSucceed(account: String, sessionId: String, connection: Socket)
+    fun onLoggedOut(account: String)
+}
 
 
 class AccountService internal constructor(agent: GanAgent, private val _listener: AccountServiceListener) : ServiceFoundation(agent)
 {
-    internal interface AccountServiceListener
-    {
-        fun onLoginSucceed(account: String, sessionId: String)
-        fun onLoggedOut(account: String)
-    }
-
-
     fun login(account: String, password: String): Boolean
     {
         var result = false
@@ -24,14 +24,14 @@ class AccountService internal constructor(agent: GanAgent, private val _listener
             buffer.writeString(account)
             buffer.writeString(password)
 
-            val response = send(FunctionType.LOGIN, buffer.data)
+            val response = send(FunctionType.LOGIN, buffer.data, false)
             if (response != null)
             {
                 result = response.result
                 if (result && response.response != null)
                 {
                     val session_id = String(response.response!!)
-                    _listener.onLoginSucceed(account, session_id)
+                    _listener.onLoginSucceed(account, session_id, response.connection!!)
                 }
             }
         }
@@ -39,6 +39,7 @@ class AccountService internal constructor(agent: GanAgent, private val _listener
         {
             Log.i("aaa", ex.toString())
         }
+
         return result
     }
 
