@@ -12,7 +12,7 @@ import RxCocoa
 import GanClient
 
 
-class ViewController: BaseViewController
+class ViewController: UIViewController
 {
     @IBOutlet private weak var ipTextField: UITextField!
     @IBOutlet private weak var portTextField: UITextField!

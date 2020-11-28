@@ -16,7 +16,7 @@ internal struct SessionInfo
 
 internal protocol AccountServiceDelegate
 {
-    func onLoginSucceed(session: SessionInfo, connection: TCPClient)
+    func onLoginSucceed(session: SessionInfo, connection: SocketConnection)
     func onLoggedOut(account: String)
 }
 

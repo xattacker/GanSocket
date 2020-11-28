@@ -7,10 +7,10 @@
 
 import Foundation
 
+
 internal protocol GanAgent
 {
-    func createSocket() -> Result<TCPClient, SocketError>
-    
+    func createSocket() -> Result<SocketConnection, Error>
     var account: String? { get }
     var sessionId: String? { get }
 }

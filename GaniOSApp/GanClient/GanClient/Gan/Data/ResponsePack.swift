@@ -13,7 +13,7 @@ internal class ResponsePack: BinarySerializable2
     var result: Bool = false
     var id: Int = 0
     var response: Data?
-    var connection: TCPClient?
+    var connection: SocketConnection?
     
     var responseString: String?
     {

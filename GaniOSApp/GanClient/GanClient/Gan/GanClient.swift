@@ -52,25 +52,16 @@ extension GanClient: GanAgent
         return self.sessionInfo?.sessionId
     }
     
-    func createSocket() -> Result<TCPClient, SocketError>
+    func createSocket() -> Result<SocketConnection, Error>
     {
-        let client = TCPClient(address: self.address, port: Int32(self.port))
-
-        switch client.connect(timeout: 3)
-        {
-            case .success(()):
-                return .success(client)
-                
-            case .failure(let error):
-                return .failure(error)
-        }
+        return SocketFactory.createSocket(self.address, port: self.port)
     }
 }
 
 
 extension GanClient: AccountServiceDelegate, CallbackServiceDelegate
 {
-    func onLoginSucceed(session: SessionInfo, connection: TCPClient)
+    func onLoginSucceed(session: SessionInfo, connection: SocketConnection)
     {
         self.sessionInfo = session // must be set first
         self.callbackService.handleConnection(connection)

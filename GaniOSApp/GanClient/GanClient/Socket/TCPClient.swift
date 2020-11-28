@@ -44,7 +44,7 @@ open class TCPClient: Socket {
      * connect to server
      * return success or fail with message
      */
-    open func connect(timeout: Int) -> Result<Void, SocketError> {
+    open func connect(timeout: Int) -> Result<Void, Error> {
         let rs: Int32 = c_ytcpsocket_connect(self.address, port: Int32(self.port), timeout: Int32(timeout))
         if rs > 0 {
             self.fd = rs
@@ -78,7 +78,7 @@ open class TCPClient: Socket {
     * send data
     * return success or fail with message
     */
-    open func send(data: [Byte]) -> Result<Void, SocketError> {
+    open func send(data: [Byte]) -> Result<Void, Error> {
         guard let fd = self.fd else { return .failure(SocketError.connectionClosed) }
         
         let sendsize: Int32 = c_ytcpsocket_send(fd, buff: data, len: Int32(data.count))
@@ -93,7 +93,7 @@ open class TCPClient: Socket {
     * send string
     * return success or fail with message
     */
-    open func send(string: String) -> Result<Void, SocketError> {
+    open func send(string: String) -> Result<Void, Error> {
         guard let fd = self.fd else { return .failure(SocketError.connectionClosed) }
       
         let sendsize = c_ytcpsocket_send(fd, buff: string, len: Int32(strlen(string)))
@@ -108,7 +108,7 @@ open class TCPClient: Socket {
     *
     * send nsdata
     */
-    open func send(data: Data) -> Result<Void, SocketError> {
+    open func send(data: Data) -> Result<Void, Error> {
         guard let fd = self.fd else { return .failure(SocketError.connectionClosed) }
       
         var buff = [Byte](repeating: 0x0,count: data.count)

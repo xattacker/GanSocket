@@ -42,10 +42,9 @@ public class ServiceFoundation
                             client.close()
                         }
                         
-                        let buffer2 = BinaryBuffer(bytes: data, length: UInt(data.count))
-                        
+                        let buffer = BinaryBuffer(bytes: data, length: UInt(data.count))
                         let response = ResponsePack()
-                        if response.fromBinaryReadable(buffer2)
+                        if response.fromBinaryReadable(buffer)
                         {
                             if !closeConnection
                             {
@@ -92,7 +91,7 @@ public class ServiceFoundation
         return buffer.data
     }
     
-    internal func createSocket() -> Result<TCPClient, SocketError>
+    internal func createSocket() -> Result<SocketConnection, Error>
     {
         return self.agent.createSocket()
     }

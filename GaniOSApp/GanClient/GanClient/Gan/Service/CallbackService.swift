@@ -27,9 +27,9 @@ internal final class CallbackService: ServiceFoundation
         super.init(agent: agent)
     }
     
-    internal func handleConnection(_ connection: TCPClient)
+    internal func handleConnection(_ connection: SocketConnection)
     {
-        self.task = CallbackReceivingTask(client: connection, callback: self.delegate)
+        self.task = CallbackReceivingTask(connection: connection, callback: self.delegate)
         self.task?.start()
     }
     
@@ -48,12 +48,12 @@ internal final class CallbackService: ServiceFoundation
 
 internal final class CallbackReceivingTask: ImpThread
 {
-    private var client: TCPClient?
+    private var connection: SocketConnection?
     private weak var callback: CallbackServiceDelegate?
     
-    init(client: TCPClient, callback: CallbackServiceDelegate)
+    init(connection: SocketConnection, callback: CallbackServiceDelegate)
     {
-        self.client = client
+        self.connection = connection
         self.callback = callback
     }
     
@@ -63,8 +63,8 @@ internal final class CallbackReceivingTask: ImpThread
         {
             self.sleep(0.3)
             
-            guard (self.client?.bytesAvailable() ?? 0) >= PackChecker.headerLength(),
-                  let data = self.client?.read(PackChecker.headerLength(), timeout: 1) else
+            guard (self.connection?.available() ?? 0) >= PackChecker.headerLength(),
+                  let data = self.connection?.read(PackChecker.headerLength(), timeout: 1) else
             {
                 continue
             }
@@ -74,9 +74,9 @@ internal final class CallbackReceivingTask: ImpThread
             let valid = PackChecker.isValidPack(buffer)
             if valid.valid && valid.length > 0
             {
-                guard let data2 = self.client?.read(valid.length, timeout: 3) else
+                guard let data2 = self.connection?.read(valid.length, timeout: 3) else
                 {
-                    print("read timeout, available: \(self.client?.bytesAvailable() ?? 0)")
+                    print("read timeout, available: \(self.connection?.available() ?? 0)")
                     continue
                 }
                 
@@ -101,8 +101,8 @@ internal final class CallbackReceivingTask: ImpThread
                                 self.callback?.onLoggedOut(account: account)
                             }
                             
-                            self.client?.close()
-                            self.client = nil
+                            self.connection?.close()
+                            self.connection = nil
                             break
 
                         default:
@@ -112,13 +112,13 @@ internal final class CallbackReceivingTask: ImpThread
                 }
             }
             
-        } while self.client != nil && !self.isTerminated
+        } while self.connection != nil && !self.isTerminated
     }
     
     deinit
     {
-        self.client?.close()
-        self.client = nil
+        self.connection?.close()
+        self.connection = nil
         
         self.delegate = nil
     }
