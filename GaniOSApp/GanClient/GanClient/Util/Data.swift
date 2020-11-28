@@ -23,27 +23,4 @@ extension Data
                     [UInt8](bytes)
                 })
     }
-    
-    public var mimeString: String?
-    {
-        return MimeCodec.encode(self)
-    }
-}
-
-
-extension UnsafeMutableRawBufferPointer
-{
-    public func convertPointer<T>() -> UnsafeMutablePointer<T>?
-    {
-        return self.baseAddress?.assumingMemoryBound(to: T.self)
-    }
-}
-
-
-extension UnsafeRawBufferPointer
-{
-    public func convertPointer<T>() -> UnsafePointer<T>?
-    {
-        return self.baseAddress?.assumingMemoryBound(to: T.self)
-    }
 }
