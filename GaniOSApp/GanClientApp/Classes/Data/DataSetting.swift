@@ -27,7 +27,6 @@ extension UserDefaults
 }
 
 
-// 本機端帳號儲存資訊
 internal class DataSetting: NSObject
 {
     private(set) static var instance: DataSetting?

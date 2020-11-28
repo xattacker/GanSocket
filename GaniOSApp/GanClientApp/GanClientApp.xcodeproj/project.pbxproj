@@ -16,7 +16,6 @@
 		681B747D256F49DD005E9309 /* UserDefaultSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681B747B256F49DD005E9309 /* UserDefaultSettable.swift */; };
 		681B7482256F4CFC005E9309 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681B7481256F4CFC005E9309 /* ViewController.swift */; };
 		68987BCF256B8AD800119088 /* GanClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68987BCE256B8AD800119088 /* GanClient.framework */; };
-		689B537D2421C13800BF4C2C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689B537C2421C13800BF4C2C /* BaseViewController.swift */; };
 		68B36F53235D9F7D005D0741 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 68B36F55235D9F7D005D0741 /* Localizable.strings */; };
 		68B36F59235DA30D005D0741 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 68B36F5B235DA30D005D0741 /* InfoPlist.strings */; };
 		68D6F13F232A243600F35374 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68D6F13D232A243600F35374 /* Launch Screen.storyboard */; };
@@ -38,7 +37,6 @@
 		681B747B256F49DD005E9309 /* UserDefaultSettable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultSettable.swift; sourceTree = "<group>"; };
 		681B7481256F4CFC005E9309 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		68987BCE256B8AD800119088 /* GanClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GanClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		689B537C2421C13800BF4C2C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		68B36F54235D9F7D005D0741 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		68B36F56235D9FB8005D0741 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		68B36F5A235DA30D005D0741 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -151,7 +149,6 @@
 		656D8FEC1B385D74007640AD /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				689B537B2421C12200BF4C2C /* Base */,
 				681B7481256F4CFC005E9309 /* ViewController.swift */,
 			);
 			path = ViewController;
@@ -164,14 +161,6 @@
 				681B747B256F49DD005E9309 /* UserDefaultSettable.swift */,
 			);
 			path = Data;
-			sourceTree = "<group>";
-		};
-		689B537B2421C12200BF4C2C /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				689B537C2421C13800BF4C2C /* BaseViewController.swift */,
-			);
-			path = Base;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -298,7 +287,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				681B7482256F4CFC005E9309 /* ViewController.swift in Sources */,
-				689B537D2421C13800BF4C2C /* BaseViewController.swift in Sources */,
 				65FC25FC1E02ED5600F9E38A /* MacroDefine.swift in Sources */,
 				654856AE1B235160001922E1 /* AppDelegate.swift in Sources */,
 				681B747D256F49DD005E9309 /* UserDefaultSettable.swift in Sources */,
