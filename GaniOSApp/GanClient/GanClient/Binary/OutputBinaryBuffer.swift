@@ -120,7 +120,7 @@ public final class OutputBinaryBuffer: BinaryWritable
     @discardableResult
     public func writeString(_ value: String) -> OutputBinaryBuffer
     {
-        if value.length == 0
+        if value.count == 0
         {
             self.writeInteger(0)
         }

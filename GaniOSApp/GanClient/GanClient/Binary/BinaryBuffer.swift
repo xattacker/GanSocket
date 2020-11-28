@@ -337,7 +337,7 @@ extension BinaryBuffer: BinaryWritable
     @discardableResult
     public func writeString(_ value: String) -> BinaryBuffer
     {
-        if value.length == 0
+        if value.count == 0
         {
             self.writeInteger(0)
         }

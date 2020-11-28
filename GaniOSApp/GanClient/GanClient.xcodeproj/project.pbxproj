@@ -26,7 +26,6 @@
 		68987BE3256B8B2300119088 /* GUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BD3256B8B2300119088 /* GUID.swift */; };
 		68987BE5256B8B2300119088 /* DateTimeUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BD5256B8B2300119088 /* DateTimeUtility.swift */; };
 		68987BE7256B8B2300119088 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BD7256B8B2300119088 /* Data.swift */; };
-		68987BF0256B8B2300119088 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BE0256B8B2300119088 /* String.swift */; };
 		68987BF9256B8BDB00119088 /* GanClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BF8256B8BDB00119088 /* GanClient.swift */; };
 		68987BFC256B8BF100119088 /* GanClientDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BFB256B8BF100119088 /* GanClientDelegate.swift */; };
 		68987BFF256B8C6C00119088 /* GanAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BFE256B8C6C00119088 /* GanAgent.swift */; };
@@ -68,7 +67,6 @@
 		68987BD3256B8B2300119088 /* GUID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GUID.swift; sourceTree = "<group>"; };
 		68987BD5256B8B2300119088 /* DateTimeUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimeUtility.swift; sourceTree = "<group>"; };
 		68987BD7256B8B2300119088 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
-		68987BE0256B8B2300119088 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		68987BF8256B8BDB00119088 /* GanClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GanClient.swift; sourceTree = "<group>"; };
 		68987BFB256B8BF100119088 /* GanClientDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GanClientDelegate.swift; sourceTree = "<group>"; };
 		68987BFE256B8C6C00119088 /* GanAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GanAgent.swift; sourceTree = "<group>"; };
@@ -174,7 +172,6 @@
 				68987BD3256B8B2300119088 /* GUID.swift */,
 				68987BD5256B8B2300119088 /* DateTimeUtility.swift */,
 				68987BD7256B8B2300119088 /* Data.swift */,
-				68987BE0256B8B2300119088 /* String.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -374,7 +371,6 @@
 				68987C14256B8D2300119088 /* RequestHeader.swift in Sources */,
 				6869D910256CA4E9001AE211 /* TCPClient.swift in Sources */,
 				68C98C7B256E4DD9004E21BB /* MessageData.swift in Sources */,
-				68987BF0256B8B2300119088 /* String.swift in Sources */,
 				68987C04256B8CD900119088 /* ServiceFoundation.swift in Sources */,
 				68987BC8256B8AB500119088 /* InputBinaryBuffer.swift in Sources */,
 				68987BCB256B8AB500119088 /* BinarySerializable.swift in Sources */,
