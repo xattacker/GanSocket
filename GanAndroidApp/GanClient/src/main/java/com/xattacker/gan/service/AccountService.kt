@@ -6,9 +6,13 @@ import com.xattacker.gan.GanAgent
 import com.xattacker.gan.data.FunctionType
 import java.net.Socket
 
+
+data class SessionInfo(val account: String, val sessionId: String)
+
+
 internal interface AccountServiceListener
 {
-    fun onLoginSucceed(account: String, sessionId: String, connection: Socket)
+    fun onLoginSucceed(session: SessionInfo, connection: Socket)
     fun onLoggedOut(account: String)
 }
 
@@ -31,7 +35,8 @@ class AccountService internal constructor(agent: GanAgent, private val _listener
                 if (result && response.response != null)
                 {
                     val session_id = String(response.response!!)
-                    _listener.onLoginSucceed(account, session_id, response.connection!!)
+                    val session = SessionInfo(account, session_id)
+                    _listener.onLoginSucceed(session, response.connection!!)
                 }
             }
         }

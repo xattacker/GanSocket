@@ -1,5 +1,5 @@
 //
-//  SocketFactory.swift
+//  ConnectionFactory.swift
 //  GanClient
 //
 //  Created by xattacker on 2020/11/29.
@@ -8,9 +8,9 @@
 import Foundation
 
 
-internal class SocketFactory
+internal class ConnectionFactory
 {
-    static func createSocket(_ address: String, port: Int) -> Result<SocketConnection, Error>
+    static func createConnection(_ address: String, port: Int) -> Result<SocketConnection, Error>
     {
         let client = TCPClient(address: address, port: Int32(port))
 
@@ -24,6 +24,7 @@ internal class SocketFactory
         }
     }
 }
+
 
 extension TCPClient: SocketConnection
 {

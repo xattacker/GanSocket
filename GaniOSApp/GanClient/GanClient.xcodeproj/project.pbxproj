@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		15C7E54AAA06F201AE455628 /* Pods_GanClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F309BB0F499F7866C31337 /* Pods_GanClient.framework */; };
-		65D7B0DA2572D05400A1A9EB /* SocketFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D7B0D82572D05400A1A9EB /* SocketFactory.swift */; };
+		65D7B0DA2572D05400A1A9EB /* ConnectionFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D7B0D82572D05400A1A9EB /* ConnectionFactory.swift */; };
 		65D7B0DB2572D05400A1A9EB /* SocketConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D7B0D92572D05400A1A9EB /* SocketConnection.swift */; };
 		6869D90E256CA4E9001AE211 /* yudpsocket.c in Sources */ = {isa = PBXBuildFile; fileRef = 6869D909256CA4E9001AE211 /* yudpsocket.c */; };
 		6869D90F256CA4E9001AE211 /* ytcpsocket.c in Sources */ = {isa = PBXBuildFile; fileRef = 6869D90A256CA4E9001AE211 /* ytcpsocket.c */; };
@@ -47,7 +47,7 @@
 /* Begin PBXFileReference section */
 		26F44A6FD4FEBD47EA5C4718 /* Pods-GanClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GanClient.release.xcconfig"; path = "Target Support Files/Pods-GanClient/Pods-GanClient.release.xcconfig"; sourceTree = "<group>"; };
 		42F309BB0F499F7866C31337 /* Pods_GanClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GanClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		65D7B0D82572D05400A1A9EB /* SocketFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketFactory.swift; sourceTree = "<group>"; };
+		65D7B0D82572D05400A1A9EB /* ConnectionFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionFactory.swift; sourceTree = "<group>"; };
 		65D7B0D92572D05400A1A9EB /* SocketConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketConnection.swift; sourceTree = "<group>"; };
 		6869D909256CA4E9001AE211 /* yudpsocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = yudpsocket.c; sourceTree = "<group>"; };
 		6869D90A256CA4E9001AE211 /* ytcpsocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ytcpsocket.c; sourceTree = "<group>"; };
@@ -102,7 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				65D7B0D92572D05400A1A9EB /* SocketConnection.swift */,
-				65D7B0D82572D05400A1A9EB /* SocketFactory.swift */,
+				65D7B0D82572D05400A1A9EB /* ConnectionFactory.swift */,
 			);
 			path = Connection;
 			sourceTree = "<group>";
@@ -384,7 +384,7 @@
 				68987BE3256B8B2300119088 /* GUID.swift in Sources */,
 				65D7B0DB2572D05400A1A9EB /* SocketConnection.swift in Sources */,
 				6869D90F256CA4E9001AE211 /* ytcpsocket.c in Sources */,
-				65D7B0DA2572D05400A1A9EB /* SocketFactory.swift in Sources */,
+				65D7B0DA2572D05400A1A9EB /* ConnectionFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

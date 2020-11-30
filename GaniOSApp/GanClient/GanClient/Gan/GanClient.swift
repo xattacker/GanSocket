@@ -54,7 +54,7 @@ extension GanClient: GanAgent
     
     func createSocket() -> Result<SocketConnection, Error>
     {
-        return SocketFactory.createSocket(self.address, port: self.port)
+        return ConnectionFactory.createConnection(self.address, port: self.port)
     }
 }
 

@@ -20,11 +20,11 @@ final class GanClient private constructor(private val _address: String, private 
 {
     private var listener: WeakReference<GanClientListener>?
 
-    override var account: String? = null
-        private set
+    override val account: String?
+        get() = this.session?.account
 
-    override var sessionId: String? = null
-        private set
+    override val sessionId: String?
+        get() = this.session?.sessionId
 
     val isConnected: Boolean
         get() = !this.account.isNullOrEmpty()
@@ -32,7 +32,9 @@ final class GanClient private constructor(private val _address: String, private 
     val accountService: AccountService by lazy { AccountService(this, this) }
     val messageService: MessageService by lazy { MessageService(this) }
     val systemService: SystemService by lazy { SystemService(this) }
+
     private val callbackService: CallbackService by lazy { CallbackService(this, this) }
+    private var session: SessionInfo? = null
 
     companion object
     {
@@ -71,15 +73,14 @@ final class GanClient private constructor(private val _address: String, private 
         return socket
     }
 
-    override fun onLoginSucceed(account: String, sessionId: String, socket: Socket)
+    override fun onLoginSucceed(session: SessionInfo, socket: Socket)
     {
         try
         {
-            this.account = account
-            this.sessionId = sessionId
+            this.session = session
 
             this.callbackService.handleConnection(socket)
-            listener?.get()?.onAccountLoggedIn(account)
+            listener?.get()?.onAccountLoggedIn(session.account)
         }
         catch (ex: Exception)
         {
@@ -88,8 +89,7 @@ final class GanClient private constructor(private val _address: String, private 
 
     override fun onLoggedOut(account: String)
     {
-        this.account = null
-        this.sessionId = null
+        this.session = null
 
         this.callbackService.close()
     }
@@ -101,22 +101,8 @@ final class GanClient private constructor(private val _address: String, private 
 
     private fun doRelease()
     {
-        account = null
-        sessionId = null
+        session = null
 
         this.callbackService.close()
-    }
-
-    @Throws(Exception::class)
-    private fun wait(aIn: InputStream, aLength: Int, aMaxTry: Int): Boolean
-    {
-        var try_count = 0
-        do
-        {
-            Thread.sleep(50)
-            try_count++
-        } while (aIn.available() < aLength && try_count < aMaxTry)
-
-        return aIn.available() >= aLength
     }
 }
