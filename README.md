@@ -6,5 +6,5 @@ GaniOSApp: implemented by Swift
 
 <br>
 ### Issues:<br>
-1. iOS app will not get message when hiding in background.
+1. iOS app will not get message when hiding in background.<br>
 2. message could not be guaranteed to receive when sending.
