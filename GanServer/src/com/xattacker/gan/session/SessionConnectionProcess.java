@@ -1,4 +1,4 @@
-package com.xattacker.gan.account;
+package com.xattacker.gan.session;
 
 import java.net.Socket;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import com.xattacker.gan.data.ResponsePack;
 import com.xattacker.gan.msg.MsgData;
 import com.xattacker.gan.msg.MsgManager;
 
-final class CallbackConnectionProcess extends Thread
+final class SessionConnectionProcess extends Thread
 {
 	public interface CallbackConnectionProcessListener
 	{
@@ -23,7 +23,7 @@ final class CallbackConnectionProcess extends Thread
 	private String _sessionId;
 	private Socket _socket = null;
 
-	public CallbackConnectionProcess(String anAccount, String aSessionId, Socket aSocket)
+	public SessionConnectionProcess(String anAccount, String aSessionId, Socket aSocket)
 	{
 		_account = anAccount;
 		_sessionId = aSessionId;

@@ -3,8 +3,8 @@ package com.xattacker.gan;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import com.xattacker.gan.account.SessionPool;
 import com.xattacker.gan.msg.MsgManager;
+import com.xattacker.gan.session.SessionPool;
 
 public class GanServer extends Thread
 {
@@ -50,7 +50,7 @@ public class GanServer extends Thread
 				socket.setOOBInline(true);
 				socket.setKeepAlive(true);
 				
-				GanClientConnectionProcess process = new GanClientConnectionProcess(socket);
+				ClientConnectionProcess process = new ClientConnectionProcess(socket);
 				process.start();
 				System.out.println("got connection");
 				

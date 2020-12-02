@@ -9,7 +9,6 @@ import com.google.gson.GsonBuilder;
 import com.xattacker.binary.InputBinaryBuffer;
 import com.xattacker.binary.OutputBinaryBuffer;
 import com.xattacker.binary.TypeConverter;
-import com.xattacker.gan.account.SessionPool;
 import com.xattacker.gan.data.FunctionType;
 import com.xattacker.gan.data.FunctionTypeJsonSerializer;
 import com.xattacker.gan.data.PackChecker;
@@ -18,14 +17,15 @@ import com.xattacker.gan.data.ResponsePack;
 import com.xattacker.gan.exception.ConnectEOFException;
 import com.xattacker.gan.msg.MsgData;
 import com.xattacker.gan.msg.MsgManager;
+import com.xattacker.gan.session.SessionPool;
 import com.xattacker.json.JsonBuilderVisitor;
 import com.xattacker.json.JsonUtility;
 
-public final class GanClientConnectionProcess extends Thread
+public final class ClientConnectionProcess extends Thread
 {
 	private Socket _socket = null;
 
-	public GanClientConnectionProcess(Socket aSocket)
+	public ClientConnectionProcess(Socket aSocket)
 	{
 		_socket = aSocket;
 	}

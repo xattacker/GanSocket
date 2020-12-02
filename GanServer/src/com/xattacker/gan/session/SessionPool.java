@@ -1,4 +1,4 @@
-package com.xattacker.gan.account;
+package com.xattacker.gan.session;
 
 import java.net.Socket;
 import java.util.Hashtable;
@@ -55,7 +55,7 @@ public final class SessionPool
 				SessionInfo session = new SessionInfo(aAccount);
 				_sessions.put(aAccount, session);
 				
-				CallbackConnectionProcess process = new CallbackConnectionProcess(aAccount, session._sessionId, aSocket);
+				SessionConnectionProcess process = new SessionConnectionProcess(aAccount, session._sessionId, aSocket);
 				session.setProcess(process);
 				process.start();
 				

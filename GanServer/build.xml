@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<project name="GanServer" default="createjar">
+
+	<target name="createjar">
+	    
+	   <delete file="lib/GanServer.jar"/>
+	   
+	   <jar destfile="lib/GanServer.jar" basedir="classes">
+	        <manifest>
+	            <attribute name="Main-Class" value="com.xattacker.gan.GanServer"/>
+	        	
+	            <section name="com/xattacker/gan/">
+	               <attribute name="Specification-Title" value="GanServer" />
+	               <attribute name="Specification-Version" value="1.0.0" />
+	               <attribute name="Specification-Vendor" value="Xattacker" />
+	               <attribute name="Implementation-Title" value="GanServer" />
+	               <attribute name="Implementation-Version" value="1.0.0" /> 
+	               <attribute name="Implementation-Vendor" value="Xattacker" />
+	               <attribute name="Package-Title" value="com.xattacker.gan" />
+	               <attribute name="Package-Version" value="1.0.0" />
+	               <attribute name="Package-Vendor" value="Xattacker" />
+	            </section>
+	        </manifest>
+	   </jar>
+		
+	</target>
+
+</project>
+

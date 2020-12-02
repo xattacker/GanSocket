@@ -5,44 +5,46 @@ import java.util.Hashtable;
 
 public class ClientConnectiontManager
 {
-	private static ClientConnectiontManager iInstance;
+	private static ClientConnectiontManager _instance;
 
-	private Hashtable<String, Socket> iClientSockets = null;
+	private Hashtable<String, Socket> _connections = null;
+	private final Object _lockObj = new Object();
 
 	private ClientConnectiontManager()
 	{
-		iClientSockets = new Hashtable<String, Socket>();
+		_connections = new Hashtable<String, Socket>();
 	}
 
-	public static ClientConnectiontManager getInstance()
+	public synchronized static ClientConnectiontManager getInstance()
 	{
-		if (iInstance == null)
+		if (_instance == null)
 		{
-			iInstance = new ClientConnectiontManager();
+			_instance = new ClientConnectiontManager();
 		}
 
-		return iInstance;
+		return _instance;
 	}
 
-	public Hashtable<String, Socket> getHandleClientSockets()
+	public boolean isConnectionExisted(String aClientName)
 	{
-		return iClientSockets;
+		synchronized (_lockObj)
+		{
+			return _connections.containsKey(aClientName);
+		}
 	}
 
-	public boolean isClientExisted(String aClientName)
+	public Socket getConnectionSocket(String aClientName)
 	{
-		return iClientSockets.containsKey(aClientName);
-	}
-
-	public Socket getClientSocket(String aClientName)
-	{
-		Socket socket = iClientSockets.get(aClientName);
+		Socket socket = _connections.get(aClientName);
 
 		return socket;
 	}
 
-	public void addClientSocket(String aClientName, Socket aSocket)
+	public void addConnectiion(String aClientName, Socket aSocket)
 	{
-		iClientSockets.put(aClientName, aSocket);
+		synchronized (_lockObj)
+		{
+			_connections.put(aClientName, aSocket);
+		}
 	}
 }
