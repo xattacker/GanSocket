@@ -6,5 +6,5 @@ a realtime socket client/server Project, includes:<br>
 <br><br>
 ### Issues:<br>
 1. iOS app will not get message when hiding in background.
-2. message will not be saved persistently.
+2. message will not keep in server persistently.
 3. message could not be guaranteed to receive when sending.
