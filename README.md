@@ -5,7 +5,7 @@ a simple realtime socket client/server Project, includes:<br>
 <a href="https://github.com/xattacker/GanSocket/tree/main/GaniOSApp">GaniOSApp</a>: implemented by Swift
 <br><br>
 ### Issues:<br>
-1. iOS app will not get message when hiding in background.
+1. iOS app will miss message when hiding in background.
 2. message will not be saved in server persistently.
-3. message could not be guaranteed to receive when sending.
+3. there is no guarantee that the message will be received when sending.
 4. account authorization feature is not implemented.
