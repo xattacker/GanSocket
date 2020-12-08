@@ -8,3 +8,4 @@ a simple realtime socket client/server Project, includes:<br>
 1. iOS app will not get message when hiding in background.
 2. message will not be saved in server persistently.
 3. message could not be guaranteed to receive when sending.
+4. account authorization mechanism doesn't be implemeneted.
