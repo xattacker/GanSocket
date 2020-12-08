@@ -6,6 +6,6 @@ a simple realtime socket client/server Project, includes:<br>
 <br><br>
 ### Issues:<br>
 1. iOS app will miss message when hiding in background.
-2. message will not be saved in server persistently.
+2. message will not be stored permanently in the server.
 3. there is no guarantee that the message will be received when sending.
 4. account authorization feature is not implemented.
