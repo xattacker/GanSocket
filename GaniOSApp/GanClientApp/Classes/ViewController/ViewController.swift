@@ -74,59 +74,74 @@ class ViewController: UIViewController
     
     @IBAction func onLogoutAction(_ sender: AnyObject)
     {
-        guard let client = self.ganClient else
-        {
-            print("GanClient is not initial !!")
+        self.callGan {
+            (client: GanClient) in
             
-            return
+            _ = client.accountService.logout()
         }
-        
-        
-        _ = client.accountService.logout()
     }
     
     @IBAction func onGetIPAction(_ sender: AnyObject)
     {
-        guard let client = self.ganClient else
-        {
-            print("GanClient is not initial !!")
+        self.callGan {
+            (client: GanClient) in
             
-            return
-        }
-        
-        
-        if let ip = client.systemService.getIP()
-        {
-            print("got ip: " + ip)
-        }
-        else
-        {
-            print("got ip failed")
+            if let ip = client.systemService.getIP()
+            {
+                print("got ip: " + ip)
+            }
+            else
+            {
+                print("got ip failed")
+            }
         }
     }
     
     @IBAction func onGetTimeAction(_ sender: AnyObject)
     {
-        guard let client = self.ganClient else
-        {
-            print("GanClient is not initial !!")
+        self.callGan {
+            (client: GanClient) in
             
-            return
-        }
-        
-        
-        if let time = client.systemService.getSystemTime()
-        {
-            print("got time: " + time.getDateTimeString(DateTimeFormatType.datetime_complete))
-        }
-        else
-        {
-            print("got time failed")
+            if let time = client.systemService.getSystemTime()
+            {
+                print("got time: " + time.getDateTimeString(DateTimeFormatType.datetime_complete))
+            }
+            else
+            {
+                print("got time failed")
+            }
         }
     }
     
     @IBAction func onSendMsgAction(_ sender: AnyObject)
     {
+        self.callGan {
+            (client: GanClient) in
+            
+            let msg = "aaafdsafad中文字 " + DateTimeUtility.getTimeStamp().toString()
+            if client.messageService.sendMessage("test", message: msg)
+            {
+                print("sendMessage succeed: \(msg)")
+            }
+            else
+            {
+                print("sendMessage failed")
+            }
+        }
+    }
+
+    deinit
+    {
+        _ = self.ganClient?.accountService.logout()
+        self.ganClient = nil
+    }
+}
+
+
+extension ViewController
+{
+    private func callGan(_ process: (_ client: GanClient) -> Void)
+    {
         guard let client = self.ganClient else
         {
             print("GanClient is not initial !!")
@@ -134,22 +149,7 @@ class ViewController: UIViewController
             return
         }
         
-        
-        let msg = "aaafdsafad中文字 " + DateTimeUtility.getTimeStamp().toString()
-        if client.messageService.sendMessage("test", message: msg)
-        {
-            print("sendMessage succeed: \(msg)")
-        }
-        else
-        {
-            print("sendMessage failed")
-        }
-    }
-    
-    deinit
-    {
-        _ = self.ganClient?.accountService.logout()
-        self.ganClient = nil
+        process(client)
     }
 }
 
