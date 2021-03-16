@@ -1,8 +1,8 @@
 # GanSocket
 a simple realtime socket client/server Project, includes:<br>
 <a href="https://github.com/xattacker/GanSocket/tree/main/GanServer">GanServer</a>: implemented by Java, eclipse project<br>
-<a href="https://github.com/xattacker/GanSocket/tree/main/GanAndroidApp">GanAndroidApp</a>: implemented by Kotlin<br>
-<a href="https://github.com/xattacker/GanSocket/tree/main/GaniOSApp">GaniOSApp</a>: implemented by Swift
+<a href="https://github.com/xattacker/GanSocket/tree/main/GanAndroidApp">GanAndroidApp</a>: implemented by Kotlin, Android project<br>
+<a href="https://github.com/xattacker/GanSocket/tree/main/GaniOSApp">GaniOSApp</a>: implemented by Swift, iOS project
 <br><br>
 ### Issues:<br>
 1. iOS app may miss message when hiding in background.
