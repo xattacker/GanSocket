@@ -16,6 +16,8 @@
 		6869D911256CA4E9001AE211 /* UDPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6869D90C256CA4E9001AE211 /* UDPClient.swift */; };
 		6869D912256CA4E9001AE211 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6869D90D256CA4E9001AE211 /* Socket.swift */; };
 		687D6417256B826F00A90D48 /* GanClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 687D6415256B826F00A90D48 /* GanClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		68908A7D261FDF7300CB0865 /* GanClientUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68908A7C261FDF7300CB0865 /* GanClientUnitTests.swift */; };
+		68908A7F261FDF7300CB0865 /* GanClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 687D6412256B826F00A90D48 /* GanClient.framework */; };
 		68987BC6256B8AB500119088 /* OutputBinaryBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BBF256B8AB500119088 /* OutputBinaryBuffer.swift */; };
 		68987BC7256B8AB500119088 /* BinaryWritable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BC0256B8AB500119088 /* BinaryWritable.swift */; };
 		68987BC8256B8AB500119088 /* InputBinaryBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987BC1256B8AB500119088 /* InputBinaryBuffer.swift */; };
@@ -42,11 +44,23 @@
 		68C98C73256E02CF004E21BB /* ImpThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C98C71256E02CF004E21BB /* ImpThread.swift */; };
 		68C98C77256E3DE3004E21BB /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C98C76256E3DE3004E21BB /* MessageService.swift */; };
 		68C98C7B256E4DD9004E21BB /* MessageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C98C7A256E4DD9004E21BB /* MessageData.swift */; };
+		9B17EA4C20F228F797D5B17E /* Pods_GanClientUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80ED1F72E0E8681552E096F2 /* Pods_GanClientUnitTests.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		68908A80261FDF7300CB0865 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 687D6409256B826F00A90D48 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 687D6411256B826F00A90D48;
+			remoteInfo = GanClient;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		26F44A6FD4FEBD47EA5C4718 /* Pods-GanClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GanClient.release.xcconfig"; path = "Target Support Files/Pods-GanClient/Pods-GanClient.release.xcconfig"; sourceTree = "<group>"; };
 		42F309BB0F499F7866C31337 /* Pods_GanClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GanClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		658A514410A8859FD7BEE9DA /* Pods-GanClientUnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GanClientUnitTests.debug.xcconfig"; path = "Target Support Files/Pods-GanClientUnitTests/Pods-GanClientUnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		65D7B0D82572D05400A1A9EB /* ConnectionFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionFactory.swift; sourceTree = "<group>"; };
 		65D7B0D92572D05400A1A9EB /* SocketConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketConnection.swift; sourceTree = "<group>"; };
 		6869D909256CA4E9001AE211 /* yudpsocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = yudpsocket.c; sourceTree = "<group>"; };
@@ -57,6 +71,9 @@
 		687D6412256B826F00A90D48 /* GanClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GanClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		687D6415256B826F00A90D48 /* GanClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GanClient.h; sourceTree = "<group>"; };
 		687D6416256B826F00A90D48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		68908A7A261FDF7300CB0865 /* GanClientUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GanClientUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		68908A7C261FDF7300CB0865 /* GanClientUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GanClientUnitTests.swift; sourceTree = "<group>"; };
+		68908A7E261FDF7300CB0865 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		68987BBF256B8AB500119088 /* OutputBinaryBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputBinaryBuffer.swift; sourceTree = "<group>"; };
 		68987BC0256B8AB500119088 /* BinaryWritable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryWritable.swift; sourceTree = "<group>"; };
 		68987BC1256B8AB500119088 /* InputBinaryBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputBinaryBuffer.swift; sourceTree = "<group>"; };
@@ -84,6 +101,8 @@
 		68C98C76256E3DE3004E21BB /* MessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
 		68C98C7A256E4DD9004E21BB /* MessageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageData.swift; sourceTree = "<group>"; };
 		6A7F2A1002A83AEA3BC49C27 /* Pods-GanClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GanClient.debug.xcconfig"; path = "Target Support Files/Pods-GanClient/Pods-GanClient.debug.xcconfig"; sourceTree = "<group>"; };
+		80ED1F72E0E8681552E096F2 /* Pods_GanClientUnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GanClientUnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACF3FB1A807D3045F4FD27C5 /* Pods-GanClientUnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GanClientUnitTests.release.xcconfig"; path = "Target Support Files/Pods-GanClientUnitTests/Pods-GanClientUnitTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +111,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				15C7E54AAA06F201AE455628 /* Pods_GanClient.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68908A77261FDF7300CB0865 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68908A7F261FDF7300CB0865 /* GanClient.framework in Frameworks */,
+				9B17EA4C20F228F797D5B17E /* Pods_GanClientUnitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				687D6414256B826F00A90D48 /* GanClient */,
+				68908A7B261FDF7300CB0865 /* GanClientUnitTests */,
 				687D6413256B826F00A90D48 /* Products */,
 				C48274F6FEBDE5456954210A /* Pods */,
 				85D8523791EE5B7D6BF0C368 /* Frameworks */,
@@ -133,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				687D6412256B826F00A90D48 /* GanClient.framework */,
+				68908A7A261FDF7300CB0865 /* GanClientUnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -150,6 +180,15 @@
 				687D6416256B826F00A90D48 /* Info.plist */,
 			);
 			path = GanClient;
+			sourceTree = "<group>";
+		};
+		68908A7B261FDF7300CB0865 /* GanClientUnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				68908A7C261FDF7300CB0865 /* GanClientUnitTests.swift */,
+				68908A7E261FDF7300CB0865 /* Info.plist */,
+			);
+			path = GanClientUnitTests;
 			sourceTree = "<group>";
 		};
 		68987BBE256B8AB500119088 /* Binary */ = {
@@ -234,6 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				42F309BB0F499F7866C31337 /* Pods_GanClient.framework */,
+				80ED1F72E0E8681552E096F2 /* Pods_GanClientUnitTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -243,6 +283,8 @@
 			children = (
 				6A7F2A1002A83AEA3BC49C27 /* Pods-GanClient.debug.xcconfig */,
 				26F44A6FD4FEBD47EA5C4718 /* Pods-GanClient.release.xcconfig */,
+				658A514410A8859FD7BEE9DA /* Pods-GanClientUnitTests.debug.xcconfig */,
+				ACF3FB1A807D3045F4FD27C5 /* Pods-GanClientUnitTests.release.xcconfig */,
 			);
 			name = Pods;
 			path = ../Pods;
@@ -281,16 +323,39 @@
 			productReference = 687D6412256B826F00A90D48 /* GanClient.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		68908A79261FDF7300CB0865 /* GanClientUnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 68908A84261FDF7300CB0865 /* Build configuration list for PBXNativeTarget "GanClientUnitTests" */;
+			buildPhases = (
+				58DD2F8A07AD71D17B2801F8 /* [CP] Check Pods Manifest.lock */,
+				68908A76261FDF7300CB0865 /* Sources */,
+				68908A77261FDF7300CB0865 /* Frameworks */,
+				68908A78261FDF7300CB0865 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				68908A81261FDF7300CB0865 /* PBXTargetDependency */,
+			);
+			name = GanClientUnitTests;
+			productName = GanClientUnitTests;
+			productReference = 68908A7A261FDF7300CB0865 /* GanClientUnitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		687D6409256B826F00A90D48 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1220;
 				TargetAttributes = {
 					687D6411256B826F00A90D48 = {
 						CreatedOnToolsVersion = 12.2;
+					};
+					68908A79261FDF7300CB0865 = {
+						CreatedOnToolsVersion = 12.4;
 					};
 				};
 			};
@@ -308,12 +373,20 @@
 			projectRoot = "";
 			targets = (
 				687D6411256B826F00A90D48 /* GanClient */,
+				68908A79261FDF7300CB0865 /* GanClientUnitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		687D6410256B826F00A90D48 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68908A78261FDF7300CB0865 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -339,6 +412,28 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-GanClient-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		58DD2F8A07AD71D17B2801F8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GanClientUnitTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -388,7 +483,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		68908A76261FDF7300CB0865 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68908A7D261FDF7300CB0865 /* GanClientUnitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		68908A81261FDF7300CB0865 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 687D6411256B826F00A90D48 /* GanClient */;
+			targetProxy = 68908A80261FDF7300CB0865 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		687D6418256B826F00A90D48 /* Debug */ = {
@@ -563,6 +674,44 @@
 			};
 			name = Release;
 		};
+		68908A82261FDF7300CB0865 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 658A514410A8859FD7BEE9DA /* Pods-GanClientUnitTests.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = GanClientUnitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = xattacker.GanClientUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		68908A83261FDF7300CB0865 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = ACF3FB1A807D3045F4FD27C5 /* Pods-GanClientUnitTests.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = GanClientUnitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = xattacker.GanClientUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -580,6 +729,15 @@
 			buildConfigurations = (
 				687D641B256B826F00A90D48 /* Debug */,
 				687D641C256B826F00A90D48 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		68908A84261FDF7300CB0865 /* Build configuration list for PBXNativeTarget "GanClientUnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68908A82261FDF7300CB0865 /* Debug */,
+				68908A83261FDF7300CB0865 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

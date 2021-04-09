@@ -62,7 +62,7 @@ class ViewController: UIViewController
         
         self.ganClient = GanClient(address: ip, port: port, delegate: self)
         let succeed = self.ganClient?.accountService.login("test", password: "test")
-        print("login: \(succeed)")
+        print("login: \(succeed ?? false)")
         
         if succeed == true
         {

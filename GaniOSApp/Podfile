@@ -10,8 +10,8 @@
   project 'GanClient/GanClient.xcodeproj'
 
   def gan_client_app_pods
-     pod 'RxSwift',    '~> 5'
-     pod 'RxCocoa',    '~> 5'
+     pod 'RxSwift'
+     pod 'RxCocoa'
 
      pod 'ObjectMapper'
   end
@@ -28,6 +28,10 @@
   target 'GanClient' do
      project 'GanClient/GanClient.xcodeproj'
      gan_client_pods
+
+   target 'GanClientUnitTests' do
+   	inherit! :search_paths
+   end
   end
 
 # fixed compile warning:

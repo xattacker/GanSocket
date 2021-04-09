@@ -46,7 +46,6 @@ public final class DateTimeUtility
             formatter.timeZone = timeZone
         }
         
-        
         return formatter.string(from: date)
     }
     

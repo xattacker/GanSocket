@@ -1,0 +1,6 @@
+framework module Pods_GanClientUnitTests {
+  umbrella header "Pods-GanClientUnitTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
