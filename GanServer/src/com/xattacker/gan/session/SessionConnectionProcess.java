@@ -46,14 +46,8 @@ final class SessionConnectionProcess extends Thread
 					 response.setId(FunctionType.LOGOUT.value());
 					 response.setContent(_account.getBytes());
 					 
-					 BinaryBuffer buffer = new BinaryBuffer();
-					 response.toBinary(buffer);
-					 
-					 PackChecker.addHeaderPack((int)buffer.getLength(), _socket.getOutputStream());
-					 
-					 OutputBinaryBuffer obb = new OutputBinaryBuffer(_socket.getOutputStream());
-					 obb.writeBinary(buffer.getData(), 0, (int)buffer.getLength());
-					 obb.flush();
+					 PackChecker.packData(response, _socket.getOutputStream());
+					 System.out.println("closed session " + _sessionId + " for [" + _account + "]");
 
 					 break;
 				 }
@@ -72,16 +66,9 @@ final class SessionConnectionProcess extends Thread
 							 response.setId(FunctionType.RECEIVE_SMS.value());
 							 response.setContent(msg.toJson().getBytes("UTF8"));
 
-							 BinaryBuffer buffer = new BinaryBuffer();
-							 response.toBinary(buffer);
+							 PackChecker.packData(response, _socket.getOutputStream());
 							 
-							 PackChecker.addHeaderPack((int)buffer.getLength(), _socket.getOutputStream());
-							 
-							 OutputBinaryBuffer obb = new OutputBinaryBuffer(_socket.getOutputStream());
-							 obb.writeBinary(buffer.getData(), 0, (int)buffer.getLength());
-							 obb.flush();
-							 
-							 System.out.println("send msg: " + msg.getMessage());
+							 System.out.println("send msg to [" + _account + "]: " + msg.getMessage());
 							 Thread.sleep(500);
 						 }
 						 

@@ -4,7 +4,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Arrays;
 
+import com.xattacker.binary.BinaryBuffer;
 import com.xattacker.binary.InputBinaryBuffer;
+import com.xattacker.binary.OutputBinaryBuffer;
 import com.xattacker.binary.TypeConverter;
 import com.xattacker.gan.exception.ConnectEOFException;
 
@@ -84,9 +86,17 @@ public final class PackChecker
       return result;
    }
    
-   public static void addHeaderPack(int dataLength, OutputStream out) throws Exception
+   public static void packData(ResponsePack response, OutputStream out) throws Exception
    {
+		 BinaryBuffer buffer = new BinaryBuffer();
+		 response.toBinary(buffer);
+		 
 		 out.write(PackChecker.HEAD_BYTE);
-		 out.write(TypeConverter.intToByte(dataLength));
+		 out.write(TypeConverter.intToByte((int)buffer.getLength()));
+		 
+		 
+		 OutputBinaryBuffer obb = new OutputBinaryBuffer(out);
+		 obb.writeBinary(buffer.getData(), 0, (int)buffer.getLength());
+		 obb.flush();
    }
 }

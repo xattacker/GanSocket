@@ -153,15 +153,9 @@ public final class ClientConnectionProcess extends Thread
 						
 						if (response != null)
 						{
-							out = _socket.getOutputStream();
-							
-							OutputBinaryBuffer obb = new OutputBinaryBuffer(out);
-							response.toBinary(obb);
-							
-							obb.flush();
-							response = null;
-							
-							System.out.println("send response");
+						   PackChecker.packData(response, _socket.getOutputStream());
+
+							System.out.println("send response " + response.getId());
 						}
 					}
 					else
