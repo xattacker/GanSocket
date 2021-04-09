@@ -42,7 +42,7 @@ public final class ClientConnectionProcess extends Thread
 			{
 				in = _socket.getInputStream();
 				
-				PackChecker.ValidResult valid = PackChecker.isValidPack(in, false);
+				PackChecker.ValidResult valid = PackChecker.isValidPack(in, 50, false);
 				if (valid.valid && valid.length > 0)
 				{
 					int wait_count = 0;

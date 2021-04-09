@@ -14,6 +14,8 @@ public final class PackChecker
 {
 	private final static String HEAD = "<GAN_PACK>";
    private final static byte[] HEAD_BYTE = HEAD.getBytes();
+	private final static int INT_LENGTH = 4;
+   private final static int VALID_LENGTH = HEAD_BYTE.length + INT_LENGTH;
    
 	public class ValidResult
 	{
@@ -21,7 +23,7 @@ public final class PackChecker
 		public int length = 0;
 	}
 
-   public static ValidResult isValidPack(InputStream aIn, boolean aMarkable) throws ConnectEOFException
+   public static ValidResult isValidPack(InputStream aIn, int aWaitCount, boolean aMarkable) throws ConnectEOFException
    {
    	ValidResult result = new PackChecker().new ValidResult();
 
@@ -29,36 +31,30 @@ public final class PackChecker
       {
       	 if (aIn != null)
           {
-      		 int size = aIn.available();
-      		 if (size < 0)
+             int wait_count = 0;
+         	 while (aIn.available() < VALID_LENGTH && wait_count < aWaitCount)
+         	 {
+         		  wait_count++;
+         		  Thread.sleep(50);
+         	 }
+         	 
+      		 if (aIn.available() > VALID_LENGTH)
       		 {
-      			 throw new ConnectEOFException();
-      		 }
-      		 
-	          if (size > HEAD_BYTE.length)
-	          {
 	         	 if (aIn.markSupported() && aMarkable)
 	         	 {
 	         		 aIn.mark(HEAD_BYTE.length);
 	         	 }
 	         	 
 	         	 byte[] temp = new byte[HEAD_BYTE.length];
-	         	 int index = aIn.read(temp);
-	         	 if (index < 0)
-	         	 {
-	         		 throw new ConnectEOFException();
-	         	 }
+	         	 aIn.read(temp);
 	         	 
 	         	 result.valid = Arrays.equals(HEAD_BYTE, temp);
-	         	 
-	 	         if (result.valid)
-		         {
-		         	InputBinaryBuffer buffer = new InputBinaryBuffer(aIn);
-		         	result.length = buffer.readInteger();
-		         }
-	 	         
-	         	 temp = null;
-	          }
+	 	          if (result.valid)
+		          {
+		         	 InputBinaryBuffer buffer = new InputBinaryBuffer(aIn);
+		         	 result.length = buffer.readInteger();
+		          }
+      		 }
       	 }
       }
       catch (ConnectEOFException ex)
@@ -93,7 +89,6 @@ public final class PackChecker
 		 
 		 out.write(PackChecker.HEAD_BYTE);
 		 out.write(TypeConverter.intToByte((int)buffer.getLength()));
-		 
 		 
 		 OutputBinaryBuffer obb = new OutputBinaryBuffer(out);
 		 obb.writeBinary(buffer.getData(), 0, (int)buffer.getLength());
