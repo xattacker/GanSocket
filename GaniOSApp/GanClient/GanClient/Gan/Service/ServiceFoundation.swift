@@ -27,21 +27,26 @@ public class ServiceFoundation
                 switch client.send(data: request_data)
                 {
                     case .success(()):
-                        Thread.sleep(forTimeInterval: 0.3)
-                        
-                        guard let data = client.read(1024*10, timeout: 5) else
+                        let valid = PackChecker.isValidPack(client)
+                        guard valid.valid && valid.length > 0 else
                         {
                             client.close()
                             
                             return nil
                         }
                         
-                        
+                        guard let data = client.read(valid.length, timeout: 5) else
+                        {
+                            client.close()
+                            
+                            return nil
+                        }
+                    
                         if closeConnection
                         {
                             client.close()
                         }
-                        
+                    
                         let buffer = BinaryBuffer(bytes: data, length: UInt(data.count))
                         let response = ResponsePack()
                         if response.fromBinaryReadable(buffer)
@@ -74,6 +79,7 @@ public class ServiceFoundation
         let buffer = BinaryBuffer()
 
         let data_buffer = BinaryBuffer()
+        
         let header = RequestHeader()
         header.type = type
         header.owner = self.agent.account
@@ -85,8 +91,7 @@ public class ServiceFoundation
             data_buffer.writeData(request)
         }
         
-        PackChecker.addHeader(data_buffer.length, buffer: buffer)
-        buffer.writeBuffer(data_buffer)
+        PackChecker.packData(data_buffer.data, container: buffer)
         
         return buffer.data
     }

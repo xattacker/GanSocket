@@ -63,15 +63,12 @@ internal final class CallbackReceivingTask: ImpThread
         {
             self.sleep(0.3)
             
-            guard (self.connection?.available() ?? 0) >= PackChecker.headerLength(),
-                  let data = self.connection?.read(PackChecker.headerLength(), timeout: 1) else
+            guard let connection = self.connection else
             {
                 continue
             }
             
-            
-            var buffer = BinaryBuffer(bytes: data, length: UInt(data.count))
-            let valid = PackChecker.isValidPack(buffer)
+            let valid = PackChecker.isValidPack(connection)
             if valid.valid && valid.length > 0
             {
                 guard let data2 = self.connection?.read(valid.length, timeout: 3) else
@@ -81,7 +78,7 @@ internal final class CallbackReceivingTask: ImpThread
                 }
                 
                 
-                buffer = BinaryBuffer(bytes: data2, length: UInt(data2.count))
+                let buffer = BinaryBuffer(bytes: data2, length: UInt(data2.count))
                 let response = ResponsePack()
                 if response.fromBinaryReadable(buffer)
                 {

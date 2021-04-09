@@ -57,10 +57,14 @@ class GanClientUnitTests: XCTestCase
         
         
         let result = self.ganClient?.accountService.logout()
-        assert(result == true, "logout failed")
+        assert(
+        result == true &&
+        self.ganClient?.isConnected == false &&
+        self.ganClient?.sessionId == nil,
+        "logout failed")
         
         wait(1)
-        assert(self.accountStatus == .logouted, "callback onAccountLoggedIn failed")
+        assert(self.accountStatus == .logouted, "callback onAccountLoggedOut failed")
     }
     
     func testGetIP() throws
@@ -77,8 +81,10 @@ class GanClientUnitTests: XCTestCase
     
     func testSendMsg() throws
     {
-        // GanClient should login first, because server side does not keep the sent message
-        // it only sends message when receiver is online
+        let msg = "aaafdsafad中文字 " + String(DateTimeUtility.getTimeStamp())
+        let succeed = self.ganClient?.messageService.sendMessage(self.account, message: msg)
+        assert(succeed == true, "sendMessage failed")
+
         let result = self.ganClient?.accountService.login(self.account, password: "test123")
         assert(
         result == true &&
@@ -87,12 +93,10 @@ class GanClientUnitTests: XCTestCase
         "login failed")
               
         
-        let msg = "aaafdsafad中文字 " + String(DateTimeUtility.getTimeStamp())
-        let succeed = self.ganClient?.messageService.sendMessage(self.account, message: msg)
-        assert(succeed == true, "sendMessage failed")
-
-        wait(2)
+        wait(1.5)
         assert(self.receivedMsg?.message == msg, "receive Message failed")
+        
+        self.ganClient?.accountService.logout()
     }
 }
 
