@@ -32,9 +32,15 @@ final class SessionConnectionProcess extends Thread
 	{
 		try
 		{
-			while (_socket != null && !_socket.isClosed() && _account != null)
+			while (isValid())
 			{
 				 Thread.sleep(800);
+				 
+				 if (!isValid())
+				 {
+					 System.out.println("CallbackConnectionProcess terminated");
+					 break;
+				 }
 				 
 				 if (SessionPool.instance() != null && !SessionPool.instance().checkSession(_account, _sessionId))
 				 {
@@ -49,7 +55,13 @@ final class SessionConnectionProcess extends Thread
 
 					 break;
 				 }
-				
+				 
+				 if (!isValid())
+				 {
+					 System.out.println("CallbackConnectionProcess terminated");
+					 break;
+				 }
+				 
 				 if (MsgManager.instance() != null && MsgManager.instance().hasMsg(_account))
 				 {
 					 ArrayList<MsgData> list = MsgManager.instance().getMsgs(_account);
@@ -101,5 +113,10 @@ final class SessionConnectionProcess extends Thread
 		
 		_account = null;
 		_sessionId = null;
+	}
+	
+	public boolean isValid()
+	{
+		return _socket != null && !_socket.isClosed() && _account != null;
 	}
 }
