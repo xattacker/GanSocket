@@ -1,6 +1,7 @@
 package com.xattacker.gan.session;
 
 import java.net.Socket;
+import java.util.Enumeration;
 import java.util.Hashtable;
 
 public final class SessionPool
@@ -108,7 +109,9 @@ public final class SessionPool
 		{
 			synchronized(_sessions)
 			{
-				_sessions.remove(aAccount);
+				SessionInfo session = _sessions.remove(aAccount);
+				session.getProcess().close();
+				session.setProcess(null);
 			}
 		}
 	}
@@ -117,6 +120,18 @@ public final class SessionPool
 	{
 		if (_sessions != null)
 		{
+			_sessions.forEach(
+						(account, session) -> {
+						try
+						{
+							session._process.close();
+							session.setProcess(null);
+						}
+						catch (Exception ex)
+						{
+						}
+					});
+			
 			_sessions.clear();
 			_sessions = null;
 		}

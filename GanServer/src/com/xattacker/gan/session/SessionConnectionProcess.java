@@ -3,8 +3,6 @@ package com.xattacker.gan.session;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import com.xattacker.binary.BinaryBuffer;
-import com.xattacker.binary.OutputBinaryBuffer;
 import com.xattacker.gan.data.FunctionType;
 import com.xattacker.gan.data.PackChecker;
 import com.xattacker.gan.data.ResponsePack;
