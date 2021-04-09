@@ -86,6 +86,32 @@ public final class MsgManager
 		return list;
 	}
 	
+	public boolean removeMsg(String aReceiver, String aMsgId)
+	{
+		boolean result = false;
+				
+		synchronized(_messages)
+		{
+			if (_messages.containsKey(aReceiver))
+			{
+				ArrayList<MsgData> existed = _messages.get(aReceiver);
+
+				for (MsgData msg : existed)
+				{
+					if (msg.getId().equals(aMsgId))
+					{
+						existed.remove(msg);
+						result = true;
+						
+						break;
+					}
+				}
+			}
+		}
+				
+		return result;
+	}
+	
 	private void doRelease()
 	{
 		_messages.clear();

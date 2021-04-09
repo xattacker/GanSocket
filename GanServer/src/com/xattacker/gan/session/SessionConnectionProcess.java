@@ -13,7 +13,7 @@ import com.xattacker.gan.msg.MsgManager;
 
 final class SessionConnectionProcess extends Thread
 {
-	public interface CallbackConnectionProcessListener
+	public interface SessionConnectionProcessListener
 	{
 		String getSessionId(String account);
 	}
@@ -63,6 +63,8 @@ final class SessionConnectionProcess extends Thread
 					 ArrayList<MsgData> list = MsgManager.instance().getMsgs(_account);
 					 if (list != null && !list.isEmpty())
 					 {
+						 System.out.println("try to send msg: " + list.size());
+						 
 						 for (MsgData msg : list)
 						 {
 							 ResponsePack response = new ResponsePack();

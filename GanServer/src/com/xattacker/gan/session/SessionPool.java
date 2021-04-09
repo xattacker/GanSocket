@@ -47,7 +47,14 @@ public final class SessionPool
 				if (_sessions.containsKey(aAccount))
 				{
 					SessionInfo session = _sessions.remove(aAccount);
-					session.getProcess().close();
+					try
+					{
+						session.getProcess().close();
+					}
+					catch (Exception ex)
+					{
+					}
+
 					System.out.println("account [" + aAccount + "]  was login by another connection, remove it from session pool");
 				}
 				
