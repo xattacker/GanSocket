@@ -20,6 +20,11 @@
      pod 'ObjectMapper'
   end
 
+  target 'GanClientUnitTests' do
+     inherit! :search_paths
+     pod 'ObjectMapper'
+  end
+
   target 'GanClientApp' do
      project 'GanClientApp/GanClientApp.xcodeproj'
      gan_client_app_pods
@@ -28,10 +33,6 @@
   target 'GanClient' do
      project 'GanClient/GanClient.xcodeproj'
      gan_client_pods
-
-   target 'GanClientUnitTests' do
-   	inherit! :search_paths
-   end
   end
 
 # fixed compile warning:
