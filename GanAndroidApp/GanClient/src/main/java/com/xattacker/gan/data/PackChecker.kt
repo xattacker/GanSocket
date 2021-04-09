@@ -13,20 +13,22 @@ class PackChecker
     {
         private const val HEAD = "<GAN_PACK>"
         private val HEAD_BYTE = HEAD.toByteArray()
+        private val HEAD_LENGTH = HEAD_BYTE.size
 
-        fun isValidPack(aIn: InputStream, aMarkable: Boolean = false): ValidResult
+        fun isValidPack(aIn: InputStream, waitCount: Int, aMarkable: Boolean = false): ValidResult
         {
             val result = PackChecker().ValidResult()
 
             try
             {
-                val size = aIn.available()
-                if (size < 0)
+                var wait_count = 0
+                while (aIn.available() < HEAD_LENGTH && wait_count < waitCount)
                 {
-                    throw Exception("EOF")
+                    wait_count++
+                    Thread.sleep(50)
                 }
 
-                if (size > HEAD_BYTE.size)
+                if (aIn.available() > HEAD_BYTE.size)
                 {
                     if (aIn.markSupported() && aMarkable)
                     {

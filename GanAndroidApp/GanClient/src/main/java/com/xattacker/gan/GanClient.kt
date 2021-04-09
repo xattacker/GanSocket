@@ -1,20 +1,12 @@
 package com.xattacker.gan
 
-import android.util.Log
-
-import com.xattacker.binary.BinaryBuffer
-import com.xattacker.binary.InputBinaryBuffer
-import com.xattacker.gan.data.*
-import com.xattacker.gan.data.RequestHeader
+import com.xattacker.gan.data.MessageData
 import com.xattacker.gan.service.*
-import com.xattacker.gan.service.AccountServiceListener
-import com.xattacker.gan.service.CallbackService
-import com.xattacker.json.JsonUtility
 
-import java.io.InputStream
 import java.lang.ref.WeakReference
 import java.net.InetSocketAddress
 import java.net.Socket
+
 
 final class GanClient private constructor(private val _address: String, private val _port: Int, aListener: GanClientListener) : GanAgent, AccountServiceListener, CallbackServiceListener
 {
@@ -78,9 +70,8 @@ final class GanClient private constructor(private val _address: String, private 
         try
         {
             this.session = session
-
             this.callbackService.handleConnection(socket)
-            listener?.get()?.onAccountLoggedIn(session.account)
+            this.listener?.get()?.onAccountLoggedIn(session.account)
         }
         catch (ex: Exception)
         {
@@ -90,8 +81,8 @@ final class GanClient private constructor(private val _address: String, private 
     override fun onLoggedOut(account: String)
     {
         this.session = null
-
         this.callbackService.close()
+        this.listener?.get()?.onAccountLoggedOut(account)
     }
 
     override fun onMessageReceived(message: MessageData)
@@ -101,8 +92,8 @@ final class GanClient private constructor(private val _address: String, private 
 
     private fun doRelease()
     {
-        session = null
-
+        this.session = null
+        this.listener = null
         this.callbackService.close()
     }
 }

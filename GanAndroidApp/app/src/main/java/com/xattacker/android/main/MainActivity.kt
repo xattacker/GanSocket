@@ -154,7 +154,7 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
             {
                 asyncRun(
                 {
-                        val ip = GanClient.instance?.systemService?.getIPAddress()
+                        val ip = GanClient.instance?.systemService?.getIP()
                         if (ip != null)
                         {
                             Log.i("aaa", "get IP: $ip")

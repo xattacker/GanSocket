@@ -8,7 +8,7 @@ import java.util.*
 
 class SystemService internal constructor(agent: GanAgent) : ServiceFoundation(agent)
 {
-    fun getIPAddress(): String?
+    fun getIP(): String?
     {
         var ip: String? = null
         try

@@ -63,13 +63,10 @@ internal class CallbackService internal constructor(agent: GanAgent, listener: C
             {
                 Thread.sleep(500)
 
-                val valid = PackChecker.isValidPack(ins, false)
+                val valid = PackChecker.isValidPack(ins, 50)
                 if (valid.valid && valid.length > 0)
                 {
-                    if (!wait(ins, valid.length, 50))
-                    {
-                        continue
-                    }
+                    wait(ins, valid.length, 50, socket?.receiveBufferSize ?: 0)
 
 
                     val binary = InputBinaryBuffer(ins)

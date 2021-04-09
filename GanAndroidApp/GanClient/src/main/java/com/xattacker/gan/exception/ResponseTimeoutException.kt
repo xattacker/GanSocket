@@ -1,4 +1,7 @@
 package com.xattacker.gan.exception
 
-class ResponseTimeoutException
-{}
+import java.io.IOException
+
+class ResponseTimeoutException : IOException()
+{
+}
