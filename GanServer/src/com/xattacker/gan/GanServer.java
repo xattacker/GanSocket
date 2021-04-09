@@ -14,7 +14,7 @@ public class GanServer extends Thread
 	{
 		GanServer server = new GanServer();
 		server.start();
-		System.out.println("GanServer started ~~");
+		System.out.println("GanServer started on port " + server._server.getLocalPort() + " ~~");
 	}
 
 	public GanServer() throws Exception
