@@ -3,6 +3,7 @@ package com.xattacker.gan.data
 import com.xattacker.binary.BinaryBuffer
 import com.xattacker.binary.InputBinaryBuffer
 import com.xattacker.binary.TypeConverter
+import com.xattacker.gan.exception.ResponseTimeoutException
 import java.io.InputStream
 import java.io.OutputStream
 import java.util.*
@@ -13,8 +14,10 @@ class PackChecker
     {
         private const val HEAD = "<GAN_PACK>"
         private val HEAD_BYTE = HEAD.toByteArray()
-        private val HEAD_LENGTH = HEAD_BYTE.size
+        private const val INT_LENGTH = 4
+        private val VALID_LENGTH = HEAD_BYTE.size + INT_LENGTH
 
+        @Throws(Exception::class)
         fun isValidPack(aIn: InputStream, waitCount: Int, aMarkable: Boolean = false): ValidResult
         {
             val result = PackChecker().ValidResult()
@@ -22,28 +25,30 @@ class PackChecker
             try
             {
                 var wait_count = 0
-                while (aIn.available() < HEAD_LENGTH && wait_count < waitCount)
+                while (aIn.available() < VALID_LENGTH && wait_count < waitCount)
                 {
                     wait_count++
                     Thread.sleep(50)
                 }
 
-                if (aIn.available() > HEAD_BYTE.size)
+                if (aIn.available() < VALID_LENGTH)
                 {
-                    if (aIn.markSupported() && aMarkable)
-                    {
-                        aIn.mark(HEAD_BYTE.size)
-                    }
+                    throw ResponseTimeoutException();
+                }
 
-                    val temp = ByteArray(HEAD_BYTE.size)
-                    aIn.read(temp)
-                    result.valid = Arrays.equals(HEAD_BYTE, temp)
+                if (aIn.markSupported() && aMarkable)
+                {
+                    aIn.mark(HEAD_BYTE.size)
+                }
 
-                    if (result.valid)
-                    {
-                        val buffer = InputBinaryBuffer(aIn)
-                        result.length = buffer.readInteger() ?: 0
-                    }
+                val temp = ByteArray(HEAD_BYTE.size)
+                aIn.read(temp)
+
+                result.valid = Arrays.equals(HEAD_BYTE, temp)
+                if (result.valid)
+                {
+                    val buffer = InputBinaryBuffer(aIn)
+                    result.length = buffer.readInteger() ?: 0
                 }
             }
             catch (ex: Exception)

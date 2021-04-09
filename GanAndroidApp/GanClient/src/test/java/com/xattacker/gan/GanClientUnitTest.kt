@@ -96,7 +96,7 @@ class GanClientUnitTest: GanClientListener
         val result2 = GanClient.instance?.messageService?.sendMessage(account, msg)
         assertTrue("sendMessage failed", result2 == true)
 
-        Thread.sleep(2000)
+        Thread.sleep(1500)
         assertTrue("callback onMessageReceived failed", this.gotMsg?.message?.equals(msg) == true)
     }
 
