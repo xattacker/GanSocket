@@ -29,7 +29,7 @@ internal final class CallbackService: ServiceFoundation
     
     internal func handleConnection(_ connection: SocketConnection)
     {
-        self.task = CallbackReceivingTask(connection: connection, callback: self.delegate)
+        self.task = CallbackReceivingTask(connection: connection, callbackDelegate: self.delegate)
         self.task?.start()
     }
     
@@ -49,12 +49,12 @@ internal final class CallbackService: ServiceFoundation
 internal final class CallbackReceivingTask: ImpThread
 {
     private var connection: SocketConnection?
-    private weak var callback: CallbackServiceDelegate?
+    private weak var callbackDelegate: CallbackServiceDelegate?
     
-    init(connection: SocketConnection, callback: CallbackServiceDelegate)
+    init(connection: SocketConnection, callbackDelegate: CallbackServiceDelegate)
     {
         self.connection = connection
-        self.callback = callback
+        self.callbackDelegate = callbackDelegate
     }
     
     override func run() throws
@@ -71,14 +71,14 @@ internal final class CallbackReceivingTask: ImpThread
             let valid = PackChecker.isValidPack(connection)
             if valid.valid && valid.length > 0
             {
-                guard let data2 = self.connection?.read(valid.length, timeout: 3) else
+                guard let data = connection.read(valid.length, timeout: 3) else
                 {
-                    print("read timeout, available: \(self.connection?.available() ?? 0)")
+                    print("read timeout, available: \(connection.available)")
                     continue
                 }
                 
                 
-                let buffer = BinaryBuffer(bytes: data2, length: UInt(data2.count))
+                let buffer = BinaryBuffer(bytes: data, length: UInt(data.count))
                 let response = ResponsePack()
                 if response.fromBinaryReadable(buffer)
                 {
@@ -88,14 +88,50 @@ internal final class CallbackReceivingTask: ImpThread
                             if let json = response.responseString,
                                let msg = MessageData(JSONString: json)
                             {
-                                self.callback?.onMessageReceived(message: msg)
+                                self.callbackDelegate?.onMessageReceived(message: msg)
+                                
+                                /*
+                                let ack = MessageAck()
+                                ack.id = msg.id
+                                
+                                if let ack_data = ack.toJSONString()?.data(using: String.Encoding.utf8)
+                                {
+                                    switch connection.send(data: ack_data)
+                                    {
+                                        case .success(()):
+                                            Thread.sleep(forTimeInterval: 0.5)
+                                            
+                                            let valid = PackChecker.isValidPack(connection)
+                                            guard valid.valid && valid.length > 0 else
+                                            {
+                                                continue
+                                            }
+                                            
+                                            guard let data2 = connection.read(valid.length, timeout: 5) else
+                                            {
+                                                continue
+                                            }
+                                            
+                                            let buffer2 = BinaryBuffer(bytes: data2, length: UInt(data2.count))
+                                            let response2 = ResponsePack()
+                                            if response2.fromBinaryReadable(buffer2), response2.result
+                                            {
+                                                self.callbackDelegate?.onMessageReceived(message: msg)
+                                            }
+                                            
+                                        case .failure(let error):
+                                            print(error)
+                                            continue
+                                    }
+                                }
+ */
                             }
                             break
                             
                         case .logout: // force logout
                             if let account = response.responseString
                             {
-                                self.callback?.onLoggedOut(account: account)
+                                self.callbackDelegate?.onLoggedOut(account: account)
                             }
                             
                             self.connection?.close()

@@ -21,51 +21,60 @@ public class ServiceFoundation
     {
         switch self.createSocket()
         {
-            case .success(let client):
-                let request_data = self.createRequestPack(type, request: request)
+            case .success(let connection):
+                return self.send(type, connection: connection, closeConnection: closeConnection, request: request)
                 
-                switch client.send(data: request_data)
+            case .failure(let error):
+                print(error)
+                return nil
+        }
+    }
+    
+    internal func send(
+    _ type: FunctionType,
+    connection: SocketConnection,
+    closeConnection: Bool = true,
+    request: Data? = nil) -> ResponsePack?
+    {
+        let request_data = self.createRequestPack(type, request: request)
+        
+        switch connection.send(data: request_data)
+        {
+            case .success(()):
+                let valid = PackChecker.isValidPack(connection)
+                guard valid.valid && valid.length > 0 else
                 {
-                    case .success(()):
-                        let valid = PackChecker.isValidPack(client)
-                        guard valid.valid && valid.length > 0 else
-                        {
-                            client.close()
-                            
-                            return nil
-                        }
-                        
-                        guard let data = client.read(valid.length, timeout: 5) else
-                        {
-                            client.close()
-                            
-                            return nil
-                        }
+                    connection.close()
                     
-                        if closeConnection
-                        {
-                            client.close()
-                        }
+                    return nil
+                }
+                
+                guard let data = connection.read(valid.length, timeout: 5) else
+                {
+                    connection.close()
                     
-                        let buffer = BinaryBuffer(bytes: data, length: UInt(data.count))
-                        let response = ResponsePack()
-                        if response.fromBinaryReadable(buffer)
-                        {
-                            if !closeConnection
-                            {
-                                response.connection = client
-                            }
-                            
-                            return response
-                        }
-                        else
-                        {
-                            return nil
-                        }
-                        
-                    case .failure(let error):
-                        print(error)
-                        return nil
+                    return nil
+                }
+            
+                if closeConnection
+                {
+                    connection.close()
+                }
+            
+                let buffer = BinaryBuffer(bytes: data, length: UInt(data.count))
+                let response = ResponsePack()
+                if response.fromBinaryReadable(buffer)
+                {
+                    if !closeConnection
+                    {
+                        response.connection = connection
+                    }
+                    
+                    return response
+                }
+                else
+                {
+                    return nil
                 }
                 
             case .failure(let error):

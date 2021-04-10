@@ -99,7 +99,7 @@ class GanClientUnitTests: XCTestCase
         "login failed")
               
         
-        wait(1.5)
+        wait(2.5)
         assert(self.receivedMsg?.message == msg, "receive Message failed")
         
         self.ganClient?.accountService.logout()

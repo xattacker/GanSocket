@@ -17,6 +17,7 @@ internal enum FunctionType: Int
     
     case send_sms = 101
     case receive_sms = 102
+    case receive_sms_ack = 103
     
     case get_ip = 901
     case get_system_time = 902

@@ -26,13 +26,13 @@ internal final class PackChecker
         var length = 0
         
         var wait_count = 0
-        while (connection.available() < VALID_LENGTH && wait_count < waitCount)
+        while (connection.available < VALID_LENGTH && wait_count < waitCount)
         {
             wait_count += 1
             Thread.sleep(forTimeInterval: 0.05)
         }
         
-        if connection.available() >= VALID_LENGTH,
+        if connection.available >= VALID_LENGTH,
            let data = connection.read(VALID_LENGTH, timeout: 1)
         {
             let buffer = BinaryBuffer(bytes: data, length: UInt(data.count))

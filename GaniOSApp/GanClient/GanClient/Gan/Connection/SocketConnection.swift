@@ -10,8 +10,9 @@ import Foundation
 
 internal protocol SocketConnection
 {
+    var available: Int { get }
+    
     func send(data: Data) -> Result<Void, Error>
     func read(_ expectlen: Int, timeout: Int) -> [UInt8]?
-    func available() -> Int
     func close()
 }

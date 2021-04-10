@@ -28,7 +28,7 @@ internal class ConnectionFactory
 
 extension TCPClient: SocketConnection
 {
-    func available() -> Int
+    var available: Int
     {
         return Int(self.bytesAvailable() ?? 0)
     }
