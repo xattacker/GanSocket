@@ -10,4 +10,6 @@ DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 cd "$DIR"
 
+ipconfig getifaddr en0
+
 java -Dfile.encoding=UTF-8 -classpath "lib/*" com.xattacker.gan.GanServer
