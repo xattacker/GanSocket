@@ -20,7 +20,7 @@ class GanClientUnitTests: XCTestCase
         case logouted
     }
     
-    private let address = (ip: "192.168.226.46", port: 5999)
+    private let address = (ip: "192.168.0.108", port: 5999)
     private let account = "test"
     private var accountStatus = AccountStatus.none
     private var ganClient: GanClient?
@@ -70,7 +70,13 @@ class GanClientUnitTests: XCTestCase
     func testGetIP() throws
     {
         let ip = self.ganClient?.systemService.getIP()
-        assert(ip?.count ?? 0 > 0, "getIP failed")
+        
+        // regular expression
+        let regex = #"^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"#
+        // use raw string
+        let regexPred = NSPredicate(format: "SELF MATCHES %@", regex)
+
+        assert(regexPred.evaluate(with: ip), "getIP failed")
     }
     
     func testGetTime() throws
