@@ -1,13 +1,17 @@
 package com.xattacker.gan.session;
 
+import java.io.InputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import com.xattacker.binary.InputBinaryBuffer;
 import com.xattacker.gan.data.FunctionType;
 import com.xattacker.gan.data.PackChecker;
 import com.xattacker.gan.data.ResponsePack;
+import com.xattacker.gan.msg.MsgAck;
 import com.xattacker.gan.msg.MsgData;
 import com.xattacker.gan.msg.MsgManager;
+import com.xattacker.json.JsonUtility;
 
 final class SessionConnectionProcess extends Thread
 {
@@ -16,7 +20,7 @@ final class SessionConnectionProcess extends Thread
 		String getSessionId(String account);
 	}
 	
-	
+	private final static int WAITING_COUNT = 20;
 	private String _account;
 	private String _sessionId;
 	private Socket _socket = null;
@@ -64,26 +68,59 @@ final class SessionConnectionProcess extends Thread
 				 
 				 if (MsgManager.instance() != null && MsgManager.instance().hasMsg(_account))
 				 {
-					 ArrayList<MsgData> list = MsgManager.instance().getMsgs(_account);
-					 if (list != null && !list.isEmpty())
+					 ArrayList<MsgData> messages = MsgManager.instance().getMsgs(_account);
+					 if (messages != null && !messages.isEmpty())
 					 {
-						 System.out.println("try to send msg: " + list.size());
+						 System.out.println("try to send msg: " + messages.size());
 						 
-						 for (MsgData msg : list)
+						 for (MsgData msg : messages)
 						 {
-							 ResponsePack response = new ResponsePack();
-							 response.setResult(true);
-							 response.setId(FunctionType.RECEIVE_SMS.value());
-							 response.setContent(msg.toJson().getBytes("UTF8"));
-
-							 PackChecker.packData(response, _socket.getOutputStream());
-							 
-							 System.out.println("send msg to [" + _account + "]: " + msg.getMessage());
-							 Thread.sleep(500);
+							   ResponsePack response = new ResponsePack();
+							   response.setResult(true);
+							   response.setId(FunctionType.RECEIVE_SMS.value());
+							   response.setContent(msg.toJson().getBytes("UTF8"));
+							   PackChecker.packData(response, _socket.getOutputStream());
+							   
+							   /*
+							   Thread.sleep(200);
+							   
+							   InputStream in = _socket.getInputStream();
+						      int wait_count = 0;
+						 	   final int ack_length = msg.getId().length();
+							   while (in.available() < ack_length && wait_count < WAITING_COUNT)
+							   {
+								   wait_count++;
+							 	   Thread.sleep(50);
+							   }
+							      	
+						      if (in.available() < ack_length)
+						      {
+						      	System.out.println("" + in.available() +", "+ ack_length);
+						      	continue; // if got ACK failed, try to send next msg
+						      }
+						      
+						      InputBinaryBuffer ibb = new InputBinaryBuffer(in);
+						      String json = ibb.readString();
+						      MsgAck ack = JsonUtility.fromJson(json, MsgAck.class);
+						      if (ack != null && ack.getId() != null && ack.getId().equals(msg.getId()))
+						      {
+						      	ResponsePack ack_response = new ResponsePack();
+						      	ack_response.setResult(true);
+						      	ack_response.setId(FunctionType.RECEIVE_SMS_ACK.value());
+						         PackChecker.packData(ack_response, _socket.getOutputStream());
+						         
+						      	MsgManager.instance().removeMsg(_account, ack.getId());
+						      	System.out.println("send msg to [" + _account + "]: " + msg.getMessage());
+						      }
+						      */
+						 
+							   
+								MsgManager.instance().removeMsg(_account, msg.getId());
+								System.out.println("send msg to [" + _account + "]: " + msg.getMessage());
+								
+							   Thread.sleep(500);
 						 }
 						 
-						 list.clear();
-						 list = null;
 						 System.gc();
 					 }
 				 }

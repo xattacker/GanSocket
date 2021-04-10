@@ -12,6 +12,7 @@ public enum FunctionType
 	
 	SEND_SMS(101),
 	RECEIVE_SMS(102),
+	RECEIVE_SMS_ACK(103),
 	
 	GET_IP(901),
 	GET_SYSTEM_TIME(902);

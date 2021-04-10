@@ -78,8 +78,6 @@ public final class MsgManager
 			{
 				ArrayList<MsgData> existed = _messages.get(aReceiver);
 				list = new ArrayList<MsgData>(existed);
-				
-				existed.clear();
 			}
 		}
 		
@@ -95,12 +93,16 @@ public final class MsgManager
 			if (_messages.containsKey(aReceiver))
 			{
 				ArrayList<MsgData> existed = _messages.get(aReceiver);
-
 				for (MsgData msg : existed)
 				{
 					if (msg.getId().equals(aMsgId))
 					{
 						existed.remove(msg);
+						if (existed.isEmpty())
+						{
+							_messages.remove(aReceiver);
+						}
+						
 						result = true;
 						
 						break;

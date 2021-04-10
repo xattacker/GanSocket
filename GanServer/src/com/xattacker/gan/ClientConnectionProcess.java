@@ -1,16 +1,10 @@
 package com.xattacker.gan;
 
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.Socket;
 
-import com.google.gson.GsonBuilder;
-
 import com.xattacker.binary.InputBinaryBuffer;
-import com.xattacker.binary.OutputBinaryBuffer;
 import com.xattacker.binary.TypeConverter;
-import com.xattacker.gan.data.FunctionType;
-import com.xattacker.gan.data.FunctionTypeJsonSerializer;
 import com.xattacker.gan.data.PackChecker;
 import com.xattacker.gan.data.RequestHeader;
 import com.xattacker.gan.data.ResponsePack;
@@ -18,8 +12,7 @@ import com.xattacker.gan.exception.ConnectEOFException;
 import com.xattacker.gan.msg.MsgData;
 import com.xattacker.gan.msg.MsgManager;
 import com.xattacker.gan.session.SessionPool;
-import com.xattacker.json.JsonBuilderVisitor;
-import com.xattacker.json.JsonUtility;
+
 
 public final class ClientConnectionProcess extends Thread
 {
@@ -33,7 +26,6 @@ public final class ClientConnectionProcess extends Thread
 	public void run()
 	{
 		InputStream in = null;
-		OutputStream out = null;
 		boolean close_connection = true;
 
 		while (true)
@@ -42,11 +34,13 @@ public final class ClientConnectionProcess extends Thread
 			{
 				in = _socket.getInputStream();
 				
-				PackChecker.ValidResult valid = PackChecker.isValidPack(in, 50, false);
+				final int max_waiting_count = 50;
+
+				PackChecker.ValidResult valid = PackChecker.isValidPack(in, max_waiting_count, false);
 				if (valid.valid && valid.length > 0)
 				{
 					int wait_count = 0;
-		      	while (in.available() < valid.length && wait_count < 20)
+		      	while (in.available() < valid.length && wait_count < max_waiting_count)
 		      	{
 		      		wait_count++;
 		      		Thread.sleep(50);
@@ -54,27 +48,17 @@ public final class ClientConnectionProcess extends Thread
 		      	
 		      	if (in.available() < valid.length)
 		      	{
-		      		throw new Exception("request data length not enough");
+		      		throw new ConnectEOFException();
 		      	}
 		      	
 		      	
 					ResponsePack response = null;
-					InputBinaryBuffer ibb = new InputBinaryBuffer(in);
-					String json = ibb.readString();
 					
-					RequestHeader request = JsonUtility.fromJson(json, 
-													RequestHeader.class, 		
-													new JsonBuilderVisitor() 
-													{
-														@Override
-														public void onBuilderPrepared(GsonBuilder aBuilder)
-														{
-															aBuilder.registerTypeAdapter(FunctionType.class, new FunctionTypeJsonSerializer());
-														}
-													});
-					
+					RequestHeader request = RequestHeader.parseHeader(in);
 					if (request != null)
 					{
+						InputBinaryBuffer ibb = new InputBinaryBuffer(in);
+						
 						switch (request.getType())
 						{
 							case LOGIN:
@@ -155,7 +139,7 @@ public final class ClientConnectionProcess extends Thread
 						{
 						   PackChecker.packData(response, _socket.getOutputStream());
 
-							System.out.println("send response " + response.getId());
+							System.out.println("send response " + response.getResult());
 						}
 					}
 					else
