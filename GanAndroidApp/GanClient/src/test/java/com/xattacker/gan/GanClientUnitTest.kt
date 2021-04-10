@@ -39,7 +39,7 @@ class GanClientUnitTest: GanClientListener
     {
         System.out.println(this::class.simpleName + " call setUp")
 
-        GanClient.initial("192.168.226.46", 5999, this)
+        GanClient.initial("192.168.0.108", 5999, this)
     }
 
     @After
