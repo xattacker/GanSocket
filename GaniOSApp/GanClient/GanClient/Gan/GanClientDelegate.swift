@@ -8,7 +8,7 @@
 import Foundation
 
 
-public protocol GanClientDelegate : class
+public protocol GanClientDelegate : AnyObject
 {
     func onAccountLoggedIn(account: String)
     func onAccountLoggedOut(account: String)

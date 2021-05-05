@@ -9,7 +9,7 @@
 import Foundation
 
 
-public protocol ThreadStatusDelegate: class
+public protocol ThreadStatusDelegate: AnyObject
 {
     func onThreadError(thread: ThreadBase, error: Error?)
     func onThreadEnd(thread: ThreadBase)
