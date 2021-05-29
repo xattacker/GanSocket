@@ -91,7 +91,7 @@ internal final class CallbackReceivingTask: ImpThread
                                 break
                             }
                             
-                            // send Ack response, but server side could not receive it ??!!
+                            // send Ack response
                             let ack = MessageAck()
                             ack.id = msg.id
                             
