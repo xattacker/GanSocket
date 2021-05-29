@@ -4,7 +4,7 @@ import java.io.IOException
 
 interface BinaryReadable
 {
-    fun available(): Long
+    val available: Long
 
     @Throws(IOException::class)
     fun readBinary(aLength: Int): ByteArray?

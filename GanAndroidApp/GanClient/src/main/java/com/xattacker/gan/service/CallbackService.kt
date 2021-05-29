@@ -1,11 +1,9 @@
 package com.xattacker.gan.service
 
 import android.util.Log
-import com.xattacker.binary.BinaryBuffer
 import com.xattacker.binary.InputBinaryBuffer
 import com.xattacker.gan.GanAgent
 import com.xattacker.gan.data.*
-import com.xattacker.gan.data.RequestHeader
 import com.xattacker.json.JsonUtility
 import java.lang.ref.WeakReference
 import java.net.Socket
@@ -22,6 +20,8 @@ internal class CallbackService internal constructor(agent: GanAgent, listener: C
     private var socket: Socket? = null
     private var thread: Thread? = null
     private var listener: WeakReference<CallbackServiceListener>? = null
+
+    private val ENABLE_MSG_ACK = false
 
     init
     {
@@ -83,6 +83,15 @@ internal class CallbackService internal constructor(agent: GanAgent, listener: C
                                     val json = String(it, Charsets.UTF_8)
                                     val msg = JsonUtility.fromJson(json, MessageData::class.java)
                                     listener?.get()?.onMessageReceived(msg)
+
+                                    if (ENABLE_MSG_ACK)
+                                    {
+                                        val ack = MessageAck()
+                                        ack.id = msg.id
+
+                                        PackChecker.pack(ack.toJson().toByteArray(), out)
+                                        Thread.sleep(200)
+                                    }
                                 }
                             }
 

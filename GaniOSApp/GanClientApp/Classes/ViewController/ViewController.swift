@@ -144,7 +144,7 @@ extension ViewController
     {
         guard let client = self.ganClient else
         {
-            print("GanClient is not initial !!")
+            print("GanClient is not initialed !!")
             
             return
         }

@@ -17,7 +17,8 @@ class BinaryBuffer : BinaryReadable, BinaryWritable<BinaryBuffer>
     val isEmpty: Boolean
         get() = length == 0L
 
-    private var _available: Long = 0
+    override val available: Long
+        get() = length - currentIndex
 
     constructor()
     {
@@ -28,22 +29,15 @@ class BinaryBuffer : BinaryReadable, BinaryWritable<BinaryBuffer>
     {
         data = aData
         currentIndex = 0
-        _available = (aData.size).toLong()
         length = (aData.size).toLong()
     }
 
     constructor(aBuffer: BinaryBuffer) : this(aBuffer.data)
 
-    override fun available(): Long
-    {
-        return _available
-    }
-
     fun clear()
     {
         currentIndex = 0
         data = ByteArray(0)
-        _available = 0
         length = 0
     }
 
@@ -245,7 +239,7 @@ class BinaryBuffer : BinaryReadable, BinaryWritable<BinaryBuffer>
 
     private fun append(aLength: Int)
     {
-        if (_available < currentIndex + aLength)
+        if (length < currentIndex + aLength)
         {
             val new_data = ByteArray(currentIndex.toInt() + aLength)
 
@@ -253,7 +247,7 @@ class BinaryBuffer : BinaryReadable, BinaryWritable<BinaryBuffer>
             System.arraycopy(data, 0, new_data, 0, data.size)
 
             data = new_data
-            _available = new_data.size.toLong()
+            length = new_data.size.toLong()
         }
     }
 }

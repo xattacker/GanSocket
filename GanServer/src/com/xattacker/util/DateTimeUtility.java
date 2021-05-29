@@ -9,17 +9,17 @@ public class DateTimeUtility
 {
 	public enum DateTimeFormatType
 	{
-   YEAR, // yyyy
-   MONTH_SIMPLE, // yyyyMM
-   MONTH_DATE_SIMPLE, //MMdd
-   DATE_SIMPLE, // yyyyMMdd
-   TIME_SIMPLE, // HHmmss
-   DATETIME_SIMPEL, // yyyyMMddHHmmss
-   MONTH_COMPLETE, // yyyy-MM
-   MONTH_DATE_COMPLETE, // MM-dd
-   DATE_COMPLETE, // yyyy-MM-dd
-   TIME_COMPLETE, // HH:mm:ss
-   DATETIME_COMPLETE // yyyy-MM-dd HH:mm:ss
+	   YEAR, // yyyy
+	   MONTH_SIMPLE, // yyyyMM
+	   MONTH_DATE_SIMPLE, //MMdd
+	   DATE_SIMPLE, // yyyyMMdd
+	   TIME_SIMPLE, // HHmmss
+	   DATETIME_SIMPLE, // yyyyMMddHHmmss
+	   MONTH_COMPLETE, // yyyy-MM
+	   MONTH_DATE_COMPLETE, // MM-dd
+	   DATE_COMPLETE, // yyyy-MM-dd
+	   TIME_COMPLETE, // HH:mm:ss
+	   DATETIME_COMPLETE // yyyy-MM-dd HH:mm:ss
 	}
 
 	// in order to hide constructor
@@ -73,7 +73,7 @@ public class DateTimeUtility
                format = new SimpleDateFormat("HHmmss");
                break;
 
-           case DATETIME_SIMPEL:
+           case DATETIME_SIMPLE:
                format = new SimpleDateFormat("yyyyMMddHHmmss");
                break;
 

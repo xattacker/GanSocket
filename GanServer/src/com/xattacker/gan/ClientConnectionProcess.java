@@ -138,8 +138,9 @@ public final class ClientConnectionProcess extends Thread
 						if (response != null)
 						{
 						   PackChecker.packData(response, _socket.getOutputStream());
-
 							System.out.println("send response " + response.getResult());
+							
+							break;
 						}
 					}
 					else

@@ -16,12 +16,15 @@ import android.widget.Toast
 import com.xattacker.gan.GanClient
 import com.xattacker.gan.GanClientListener
 import com.xattacker.gan.data.MessageData
+import com.xattacker.util.DateTimeFormatType
 import com.xattacker.util.DateTimeUtility
-import com.xattacker.util.DateTimeUtility.DateTimeFormatType
 import java.util.*
 
 class MainActivity() : Activity(), View.OnClickListener, GanClientListener
 {
+    private var _ipEdit: EditText? = null
+    private var _portEdit: EditText? = null
+
     private var _accountEdit: EditText? = null
     private var _pwdEdit: EditText? = null
 
@@ -33,18 +36,23 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
     {
         super.onCreate(savedInstanceState)
 
-        try
-        {
-            GanClient.initial("192.168.226.41", 5999, this)
-        }
-        catch (ex: Exception)
-        {
-            Log.i("aaa", ex.toString())
-        }
-
         val layout = LinearLayout(this)
         layout.orientation = LinearLayout.VERTICAL
         setContentView(layout)
+
+        _ipEdit = EditText(this)
+        _ipEdit?.setText("192.168.0.1")
+        layout.addView(_ipEdit)
+
+        _portEdit = EditText(this)
+        _portEdit?.setText("5999")
+        layout.addView(_portEdit)
+
+        this.loadIP("GanClient", {
+            ip: String, port: Int ->
+            _ipEdit?.setText(ip)
+            _portEdit?.setText(port.toString())
+        })
 
         _accountEdit = EditText(this)
         _accountEdit?.setText("test")
@@ -53,6 +61,8 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
         _pwdEdit = EditText(this)
         _pwdEdit?.setText("123")
         layout.addView(_pwdEdit)
+
+
         val layout2 = LinearLayout(this)
         layout2.orientation = LinearLayout.HORIZONTAL
         layout.addView(layout2)
@@ -217,6 +227,26 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
     {
         try
         {
+            if (GanClient.instance == null)
+            {
+                try
+                {
+                    val ip = _ipEdit?.text.toString()
+                    val port = _portEdit?.text.toString().toInt()
+                    GanClient.initial(ip, port, this)
+
+                    saveIP("GanClient", ip, port)
+                }
+                catch (th: Throwable)
+                {
+                    showToast("initial GanClient failed: " + th.toString())
+                    onError?.invoke(th)
+
+                    return
+                }
+            }
+
+
             object : Thread()
             {
                 override fun run()
@@ -259,7 +289,7 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
             return version
         }
 
-    private fun showToast(text: String?)
+    private fun showToast(text: String)
     {
         if (isMainThread)
         {
@@ -292,5 +322,22 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
                     "vbox86p".equals(product, ignoreCase = true) ||
                     (android_id == null) ||
                     android_id.equals("9774D56D682E549C", ignoreCase = true))
+        }
+
+        private fun loadIP(aName: String, loaded: (ip: String, port: Int) -> Unit)
+        {
+            val pref = getSharedPreferences(aName, MODE_PRIVATE)
+            val ip = pref.getString("IP", null)
+            val port = pref.getInt("PORT", 0)
+            if (ip != null && port != 0)
+            {
+                loaded(ip, port)
+            }
+        }
+
+        private fun saveIP(name: String, ip: String, port: Int)
+        {
+            val pref = getSharedPreferences(name, MODE_PRIVATE)
+            pref.edit().putString("IP", ip).putInt("PORT", port).commit()
         }
 }

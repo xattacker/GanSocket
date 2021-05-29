@@ -109,9 +109,15 @@ public final class SessionPool
 		{
 			synchronized(_sessions)
 			{
-				SessionInfo session = _sessions.remove(aAccount);
-				session.getProcess().close();
-				session.setProcess(null);
+				try
+				{
+					SessionInfo session = _sessions.remove(aAccount);
+					session.getProcess().close();
+					session.setProcess(null);
+				}
+				catch (Throwable th)
+				{
+				}
 			}
 		}
 	}

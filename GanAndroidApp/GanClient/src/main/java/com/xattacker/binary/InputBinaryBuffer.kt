@@ -13,21 +13,22 @@ class InputBinaryBuffer: Closeable, BinaryReadable
         _in = ins
     }
 
-    override fun available(): Long
-    {
-        var available = 0
-
-        try
+    override val available: Long
+        get()
         {
-            available = _in?.available() ?: 0
-        }
-        catch (ex: Exception)
-        {
-            available = 0
-        }
+            var available = 0
 
-        return available.toLong()
-    }
+            try
+            {
+                available = _in?.available() ?: 0
+            }
+            catch (ex: Exception)
+            {
+                available = 0
+            }
+
+            return available.toLong()
+        }
 
     @Throws(IOException::class)
     override fun close()
