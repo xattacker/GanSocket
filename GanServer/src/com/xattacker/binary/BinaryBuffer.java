@@ -7,7 +7,6 @@ public class BinaryBuffer implements BinaryReadable, BinaryWritable
 {	
 	private byte _data[];
 	private long _index;
-	private long _available;
 	private long _length;
 
 	public BinaryBuffer()
@@ -19,7 +18,6 @@ public class BinaryBuffer implements BinaryReadable, BinaryWritable
 	{
 		_data = aData;
 		_index = 0;
-		_available = aData != null ? aData.length : 0;
 		_length = aData != null ? aData.length : 0;
 	}
 
@@ -35,7 +33,7 @@ public class BinaryBuffer implements BinaryReadable, BinaryWritable
 	
 	public long available()
 	{
-		return _available;
+		return _length - _index;
 	}
 	
 	public long getLength()
@@ -51,8 +49,7 @@ public class BinaryBuffer implements BinaryReadable, BinaryWritable
 	public void clear()
 	{
 		_index = 0;
-		_data = null;
-		_available = 0;
+		_data = null;;
 		_length = 0;
 	}
 
@@ -242,7 +239,7 @@ public class BinaryBuffer implements BinaryReadable, BinaryWritable
 
 	private void append(int aLength)
 	{
-		if (_available < _index + aLength)
+		if (_length < _index + aLength)
 		{
 			byte[] new_data = new byte[(int)_index + aLength];
 
@@ -253,7 +250,7 @@ public class BinaryBuffer implements BinaryReadable, BinaryWritable
 			}
 
 			_data = new_data;
-			_available = new_data.length;
+			_length = new_data.length;
 		}
 	}
 }
