@@ -8,10 +8,8 @@ import java.net.InetSocketAddress
 import java.net.Socket
 
 
-final class GanClient private constructor(private val _address: String, private val _port: Int, aListener: GanClientListener) : GanAgent, AccountServiceListener, CallbackServiceListener
+final class GanClient: GanAgent, AccountServiceListener, CallbackServiceListener
 {
-    private var listener: WeakReference<GanClientListener>?
-
     override val account: String?
         get() = this.session?.account
 
@@ -24,6 +22,10 @@ final class GanClient private constructor(private val _address: String, private 
     val accountService: AccountService by lazy { AccountService(this, this) }
     val messageService: MessageService by lazy { MessageService(this) }
     val systemService: SystemService by lazy { SystemService(this) }
+
+    private val address: String
+    private val port: Int
+    private var listener: WeakReference<GanClientListener>?
 
     private val callbackService: CallbackService by lazy { CallbackService(this, this) }
     private var session: SessionInfo? = null
@@ -51,26 +53,28 @@ final class GanClient private constructor(private val _address: String, private 
         }
     }
 
-    init
+    private constructor(address: String, port: Int, listener: GanClientListener)
     {
-        listener = WeakReference(aListener)
+        this.address = address
+        this.port = port
+        this.listener = WeakReference(listener)
     }
 
     @Throws(Exception::class)
     override fun createSocket(): Socket
     {
         val socket = Socket()
-        socket.connect(InetSocketAddress(_address, _port), TIMEOUT)
+        socket.connect(InetSocketAddress(this.address, this.port), TIMEOUT)
 
         return socket
     }
 
-    override fun onLoginSucceed(session: SessionInfo, socket: Socket)
+    override fun onLoginSucceed(session: SessionInfo, connection: Socket)
     {
         try
         {
             this.session = session
-            this.callbackService.handleConnection(socket)
+            this.callbackService.handleConnection(connection)
             this.listener?.get()?.onAccountLoggedIn(session.account)
         }
         catch (ex: Exception)
