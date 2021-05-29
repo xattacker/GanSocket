@@ -21,8 +21,6 @@ internal class CallbackService internal constructor(agent: GanAgent, listener: C
     private var thread: Thread? = null
     private var listener: WeakReference<CallbackServiceListener>? = null
 
-    private val ENABLE_MSG_ACK = false
-
     init
     {
         this.listener = WeakReference(listener)
@@ -68,7 +66,6 @@ internal class CallbackService internal constructor(agent: GanAgent, listener: C
                 {
                     wait(ins, valid.length, 50, socket?.receiveBufferSize ?: 0)
 
-
                     val binary = InputBinaryBuffer(ins)
                     val response = ResponsePack()
                     response.fromBinary(binary)
@@ -84,14 +81,11 @@ internal class CallbackService internal constructor(agent: GanAgent, listener: C
                                     val msg = JsonUtility.fromJson(json, MessageData::class.java)
                                     listener?.get()?.onMessageReceived(msg)
 
-                                    if (ENABLE_MSG_ACK)
-                                    {
-                                        val ack = MessageAck()
-                                        ack.id = msg.id
+                                    val ack = MessageAck()
+                                    ack.id = msg.id
 
-                                        PackChecker.pack(ack.toJson().toByteArray(), out)
-                                        Thread.sleep(200)
-                                    }
+                                    PackChecker.pack(ack.toJson().toByteArray(), out)
+                                    Thread.sleep(200)
                                 }
                             }
 

@@ -21,7 +21,6 @@ final class SessionConnectionProcess extends Thread
 	}
 	
 	private final static int WAITING_COUNT = 20;
-	private final static boolean ENABLE_MSG_ACK = false;
 	private String _account;
 	private String _sessionId;
 	private Socket _socket = null;
@@ -64,6 +63,7 @@ final class SessionConnectionProcess extends Thread
 				 if (!isValid())
 				 {
 					 System.out.println("CallbackConnectionProcess terminated");
+					 
 					 break;
 				 }
 				 
@@ -85,32 +85,25 @@ final class SessionConnectionProcess extends Thread
 								
 							   Thread.sleep(200);
 
-								if (ENABLE_MSG_ACK)
+							   // try to receive client side's ack response
+							   InputStream in = _socket.getInputStream();  
+								PackChecker.ValidResult valid = PackChecker.isValidPack(in, WAITING_COUNT, false);
+								if (valid.valid && valid.length > 0)
 								{
-								   // try to receive client side's ack response, but could not received from iOS client ??!!
-								   InputStream in = _socket.getInputStream();  
-									PackChecker.ValidResult valid = PackChecker.isValidPack(in, WAITING_COUNT, false);
-									if (valid.valid && valid.length > 0)
-									{
-								      InputBinaryBuffer ibb = new InputBinaryBuffer(in);
-								      byte[] ack_bytes = ibb.readBinary(valid.length);
-								      String json = new String(ack_bytes);
-								      MsgAck ack = JsonUtility.fromJson(json, MsgAck.class);
-								      if (ack != null && ack.getId() != null && ack.getId().equals(msg.getId()))
-								      {
-		//						      	ResponsePack ack_response = new ResponsePack();
-		//						      	ack_response.setResult(true);
-		//						      	ack_response.setId(FunctionType.RECEIVE_SMS_ACK.value());
-		//						         PackChecker.packData(ack_response, _socket.getOutputStream());
-								         
-								      	MsgManager.instance().removeMsg(_account, ack.getId());
-								      	System.out.println("got msg ack response form [" + _account + "]");
-								      }
-									}
-								}
-								else
-								{
-									MsgManager.instance().removeMsg(_account, msg.getId());
+							      InputBinaryBuffer ibb = new InputBinaryBuffer(in);
+							      byte[] ack_bytes = ibb.readBinary(valid.length);
+							      String json = new String(ack_bytes);
+							      MsgAck ack = JsonUtility.fromJson(json, MsgAck.class);
+							      if (ack != null && ack.getId() != null && ack.getId().equals(msg.getId()))
+							      {
+	//						      	ResponsePack ack_response = new ResponsePack();
+	//						      	ack_response.setResult(true);
+	//						      	ack_response.setId(FunctionType.RECEIVE_SMS_ACK.value());
+	//						         PackChecker.packData(ack_response, _socket.getOutputStream());
+							         
+							      	MsgManager.instance().removeMsg(_account, ack.getId());
+							      	System.out.println("got msg ack response form [" + _account + "]");
+							      }
 								}
 						 }
 						 

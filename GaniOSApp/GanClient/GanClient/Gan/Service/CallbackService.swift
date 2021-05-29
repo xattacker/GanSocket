@@ -50,7 +50,7 @@ internal final class CallbackReceivingTask: ImpThread
 {
     private var connection: SocketConnection?
     private weak var callbackDelegate: CallbackServiceDelegate?
-    
+
     init(connection: SocketConnection, callbackDelegate: CallbackServiceDelegate)
     {
         self.connection = connection
@@ -85,53 +85,53 @@ internal final class CallbackReceivingTask: ImpThread
                     switch FunctionType.init(rawValue: response.id)
                     {
                         case .receive_sms:
-                            if let json = response.responseString,
-                               let msg = MessageData(JSONString: json)
+                            guard let json = response.responseString,
+                                  let msg = MessageData(JSONString: json) else
                             {
-                                self.callbackDelegate?.onMessageReceived(message: msg)
-
-/*
-                                // send Ack response, but server side could not receive it ??!!
-                                let ack = MessageAck()
-                                ack.id = msg.id
-                                
-                                guard let ack_data = ack.toJSONString()?.data(using: String.Encoding.utf8) else
-                                {
-                                    break
-                                }
-                                
-                                let buffer_ack = BinaryBuffer()
-                                PackChecker.packData(ack_data, container: buffer_ack)
-                                
-                                switch connection.send(data: buffer_ack.data)
-                                {
-                                    case .success(()):
-//                                            Thread.sleep(forTimeInterval: 0.5)
+                                break
+                            }
+                            
+                            // send Ack response, but server side could not receive it ??!!
+                            let ack = MessageAck()
+                            ack.id = msg.id
+                            
+                            guard let ack_data = ack.toJSONString()?.data(using: String.Encoding.utf8) else
+                            {
+                                break
+                            }
+                            
+                            let buffer_ack = BinaryBuffer()
+                            PackChecker.packData(ack_data, container: buffer_ack)
+                            
+                            switch connection.send(data: buffer_ack.data)
+                            {
+                                case .success(()):
+//                                    Thread.sleep(forTimeInterval: 0.5)
 //
-//                                            let valid = PackChecker.isValidPack(connection)
-//                                            guard valid.valid && valid.length > 0 else
-//                                            {
-//                                                continue
-//                                            }
+//                                    let valid = PackChecker.isValidPack(connection)
+//                                    guard valid.valid && valid.length > 0 else
+//                                    {
+//                                        continue
+//                                    }
 //
-//                                            guard let data2 = connection.read(valid.length, timeout: 5) else
-//                                            {
-//                                                continue
-//                                            }
+//                                    guard let data2 = connection.read(valid.length, timeout: 5) else
+//                                    {
+//                                        continue
+//                                    }
 //
-//                                            let buffer2 = BinaryBuffer(bytes: data2, length: UInt(data2.count))
-//                                            let response2 = ResponsePack()
-//                                            if response2.fromBinaryReadable(buffer2), response2.result
-//                                            {
-//                                                self.callbackDelegate?.onMessageReceived(message: msg)
-//                                            }
-                                        
-                                        self.callbackDelegate?.onMessageReceived(message: msg)
-                                    case .failure(let error):
-                                        print(error)
-                                        continue
-                                }
- */
+//                                    let buffer2 = BinaryBuffer(bytes: data2, length: UInt(data2.count))
+//                                    let response2 = ResponsePack()
+//                                    if response2.fromBinaryReadable(buffer2), response2.result
+//                                    {
+//                                        self.callbackDelegate?.onMessageReceived(message: msg)
+//                                    }
+                                    
+                                    self.callbackDelegate?.onMessageReceived(message: msg)
+                                    Thread.sleep(forTimeInterval: 0.2)
+                                    
+                                case .failure(let error):
+                                    print(error)
+                                    continue
                             }
                             break
                             
