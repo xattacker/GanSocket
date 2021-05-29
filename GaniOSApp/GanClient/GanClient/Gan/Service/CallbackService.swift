@@ -89,40 +89,47 @@ internal final class CallbackReceivingTask: ImpThread
                                let msg = MessageData(JSONString: json)
                             {
                                 self.callbackDelegate?.onMessageReceived(message: msg)
-                                
-                                /*
+
+/*
+                                // send Ack response, but server side could not receive it ??!!
                                 let ack = MessageAck()
                                 ack.id = msg.id
                                 
-                                if let ack_data = ack.toJSONString()?.data(using: String.Encoding.utf8)
+                                guard let ack_data = ack.toJSONString()?.data(using: String.Encoding.utf8) else
                                 {
-                                    switch connection.send(data: ack_data)
-                                    {
-                                        case .success(()):
-                                            Thread.sleep(forTimeInterval: 0.5)
-                                            
-                                            let valid = PackChecker.isValidPack(connection)
-                                            guard valid.valid && valid.length > 0 else
-                                            {
-                                                continue
-                                            }
-                                            
-                                            guard let data2 = connection.read(valid.length, timeout: 5) else
-                                            {
-                                                continue
-                                            }
-                                            
-                                            let buffer2 = BinaryBuffer(bytes: data2, length: UInt(data2.count))
-                                            let response2 = ResponsePack()
-                                            if response2.fromBinaryReadable(buffer2), response2.result
-                                            {
-                                                self.callbackDelegate?.onMessageReceived(message: msg)
-                                            }
-                                            
-                                        case .failure(let error):
-                                            print(error)
-                                            continue
-                                    }
+                                    break
+                                }
+                                
+                                let buffer_ack = BinaryBuffer()
+                                PackChecker.packData(ack_data, container: buffer_ack)
+                                
+                                switch connection.send(data: buffer_ack.data)
+                                {
+                                    case .success(()):
+//                                            Thread.sleep(forTimeInterval: 0.5)
+//
+//                                            let valid = PackChecker.isValidPack(connection)
+//                                            guard valid.valid && valid.length > 0 else
+//                                            {
+//                                                continue
+//                                            }
+//
+//                                            guard let data2 = connection.read(valid.length, timeout: 5) else
+//                                            {
+//                                                continue
+//                                            }
+//
+//                                            let buffer2 = BinaryBuffer(bytes: data2, length: UInt(data2.count))
+//                                            let response2 = ResponsePack()
+//                                            if response2.fromBinaryReadable(buffer2), response2.result
+//                                            {
+//                                                self.callbackDelegate?.onMessageReceived(message: msg)
+//                                            }
+                                        
+                                        self.callbackDelegate?.onMessageReceived(message: msg)
+                                    case .failure(let error):
+                                        print(error)
+                                        continue
                                 }
  */
                             }
