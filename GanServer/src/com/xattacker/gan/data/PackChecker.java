@@ -9,6 +9,7 @@ import com.xattacker.binary.InputBinaryBuffer;
 import com.xattacker.binary.OutputBinaryBuffer;
 import com.xattacker.binary.TypeConverter;
 import com.xattacker.gan.exception.ConnectEOFException;
+import com.xattacker.util.Logger;
 
 public final class PackChecker
 {
@@ -63,6 +64,7 @@ public final class PackChecker
       }
       catch (Exception ex)
       {
+      	Logger.instance().except(ex);
       	result.valid = false;
       }
       finally

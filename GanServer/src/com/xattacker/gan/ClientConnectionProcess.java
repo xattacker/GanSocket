@@ -12,6 +12,7 @@ import com.xattacker.gan.exception.ConnectEOFException;
 import com.xattacker.gan.msg.MsgData;
 import com.xattacker.gan.msg.MsgManager;
 import com.xattacker.gan.session.SessionPool;
+import com.xattacker.util.Logger;
 
 
 public final class ClientConnectionProcess extends Thread
@@ -65,7 +66,7 @@ public final class ClientConnectionProcess extends Thread
 							{
 								String account = ibb.readString();
 								String password = ibb.readString();
-								System.out.println("login account: " + account + "/" + password);
+								Logger.instance().debug("login account: " + account + "/" + password);
 								
 								StringBuilder session_id = new StringBuilder();
 								boolean result = SessionPool.instance().addSession(account, _socket, session_id);
@@ -79,7 +80,7 @@ public final class ClientConnectionProcess extends Thread
 									
 									String id = session_id.toString();
 									response.setContent(id.getBytes());
-									System.out.println("create session id [" + id + "] for account [" + account + "]");
+									Logger.instance().log("create session id [" + id + "] for account [" + account + "]");
 								}
 							}
 								break;
@@ -88,7 +89,7 @@ public final class ClientConnectionProcess extends Thread
 							{
 								String account = ibb.readString();
 								SessionPool.instance().removeSession(account);
-								System.out.println("account logged out: " + account);
+								Logger.instance().log("account logged out: " + account);
 								
 								response = new ResponsePack();
 								response.setResult(true);
@@ -105,7 +106,7 @@ public final class ClientConnectionProcess extends Thread
 								sms.setMessage(msg);
 								sms.setTime(System.currentTimeMillis());
 								MsgManager.instance().addMsg(receiver, sms);
-								System.out.println("got message: " + msg);
+								Logger.instance().debug("got message: " + msg);
 								
 								response = new ResponsePack();
 								response.setResult(true);
@@ -131,27 +132,27 @@ public final class ClientConnectionProcess extends Thread
 								break;
 								
 							default:
-								System.out.println("unhandled request type: " + request.getType());
+								Logger.instance().error("unhandled request type: " + request.getType());
 								break;
 						}
 						
 						if (response != null)
 						{
 						   PackChecker.packData(response, _socket.getOutputStream());
-							System.out.println("send response " + response.getResult());
+						   Logger.instance().debug("send response " + response.getResult());
 							
 							break;
 						}
 					}
 					else
 					{
-						System.out.println("invalid request pack, just ignore it");
+						Logger.instance().warn("invalid request pack, just ignore it");
 					}
 				}
 			}
 			catch (Exception ex)
 			{
-				ex.printStackTrace();
+				Logger.instance().except(ex);
 
 				break;
 			}
@@ -162,7 +163,7 @@ public final class ClientConnectionProcess extends Thread
 			close();
 		}
 		
-		System.out.println("ClientConnectionProcess ended");
+		Logger.instance().debug("ClientConnectionProcess ended");
 	}
 	
 	public void close()

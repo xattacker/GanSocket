@@ -3,6 +3,7 @@ package com.xattacker.gan.data;
 import com.xattacker.binary.BinaryReadable;
 import com.xattacker.binary.BinarySerializable2;
 import com.xattacker.binary.BinaryWritable;
+import com.xattacker.util.Logger;
 
 public class ResponsePack implements BinarySerializable2
 {
@@ -64,6 +65,7 @@ public class ResponsePack implements BinarySerializable2
 			}
 			catch (Exception ex)
 			{
+				Logger.instance().except(ex);
 			}
 		}
 	}
@@ -94,6 +96,7 @@ public class ResponsePack implements BinarySerializable2
 			}
 			catch (Exception ex)
 			{
+				Logger.instance().except(ex);
 				result = false;
 			}
 		}

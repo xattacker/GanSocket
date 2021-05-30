@@ -1,8 +1,9 @@
 package com.xattacker.gan.session;
 
 import java.net.Socket;
-import java.util.Enumeration;
 import java.util.Hashtable;
+
+import com.xattacker.util.Logger;
 
 public final class SessionPool
 {
@@ -56,7 +57,7 @@ public final class SessionPool
 					{
 					}
 
-					System.out.println("account [" + aAccount + "]  was login by another connection, remove it from session pool");
+					Logger.instance().warn("account [" + aAccount + "]  was login by another connection, remove it from session pool");
 				}
 				
 				

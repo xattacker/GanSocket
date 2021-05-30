@@ -5,6 +5,7 @@ import java.net.Socket;
 
 import com.xattacker.gan.msg.MsgManager;
 import com.xattacker.gan.session.SessionPool;
+import com.xattacker.util.Logger;
 
 public class GanServer extends Thread
 {
@@ -25,11 +26,12 @@ public class GanServer extends Thread
 			imp_version = "";
 		}
 		
-		System.out.println("GanServer " + imp_version + " started on port " + server._server.getLocalPort() + " ~~");
+		Logger.instance().log("GanServer " + imp_version + " started on port " + server._server.getLocalPort() + " ~~");
 	}
 
 	public GanServer() throws Exception
 	{
+		Logger.initial();
 		SessionPool.initial();
 		MsgManager.constructInstance();
 		
@@ -63,13 +65,13 @@ public class GanServer extends Thread
 				
 				ClientConnectionProcess process = new ClientConnectionProcess(socket);
 				process.start();
-				System.out.println("got connection");
+				Logger.instance().debug("got connection");
 				
 				Thread.sleep(500);
 			}
 			catch (Exception ex)
 			{
-				ex.printStackTrace();
+				Logger.instance().except(ex);
 			}
 		}
 	}

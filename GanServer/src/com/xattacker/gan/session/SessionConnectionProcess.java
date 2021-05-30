@@ -12,6 +12,7 @@ import com.xattacker.gan.msg.MsgAck;
 import com.xattacker.gan.msg.MsgData;
 import com.xattacker.gan.msg.MsgManager;
 import com.xattacker.json.JsonUtility;
+import com.xattacker.util.Logger;
 
 final class SessionConnectionProcess extends Thread
 {
@@ -42,7 +43,7 @@ final class SessionConnectionProcess extends Thread
 				 
 				 if (!isValid())
 				 {
-					 System.out.println("CallbackConnectionProcess terminated");
+					 Logger.instance().warn("CallbackConnectionProcess terminated");
 					 break;
 				 }
 				 
@@ -55,14 +56,14 @@ final class SessionConnectionProcess extends Thread
 					 response.setContent(_account.getBytes());
 					 
 					 PackChecker.packData(response, _socket.getOutputStream());
-					 System.out.println("closed session " + _sessionId + " for [" + _account + "]");
+					 Logger.instance().warn("closed session " + _sessionId + " for [" + _account + "]");
 
 					 break;
 				 }
 				 
 				 if (!isValid())
 				 {
-					 System.out.println("CallbackConnectionProcess terminated");
+					 Logger.instance().warn("CallbackConnectionProcess terminated");
 					 
 					 break;
 				 }
@@ -72,7 +73,7 @@ final class SessionConnectionProcess extends Thread
 					 ArrayList<MsgData> messages = MsgManager.instance().getMsgs(_account);
 					 if (messages != null && !messages.isEmpty())
 					 {
-						 System.out.println("try to send msg: " + messages.size());
+						 Logger.instance().debug("try to send msg: " + messages.size());
 						 
 						 for (MsgData msg : messages)
 						 {
@@ -81,7 +82,7 @@ final class SessionConnectionProcess extends Thread
 							   response.setId(FunctionType.RECEIVE_SMS.value());
 							   response.setContent(msg.toJson().getBytes("UTF8"));
 							   PackChecker.packData(response, _socket.getOutputStream());
-								System.out.println("send msg to [" + _account + "]: " + msg.getMessage());
+							   Logger.instance().debug("send msg to [" + _account + "]: " + msg.getMessage());
 								
 							   Thread.sleep(200);
 
@@ -102,7 +103,7 @@ final class SessionConnectionProcess extends Thread
 	//						         PackChecker.packData(ack_response, _socket.getOutputStream());
 							         
 							      	MsgManager.instance().removeMsg(_account, ack.getId());
-							      	System.out.println("got msg ack response form [" + _account + "]");
+							      	Logger.instance().debug("got msg ack response form [" + _account + "]");
 							      }
 								}
 						 }
@@ -114,10 +115,10 @@ final class SessionConnectionProcess extends Thread
 		}
 		catch (Exception ex)
 		{
-			ex.printStackTrace();
+			Logger.instance().except(ex);
 		}
 		
-		System.out.println("CallbackConnectionProcess end for account: " + _account + ", session: " + _sessionId);
+		Logger.instance().debug("CallbackConnectionProcess end for account: " + _account + ", session: " + _sessionId);
 	}
 
 	public void close()

@@ -1,6 +1,5 @@
 package com.xattacker.util
 
-import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -18,8 +17,7 @@ enum class DateTimeFormatType(internal var _value: String)
     MONTH_DATE_COMPLETE("MM-dd"),
     DATE_COMPLETE("yyyy-MM-dd"),
     TIME_COMPLETE("HH:mm:ss"),
-    DATETIME_COMPLETE("yyyy-MM-dd HH:mm:ss"),
-    DATETIME_COMPLETE_WITHOUT_SECOND("yyyy-MM-dd HH:mm");
+    DATETIME_COMPLETE("yyyy-MM-dd HH:mm:ss");
 
     companion object
     {
@@ -41,14 +39,26 @@ enum class DateTimeFormatType(internal var _value: String)
 
 object DateTimeUtility
 {
-    fun getDateTimeString(aType: DateTimeFormatType): String
+    fun getDateTimeString(aType: DateTimeFormatType, aTimeZone: TimeZone? = null): String
     {
         return getDateTimeString(Date(), aType)
     }
 
-    fun getDateTimeString(aDate: Date, aType: DateTimeFormatType): String
+    fun getDateTimeString(aDate: Date, aType: DateTimeFormatType, aTimeZone: TimeZone? = null): String
     {
-        return aType._value.format(aDate)
+        return getDateTimeString(aDate, aType._value, aTimeZone)
+    }
+
+    fun getDateTimeString(aDate: Date, aFormat: String, aTimeZone: TimeZone? = null): String
+    {
+        val format = SimpleDateFormat(aFormat)
+
+        if (aTimeZone != null)
+        {
+            format.timeZone = aTimeZone
+        }
+
+        return format.format(aDate)
     }
 
     @Throws(ParseException::class)
