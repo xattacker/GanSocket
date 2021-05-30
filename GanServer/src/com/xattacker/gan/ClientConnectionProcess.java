@@ -162,7 +162,7 @@ public final class ClientConnectionProcess extends Thread
 			close();
 		}
 		
-		System.out.println("_socket closed");
+		System.out.println("ClientConnectionProcess ended");
 	}
 	
 	public void close()
