@@ -63,7 +63,7 @@ public class GanServer extends Thread
 				socket.setOOBInline(true);
 				socket.setKeepAlive(true);
 				
-				ClientConnectionProcess process = new ClientConnectionProcess(socket);
+				ClientSocketProcess process = new ClientSocketProcess(socket);
 				process.start();
 				Logger.instance().debug("got connection");
 				

@@ -181,7 +181,7 @@ public final class Logger
 			builder.append(DateTimeUtility.getDateTimeString(DateTimeFormatType.DATETIME_COMPLETE));
 			builder.append(" ");
 			builder.append(aRecord._lv);
-			builder.append(" ");
+			builder.append(": ");
 			
 			if (aRecord._tag != null && aRecord._tag.length() > 0)
 			{

@@ -15,11 +15,11 @@ import com.xattacker.gan.session.SessionPool;
 import com.xattacker.util.Logger;
 
 
-public final class ClientConnectionProcess extends Thread
+public final class ClientSocketProcess extends Thread
 {
 	private Socket _socket = null;
 
-	public ClientConnectionProcess(Socket aSocket)
+	public ClientSocketProcess(Socket aSocket)
 	{
 		_socket = aSocket;
 	}

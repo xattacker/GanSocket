@@ -8,6 +8,7 @@
 	   <jar destfile="lib/GanServer.jar" basedir="classes">
 	        <manifest>
 	            <attribute name="Main-Class" value="com.xattacker.gan.GanServer"/>
+	            <attribute name="Class-Path" value="gson-2.8.6.jar"/>
 	        	
 	            <section name="com/xattacker/gan/">
 	               <attribute name="Specification-Title" value="GanServer" />
