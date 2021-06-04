@@ -1,114 +1,50 @@
 package com.xattacker.android.main
 
 import android.app.Activity
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
 import android.util.Log
-import android.view.Gravity
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.Toast
+
+import com.xattacker.android.main.databinding.ActivityMainBinding
 import com.xattacker.gan.GanClient
 import com.xattacker.gan.GanClientListener
 import com.xattacker.gan.data.MessageData
 import com.xattacker.util.DateTimeFormatType
 import com.xattacker.util.DateTimeUtility
+
 import java.util.*
 
-class MainActivity() : Activity(), View.OnClickListener, GanClientListener
+class MainActivity() : Activity(), GanClientListener
 {
-    private var _ipEdit: EditText? = null
-    private var _portEdit: EditText? = null
+    companion object
+    {
+        private val ACCOUNT = "test2"
+        private val PASSWORD = "test2"
+    }
 
-    private var _accountEdit: EditText? = null
-    private var _pwdEdit: EditText? = null
-
-    private var _receiverEdit: EditText? = null
-    private var _msgEdit: EditText? = null
-    private var _receivedMsgEdit: EditText? = null
+    private lateinit var binding: ActivityMainBinding
 
     public override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
 
-        val layout = LinearLayout(this)
-        layout.orientation = LinearLayout.VERTICAL
-        setContentView(layout)
+        // use view Binding mode
+        binding = ActivityMainBinding.inflate(this.layoutInflater)
+        setContentView(binding.root)
 
-        _ipEdit = EditText(this)
-        _ipEdit?.setText("192.168.0.1")
-        layout.addView(_ipEdit)
-
-        _portEdit = EditText(this)
-        _portEdit?.setText("5999")
-        layout.addView(_portEdit)
+        this.title = "GanClientApp"
 
         this.loadIP("GanClient", {
             ip: String, port: Int ->
-            _ipEdit?.setText(ip)
-            _portEdit?.setText(port.toString())
+            binding.editIp.setText(ip)
+            binding.editPort.setText(port.toString())
         })
 
-        _accountEdit = EditText(this)
-        _accountEdit?.setText("test")
-        layout.addView(_accountEdit)
-
-        _pwdEdit = EditText(this)
-        _pwdEdit?.setText("123")
-        layout.addView(_pwdEdit)
-
-
-        val layout2 = LinearLayout(this)
-        layout2.orientation = LinearLayout.HORIZONTAL
-        layout.addView(layout2)
-
-        var button = Button(this)
-        button.text = "login"
-        button.id = 1
-        button.setOnClickListener(this)
-        layout2.addView(button)
-        button = Button(this)
-        button.text = "logout"
-        button.id = 2
-        button.setOnClickListener(this)
-        layout2.addView(button)
-
-        button = Button(this)
-        button.text = "get ip"
-        button.id = 4
-        button.setOnClickListener(this)
-        layout2.addView(button)
-
-        button = Button(this)
-        button.text = "get time"
-        button.id = 5
-        button.setOnClickListener(this)
-        layout2.addView(button)
-
-        _receiverEdit = EditText(this)
-        _receiverEdit?.setText("test")
-        layout.addView(_receiverEdit)
-        _msgEdit = EditText(this)
-        _msgEdit?.setText("1231234")
-        layout.addView(_msgEdit)
-
-        button = Button(this)
-        button.text = "send sms"
-        button.id = 3
-        button.setOnClickListener(this)
-        layout.addView(button)
-
-        _receivedMsgEdit = EditText(this)
-        _receivedMsgEdit?.gravity = Gravity.TOP
-        _receivedMsgEdit?.setTextColor(Color.BLUE)
-        _receivedMsgEdit?.isEnabled = false
-        _receivedMsgEdit?.setLines(3)
-        layout.addView(_receivedMsgEdit)
+        binding.editReceiver.setText(PASSWORD)
     }
 
     public override fun onDestroy()
@@ -118,93 +54,91 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
         GanClient.release()
     }
 
-    override fun onClick(aView: View)
+    public fun onLoginClick(view: View)
     {
-        when (aView.id)
-        {
-            1 ->
+        val account = ACCOUNT
+        val pwd = PASSWORD
+
+        asyncRun(
             {
-                val account = _accountEdit?.text.toString()
-                val pwd = _pwdEdit?.text.toString()
+                val result: Boolean = GanClient.instance?.accountService?.login(account, pwd) ?: false
+                Log.i("aaa", "login $result")
+                showToast("login result: $result")
+            })
+    }
 
-                asyncRun(
-                {
-                        val result: Boolean = GanClient.instance?.accountService?.login(account, pwd) ?: false
-                        Log.i("aaa", "login $result")
-                        showToast("login result: $result")
-                })
-            }
-
-            2 ->
+    public fun onLogoutClick(view: View)
+    {
+        asyncRun(
             {
-                asyncRun(
-                {
-                        val result: Boolean = GanClient.instance?.accountService?.logout() ?: false
-                        Log.i("aaa", "logout $result")
-                        showToast("logout result: $result")
-                })
+                val result: Boolean = GanClient.instance?.accountService?.logout() ?: false
+                Log.i("aaa", "logout $result")
+                showToast("logout result: $result")
+            })
 
-                _receivedMsgEdit?.setText("")
-            }
+        binding.textGotMessage.setText("")
+    }
 
-            3 ->
+    public fun onGetIPClick(view: View)
+    {
+        asyncRun(
             {
-                val receiver = _receiverEdit?.text.toString()
-                val msg = _msgEdit?.text.toString() + System.currentTimeMillis()
-
-                asyncRun(
+                val ip = GanClient.instance?.systemService?.getIP()
+                if (ip != null)
                 {
-                        val result: Boolean = GanClient.instance?.messageService?.sendMessage(receiver, msg) ?: false
-                        Log.i("aaa", "send msg $result")
-                        showToast("send msg result: $result")
-                })
-            }
+                    Log.i("aaa", "get IP: $ip")
+                    showToast("get IP:  $ip")
+                }
+                else
+                {
+                    showToast("get IP failed ")
+                }
+            })
+    }
 
-            4 ->
+    public fun onGetTimeClick(view: View)
+    {
+        asyncRun(
             {
-                asyncRun(
+                val time = GanClient.instance?.systemService?.getSystemTime()
+                if (time != null)
                 {
-                        val ip = GanClient.instance?.systemService?.getIP()
-                        if (ip != null)
-                        {
-                            Log.i("aaa", "get IP: $ip")
-                            showToast("get IP:  $ip")
-                        }
-                        else
-                        {
-                            showToast("get IP failed ")
-                        }
-                })
-            }
+                    val time_str: String = DateTimeUtility.getDateTimeString(time, DateTimeFormatType.DATETIME_COMPLETE)
+                    Log.i("aaa", "get time: $time_str")
+                    showToast("get time:  $time_str")
+                }
+                else
+                {
+                    showToast("get time failed")
+                }
+            })
+    }
 
-            5 ->
+    public fun onSendMsgClick(view: View)
+    {
+        val receiver = binding.editReceiver.text.toString()
+        val msg = "send test message=" + System.currentTimeMillis()
+
+        asyncRun(
             {
-                asyncRun(
-                {
-                        val time = GanClient.instance?.systemService?.getSystemTime()
-                        if (time != null)
-                        {
-                            val time_str: String = DateTimeUtility.getDateTimeString(time, DateTimeFormatType.DATETIME_COMPLETE)
-                            Log.i("aaa", "get time: $time_str")
-                            showToast("get time:  $time_str")
-                        }
-                        else
-                        {
-                            showToast("get time failed")
-                        }
-                })
-            }
-        }
+                val result: Boolean = GanClient.instance?.messageService?.sendMessage(receiver, msg) ?: false
+                Log.i("aaa", "send msg $result")
+                showToast("send msg result: $result")
+            })
     }
 
     override fun onAccountLoggedIn(account: String)
     {
-        Log.i("aaa", "onAccountLogined $account")
+        Log.i("aaa", "onAccountLoggedIn $account")
+
+        this.title = account + "(loggedIn)"
     }
 
     override fun onAccountLoggedOut(account: String)
     {
-        Log.i("aaa", "onAccountClosed $account")
+        Log.i("aaa", "onAccountLoggedOut $account")
+
+        this.title = "GanClientApp"
     }
 
     override fun onMessageReceived(message: MessageData)
@@ -212,14 +146,12 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
         Log.i("aaa", "onMessageReceived $message")
 
         runOnUiThread(Runnable {
-            if (_receivedMsgEdit != null)
-            {
-                _receivedMsgEdit?.setText("")
 
-                val date = Date(message.time ?: 0)
-                _receivedMsgEdit?.append(DateTimeUtility.getDateTimeString(date, DateTimeFormatType.DATETIME_COMPLETE))
-                _receivedMsgEdit?.append("\n" + message.message)
-            }
+            binding.textGotMessage.setText("")
+
+            val date = Date(message.time ?: 0)
+            binding.textGotMessage.append(DateTimeUtility.getDateTimeString(date, DateTimeFormatType.DATETIME_COMPLETE))
+            binding.textGotMessage.append("\n" + message.message)
         })
     }
 
@@ -231,8 +163,8 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
             {
                 try
                 {
-                    val ip = _ipEdit?.text.toString()
-                    val port = _portEdit?.text.toString().toInt()
+                    val ip = binding.editIp.text.toString()
+                    val port = binding.editPort.text.toString().toInt()
                     GanClient.initial(ip, port, this)
 
                     saveIP("GanClient", ip, port)
@@ -275,20 +207,6 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
         }
     }
 
-    val appVersion: String?
-        get()
-        {
-            var version: String? = null
-            try
-            {
-                version = packageManager.getPackageInfo(packageName, 0).versionName
-            }
-            catch (ex: Exception)
-            {
-            }
-            return version
-        }
-
     private fun showToast(text: String)
     {
         if (isMainThread)
@@ -324,20 +242,20 @@ class MainActivity() : Activity(), View.OnClickListener, GanClientListener
                     android_id.equals("9774D56D682E549C", ignoreCase = true))
         }
 
-        private fun loadIP(aName: String, loaded: (ip: String, port: Int) -> Unit)
+    private fun loadIP(aName: String, loaded: (ip: String, port: Int) -> Unit)
+    {
+        val pref = getSharedPreferences(aName, MODE_PRIVATE)
+        val ip = pref.getString("IP", null)
+        val port = pref.getInt("PORT", 0)
+        if (ip != null && port != 0)
         {
-            val pref = getSharedPreferences(aName, MODE_PRIVATE)
-            val ip = pref.getString("IP", null)
-            val port = pref.getInt("PORT", 0)
-            if (ip != null && port != 0)
-            {
-                loaded(ip, port)
-            }
+            loaded(ip, port)
         }
+    }
 
-        private fun saveIP(name: String, ip: String, port: Int)
-        {
-            val pref = getSharedPreferences(name, MODE_PRIVATE)
-            pref.edit().putString("IP", ip).putInt("PORT", port).commit()
-        }
+    private fun saveIP(name: String, ip: String, port: Int)
+    {
+        val pref = getSharedPreferences(name, MODE_PRIVATE)
+        pref.edit().putString("IP", ip).putInt("PORT", port).commit()
+    }
 }

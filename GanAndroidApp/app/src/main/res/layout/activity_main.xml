@@ -1,14 +1,95 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="12dp"
+        android:weightSum="10"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edit_ip"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="6.5"
+            android:layout_marginRight="10dip"
+            android:text="" />
+
+        <EditText
+            android:id="@+id/edit_port"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="3.5"
+            android:text="5999" />
+      </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="12dp"
+        android:weightSum="6"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_login"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:layout_marginRight="10dip"
+            android:text="login"
+            android:onClick="onLoginClick"/>
+
+        <Button
+            android:id="@+id/button_logout"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="logout"
+            android:onClick="onLogoutClick"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_get_ip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dip"
+        android:text="get IP"
+        android:onClick="onGetIPClick"/>
+
+    <Button
+        android:id="@+id/button_get_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dip"
+        android:text="get time"
+        android:onClick="onGetTimeClick"/>
+
+    <EditText
+        android:id="@+id/edit_receiver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dip"
+        android:text="" />
+
+    <Button
+        android:id="@+id/button_send_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dip"
+        android:text="send message"
+        android:onClick="onSendMsgClick"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/text_got_message"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world"
-        tools:context=".MainActivity" />
+        android:layout_marginBottom="10dip"
+        android:text=""/>
 
-</RelativeLayout>
+</LinearLayout>
