@@ -98,7 +98,7 @@ abstract class ServiceFoundation protected constructor(protected var agent: GanA
     }
 
     @Throws(Exception::class)
-    protected fun readResponse(aIn: InputStream, aBos: ByteArrayOutputStream)
+    protected fun readResponse(ins: InputStream, bos: ByteArrayOutputStream)
     {
 //        val temp = ByteArray(256)
 //        var index = -1
@@ -116,24 +116,24 @@ abstract class ServiceFoundation protected constructor(protected var agent: GanA
 
         val temp = ByteArray(256)
         var index = -1
-        while (aIn.available() > 0 && aIn.read(temp).also {index = it} != -1)
+        while (ins.available() > 0 && ins.read(temp).also {index = it} != -1)
         {
-            aBos.write(temp, 0, index)
+            bos.write(temp, 0, index)
             //Thread.sleep(50);
         }
     }
 
     @Throws(Exception::class)
-    protected fun wait(aIn: InputStream, aLength: Int, aMaxTry: Int, aBufferSize: Int)
+    protected fun wait(ins: InputStream, length: Int, maxTry: Int, bufferSize: Int)
     {
         var try_count = 0
         do
         {
             Thread.sleep(50)
             try_count++
-        } while (aIn.available() < aLength && try_count < aMaxTry)
+        } while (ins.available() < length && try_count < maxTry)
 
-        if (aIn.available() < aLength && aIn.available() < aBufferSize)
+        if (ins.available() < length && ins.available() < bufferSize)
         {
             throw ResponseTimeoutException()
         }

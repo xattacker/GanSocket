@@ -6,20 +6,20 @@ import java.io.IOException
 interface BinaryWritable<T>
 {
     @Throws(IOException::class)
-    fun writeBinary(aData: ByteArray, aOffset: Int, aLength: Int): T
+    fun writeBinary(data: ByteArray, offset: Int, length: Int): T
 
     @Throws(IOException::class)
-    fun writeShort(aShort: Short): T
+    fun writeShort(short: Short): T
 
     @Throws(IOException::class)
-    fun writeInteger(aInt: Int): T
+    fun writeInteger(int: Int): T
 
     @Throws(IOException::class)
-    fun writeLong(aLong: Long): T
+    fun writeLong(long: Long): T
 
     @Throws(IOException::class)
-    fun writeDouble(aDouble: Double): T
+    fun writeDouble(double: Double): T
 
     @Throws(IOException::class)
-    fun writeString(aStr: String): T
+    fun writeString(str: String): T
 }

@@ -13,10 +13,10 @@ import java.io.InputStream
 object JsonUtility
 {
     @JvmOverloads
-    fun createGson(aVisitor: ((builder: GsonBuilder) -> Unit)? = null): Gson
+    fun createGson(visitor: ((builder: GsonBuilder) -> Unit)? = null): Gson
     {
         val builder = GsonBuilder()
-        aVisitor?.invoke(builder)
+        visitor?.invoke(builder)
 
         // ignore expose field to serialize
         builder.setExclusionStrategies(
@@ -38,26 +38,26 @@ object JsonUtility
     }
 
     @JvmOverloads
-    fun <T> fromJson(aJson: String, aToken: TypeToken<T>, aVisitor:((builder: GsonBuilder) -> Unit)? = null): T?
+    fun <T> fromJson(json: String, token: TypeToken<T>, visitor:((builder: GsonBuilder) -> Unit)? = null): T?
     {
-        val gson = createGson(aVisitor)
-        return gson.fromJson<T>(aJson, aToken.type)
+        val gson = createGson(visitor)
+        return gson.fromJson<T>(json, token.type)
     }
 
     @JvmOverloads
-    fun <T> fromJson(aJson: String, aType: Class<T>, aVisitor: ((builder: GsonBuilder) -> Unit)? = null): T
+    fun <T> fromJson(json: String, type: Class<T>, visitor: ((builder: GsonBuilder) -> Unit)? = null): T
     {
-        val gson = createGson(aVisitor)
-        return gson.fromJson(aJson, aType)
+        val gson = createGson(visitor)
+        return gson.fromJson(json, type)
     }
 
     @JvmOverloads
     @Throws(Exception::class)
     fun <T> fromJsonRes(
-            aContext: Context,
-            aRes: Int,
-            aType: Class<T>,
-            aVisitor: ((builder: GsonBuilder) -> Unit)? = null
+            context: Context,
+            res: Int,
+            type: Class<T>,
+            visitor: ((builder: GsonBuilder) -> Unit)? = null
             ): T?
     {
         var obj: T?
@@ -66,7 +66,7 @@ object JsonUtility
 
         try
         {
-            fin = aContext.resources.openRawResource(aRes)
+            fin = context.resources.openRawResource(res)
             bout = ByteArrayOutputStream()
 
             val buffer = ByteArray(256)
@@ -85,9 +85,9 @@ object JsonUtility
             }
 
             obj = fromJson(
-                    String(bout.toByteArray()),
-                    aType,
-                    aVisitor)
+                     String(bout.toByteArray()),
+                     type,
+                     visitor)
         }
         catch (ex: Exception)
         {
@@ -118,10 +118,10 @@ object JsonUtility
     @JvmOverloads
     @Throws(Exception::class)
     fun <T> fromJsonRes(
-            aContext: Context,
-            aRes: Int,
-            aToken: TypeToken<T>,
-            aVisitor: ((builder: GsonBuilder) -> Unit)?= null
+            context: Context,
+            res: Int,
+            token: TypeToken<T>,
+            visitor: ((builder: GsonBuilder) -> Unit)?= null
             ): T?
     {
         var obj: T?
@@ -130,7 +130,7 @@ object JsonUtility
 
         try
         {
-            fin = aContext.resources.openRawResource(aRes)
+            fin = context.resources.openRawResource(res)
             bout = ByteArrayOutputStream()
 
             val buffer = ByteArray(256)
@@ -149,9 +149,9 @@ object JsonUtility
             }
 
             obj = fromJson(
-                    String(bout.toByteArray()),
-                    aToken,
-                    aVisitor)
+                     String(bout.toByteArray()),
+                     token,
+                     visitor)
         }
         catch (ex: Exception)
         {

@@ -7,7 +7,7 @@ interface BinaryReadable
     val available: Long
 
     @Throws(IOException::class)
-    fun readBinary(aLength: Int): ByteArray?
+    fun readBinary(length: Int): ByteArray?
 
     @Throws(IOException::class)
     fun readShort(): Short?

@@ -12,22 +12,22 @@ class ResponsePack() : BinarySerializable2
     var response: ByteArray? = null
     var connection: Socket? = null
 
-    override fun <ByteArray>toBinary(aWritable: BinaryWritable<ByteArray>)
+    override fun <ByteArray>toBinary(writable: BinaryWritable<ByteArray>)
     {
         try
         {
-            aWritable.writeShort(if (result) 1.toShort() else 0.toShort())
-            aWritable.writeInteger(id)
+            writable.writeShort(if (result) 1.toShort() else 0.toShort())
+            writable.writeInteger(id)
 
             if (response?.size ?: 0 > 0)
             {
                 val size = response!!.size
-                aWritable.writeInteger(size)
-                aWritable.writeBinary(response!!, 0, size)
+                writable.writeInteger(size)
+                writable.writeBinary(response!!, 0, size)
             }
             else
             {
-                aWritable.writeInteger(0)
+                writable.writeInteger(0)
             }
         }
         catch (ex: Exception)
@@ -35,19 +35,19 @@ class ResponsePack() : BinarySerializable2
         }
     }
 
-    override fun fromBinary(aReadable: BinaryReadable): Boolean
+    override fun fromBinary(readable: BinaryReadable): Boolean
     {
         var succeed = false
 
         try
         {
-            this.result = aReadable.readShort()?.toInt() == 1
-            this.id = aReadable.readInteger() ?: 0
+            this.result = readable.readShort()?.toInt() == 1
+            this.id = readable.readInteger() ?: 0
 
-            val size = aReadable.readInteger() ?: 0
+            val size = readable.readInteger() ?: 0
             if (size > 0)
             {
-                response = aReadable.readBinary(size)
+                response = readable.readBinary(size)
             }
             else
             {

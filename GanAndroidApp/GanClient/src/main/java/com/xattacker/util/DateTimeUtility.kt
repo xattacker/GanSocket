@@ -39,48 +39,48 @@ enum class DateTimeFormatType(internal var _value: String)
 
 object DateTimeUtility
 {
-    fun getDateTimeString(aType: DateTimeFormatType, aTimeZone: TimeZone? = null): String
+    fun getDateTimeString(type: DateTimeFormatType, timeZone: TimeZone? = null): String
     {
-        return getDateTimeString(Date(), aType)
+        return getDateTimeString(Date(), type)
     }
 
-    fun getDateTimeString(aDate: Date, aType: DateTimeFormatType, aTimeZone: TimeZone? = null): String
+    fun getDateTimeString(aDate: Date, type: DateTimeFormatType, timeZone: TimeZone? = null): String
     {
-        return getDateTimeString(aDate, aType._value, aTimeZone)
+        return getDateTimeString(aDate, type._value, timeZone)
     }
 
-    fun getDateTimeString(aDate: Date, aFormat: String, aTimeZone: TimeZone? = null): String
+    fun getDateTimeString(aDate: Date, format: String, timeZone: TimeZone? = null): String
     {
-        val format = SimpleDateFormat(aFormat)
+        val format = SimpleDateFormat(format)
 
-        if (aTimeZone != null)
+        if (timeZone != null)
         {
-            format.timeZone = aTimeZone
+            format.timeZone = timeZone
         }
 
         return format.format(aDate)
     }
 
     @Throws(ParseException::class)
-    fun parseDate(aDateString: String, aType: DateTimeFormatType): Date?
+    fun parseDate(dateString: String, type: DateTimeFormatType): Date?
     {
-        return parseDate(aType._value, aDateString)
+        return parseDate(type._value, dateString)
     }
 
-    fun parseDate(aDateString: String, aFormat: String, aTimeZone: TimeZone? = null): Date?
+    fun parseDate(dateString: String, format: String, timeZone: TimeZone? = null): Date?
     {
         var date: Date? = null
 
         try
         {
-            val format = SimpleDateFormat(aFormat)
+            val format = SimpleDateFormat(format)
 
-            if (aTimeZone != null)
+            if (timeZone != null)
             {
-                format.timeZone = aTimeZone
+                format.timeZone = timeZone
             }
 
-            date = format.parse(aDateString)
+            date = format.parse(dateString)
         }
         catch(ex: Exception)
         {

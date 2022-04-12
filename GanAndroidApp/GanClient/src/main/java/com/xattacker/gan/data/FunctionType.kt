@@ -24,11 +24,11 @@ enum class FunctionType(private val _value: Int)
 
     companion object
     {
-        fun parse(aValue: Int): FunctionType
+        fun parse(value: Int): FunctionType
         {
             for (type in values())
             {
-                if (type.value() == aValue)
+                if (type.value() == value)
                 {
                     return type
                 }
