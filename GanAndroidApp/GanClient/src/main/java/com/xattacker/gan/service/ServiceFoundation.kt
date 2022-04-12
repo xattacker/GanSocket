@@ -17,7 +17,7 @@ abstract class ServiceFoundation protected constructor(protected var agent: GanA
 {
     private val waitCount = 100
 
-    protected fun send(aType: FunctionType, aRequest: ByteArray? = null, closeConnection: Boolean = true): ResponsePack?
+    protected fun send(type: FunctionType, request: ByteArray? = null, closeConnection: Boolean = true): ResponsePack?
     {
         var response: ResponsePack? = null
         var socket: Socket? = null
@@ -32,14 +32,14 @@ abstract class ServiceFoundation protected constructor(protected var agent: GanA
 
                 val buffer = BinaryBuffer()
                 val header = RequestHeader()
-                header.type = aType
+                header.type = type
                 header.owner = agent.account
                 header.sessionId = agent.sessionId
                 buffer.writeString(header.toJson())
 
-                if (aRequest != null && aRequest.size > 0)
+                if (request != null && request.size > 0)
                 {
-                    buffer.writeBinary(aRequest, 0, aRequest.size)
+                    buffer.writeBinary(request, 0, request.size)
                 }
 
                 PackChecker.pack(buffer.data, out)
