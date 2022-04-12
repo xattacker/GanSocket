@@ -14,6 +14,7 @@ public final class GanClient
     private let port: Int
     private weak var delegate: GanClientDelegate?
     private var sessionInfo: SessionInfo?
+    private var connectionFactory: ConnectionFactory!
     
     public var isConnected: Bool
     {
@@ -30,12 +31,14 @@ public final class GanClient
         self.address = address
         self.port = port
         self.delegate = delegate
+        self.connectionFactory = TCPConnectionFactory()
     }
     
     deinit
     {
         self.sessionInfo = nil
         self.delegate = nil
+        self.connectionFactory = nil
     }
 }
 
@@ -54,7 +57,7 @@ extension GanClient: GanAgent
     
     func createSocket() -> Result<SocketConnection, Error>
     {
-        return ConnectionFactory.createConnection(self.address, port: self.port)
+        return self.connectionFactory.createConnection(self.address, port: self.port)
     }
 }
 

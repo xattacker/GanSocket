@@ -16,3 +16,9 @@ internal protocol SocketConnection
     func read(_ expectlen: Int, timeout: Int) -> [UInt8]?
     func close()
 }
+
+
+internal protocol ConnectionFactory
+{
+    func createConnection(_ address: String, port: Int) -> Result<SocketConnection, Error>
+}

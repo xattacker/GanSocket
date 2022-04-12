@@ -1,16 +1,17 @@
 //
-//  ConnectionFactory.swift
+//  TCPConnectionFactory.swift
 //  GanClient
 //
-//  Created by xattacker on 2020/11/29.
+//  Created by xattacker.tao on 2022/4/12.
+//  
 //
 
 import Foundation
 
 
-internal class ConnectionFactory
+internal class TCPConnectionFactory: ConnectionFactory
 {
-    static func createConnection(_ address: String, port: Int) -> Result<SocketConnection, Error>
+    func createConnection(_ address: String, port: Int) -> Result<SocketConnection, Error>
     {
         let client = TCPClient(address: address, port: Int32(port))
 
