@@ -38,11 +38,11 @@ final class GanClient: GanAgent, AccountServiceListener, CallbackServiceListener
             private set
 
         @Throws(Exception::class)
-        fun initial(aAddress: String, aPort: Int, aListener: GanClientListener)
+        fun initial(address: String, port: Int, listener: GanClientListener)
         {
             if (instance == null)
             {
-                instance = GanClient(aAddress, aPort, aListener)
+                instance = GanClient(address, port, listener)
             }
         }
 
