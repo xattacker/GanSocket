@@ -1,5 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.xattacker.android.main">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
       	<!-- for network access -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -36,7 +35,8 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.xattacker.android.main.MainActivity">
+            android:name="com.xattacker.android.main.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
