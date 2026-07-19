@@ -3,13 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		15C7E54AAA06F201AE455628 /* Pods_GanClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F309BB0F499F7866C31337 /* Pods_GanClient.framework */; };
 		65D7B0DB2572D05400A1A9EB /* SocketConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D7B0D92572D05400A1A9EB /* SocketConnection.swift */; };
 		65F111D32621B1D600605DF1 /* MessageAck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F111D22621B1D600605DF1 /* MessageAck.swift */; };
+		65FD9B14300D42F50080215D /* ObjectMapper in Frameworks */ = {isa = PBXBuildFile; productRef = 65FD9B13300D42F50080215D /* ObjectMapper */; };
 		6869D90E256CA4E9001AE211 /* yudpsocket.c in Sources */ = {isa = PBXBuildFile; fileRef = 6869D909256CA4E9001AE211 /* yudpsocket.c */; };
 		6869D90F256CA4E9001AE211 /* ytcpsocket.c in Sources */ = {isa = PBXBuildFile; fileRef = 6869D90A256CA4E9001AE211 /* ytcpsocket.c */; };
 		6869D910256CA4E9001AE211 /* TCPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6869D90B256CA4E9001AE211 /* TCPClient.swift */; };
@@ -112,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65FD9B14300D42F50080215D /* ObjectMapper in Frameworks */,
 				15C7E54AAA06F201AE455628 /* Pods_GanClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -334,7 +336,6 @@
 				68908A76261FDF7300CB0865 /* Sources */,
 				68908A77261FDF7300CB0865 /* Frameworks */,
 				68908A78261FDF7300CB0865 /* Resources */,
-				353F0E1D49EAFC856A4A4525 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -372,6 +373,9 @@
 				Base,
 			);
 			mainGroup = 687D6408256B826F00A90D48;
+			packageReferences = (
+				65FD9B12300D42F50080215D /* XCRemoteSwiftPackageReference "ObjectMapper" */,
+			);
 			productRefGroup = 687D6413256B826F00A90D48 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -420,23 +424,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		353F0E1D49EAFC856A4A4525 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GanClientUnitTests/Pods-GanClientUnitTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GanClientUnitTests/Pods-GanClientUnitTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GanClientUnitTests/Pods-GanClientUnitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		58DD2F8A07AD71D17B2801F8 /* [CP] Check Pods Manifest.lock */ = {
@@ -576,7 +563,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -634,7 +621,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -765,6 +752,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		65FD9B12300D42F50080215D /* XCRemoteSwiftPackageReference "ObjectMapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tristanhimmelman/ObjectMapper";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.4.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		65FD9B13300D42F50080215D /* ObjectMapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 65FD9B12300D42F50080215D /* XCRemoteSwiftPackageReference "ObjectMapper" */;
+			productName = ObjectMapper;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 687D6409256B826F00A90D48 /* Project object */;
 }

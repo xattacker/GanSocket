@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,7 @@
 		6549F33D1B1CBFF6007B7EF6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6549F33C1B1CBFF6007B7EF6 /* Images.xcassets */; };
 		65D7B0F42572D24000A1A9EB /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D7B0F32572D24000A1A9EB /* String.swift */; };
 		65FC25FC1E02ED5600F9E38A /* MacroDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FC25FB1E02ED5600F9E38A /* MacroDefine.swift */; };
+		65FD9B11300D42DE0080215D /* ObjectMapper in Frameworks */ = {isa = PBXBuildFile; productRef = 65FD9B10300D42DE0080215D /* ObjectMapper */; };
 		681B747C256F49DD005E9309 /* DataSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681B747A256F49DD005E9309 /* DataSetting.swift */; };
 		681B747D256F49DD005E9309 /* UserDefaultSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681B747B256F49DD005E9309 /* UserDefaultSettable.swift */; };
 		681B7482256F4CFC005E9309 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681B7481256F4CFC005E9309 /* ViewController.swift */; };
@@ -56,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65FD9B11300D42DE0080215D /* ObjectMapper in Frameworks */,
 				68987BCF256B8AD800119088 /* GanClient.framework in Frameworks */,
 				654611D01B2497B7007A6AD5 /* CoreFoundation.framework in Frameworks */,
 				7DE1F14C713C71C0A19E9039 /* Pods_GanClientApp.framework in Frameworks */,
@@ -185,7 +187,6 @@
 				6549F3291B1CBFF6007B7EF6 /* Sources */,
 				6549F32A1B1CBFF6007B7EF6 /* Frameworks */,
 				6549F32B1B1CBFF6007B7EF6 /* Resources */,
-				45450AFF16001EA1DBFA9C31 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -223,6 +224,9 @@
 				"zh-Hant",
 			);
 			mainGroup = 6549F3241B1CBFF6007B7EF6;
+			packageReferences = (
+				65FD9B0F300D42DE0080215D /* XCRemoteSwiftPackageReference "ObjectMapper" */,
+			);
 			productRefGroup = 6549F32E1B1CBFF6007B7EF6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -248,30 +252,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		45450AFF16001EA1DBFA9C31 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GanClientApp/Pods-GanClientApp-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/ObjectMapper-iOS10.0/ObjectMapper.framework",
-				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GanClientApp/Pods-GanClientApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		95BEFDADC164D0A7838C17CC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -394,7 +374,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-DDEBUG -DFOO";
@@ -445,7 +425,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -461,8 +441,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.xattacker.GanClientApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Classes/GanClientApp-Bridging-Header.h";
@@ -479,8 +462,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.xattacker.GanClientApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Classes/GanClientApp-Bridging-Header.h";
@@ -511,6 +497,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		65FD9B0F300D42DE0080215D /* XCRemoteSwiftPackageReference "ObjectMapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tristanhimmelman/ObjectMapper";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.4.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		65FD9B10300D42DE0080215D /* ObjectMapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 65FD9B0F300D42DE0080215D /* XCRemoteSwiftPackageReference "ObjectMapper" */;
+			productName = ObjectMapper;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6549F3251B1CBFF6007B7EF6 /* Project object */;
 }

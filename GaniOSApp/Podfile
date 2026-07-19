@@ -10,19 +10,13 @@
   project 'GanClient/GanClient.xcodeproj'
 
   def gan_client_app_pods
-     pod 'RxSwift'
-     pod 'RxCocoa'
-
-     pod 'ObjectMapper'
   end
 
   def gan_client_pods
-     pod 'ObjectMapper'
   end
 
   target 'GanClientUnitTests' do
      inherit! :search_paths
-     pod 'ObjectMapper'
   end
 
   target 'GanClientApp' do

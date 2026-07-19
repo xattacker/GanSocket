@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
 import GanClient
 
 
@@ -20,8 +18,6 @@ class ViewController: UIViewController
     @IBOutlet private weak var msgTextView: UITextView!
     
     private var ganClient: GanClient?
-    
-    private let disposeBag = DisposeBag()
     
     override func viewDidLoad()
     {
