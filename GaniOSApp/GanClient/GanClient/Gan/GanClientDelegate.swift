@@ -14,4 +14,3 @@ public protocol GanClientDelegate : AnyObject
     func onAccountLoggedOut(account: String)
     func onMessageReceived(message: MessageData)
 }
-

@@ -128,8 +128,8 @@ class ViewController: UIViewController
 
     deinit
     {
-        _ = self.ganClient?.accountService.logout()
-        self.ganClient = nil
+//        _ = self.ganClient?.accountService.logout()
+//        self.ganClient = nil
     }
 }
 
@@ -150,7 +150,7 @@ extension ViewController
 }
 
 
-extension ViewController: GanClientDelegate
+extension ViewController: @MainActor GanClientDelegate
 {
     func onAccountLoggedIn(account: String)
     {

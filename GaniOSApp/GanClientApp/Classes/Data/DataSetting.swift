@@ -27,6 +27,7 @@ extension UserDefaults
 }
 
 
+@MainActor
 internal class DataSetting: NSObject
 {
     private(set) static var instance: DataSetting?
