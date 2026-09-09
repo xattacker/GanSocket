@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		15C7E54AAA06F201AE455628 /* Pods_GanClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F309BB0F499F7866C31337 /* Pods_GanClient.framework */; };
 		65D7B0DB2572D05400A1A9EB /* SocketConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D7B0D92572D05400A1A9EB /* SocketConnection.swift */; };
 		65F111D32621B1D600605DF1 /* MessageAck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F111D22621B1D600605DF1 /* MessageAck.swift */; };
 		65FD9B14300D42F50080215D /* ObjectMapper in Frameworks */ = {isa = PBXBuildFile; productRef = 65FD9B13300D42F50080215D /* ObjectMapper */; };
@@ -45,7 +44,6 @@
 		68C98C73256E02CF004E21BB /* ImpThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C98C71256E02CF004E21BB /* ImpThread.swift */; };
 		68C98C77256E3DE3004E21BB /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C98C76256E3DE3004E21BB /* MessageService.swift */; };
 		68C98C7B256E4DD9004E21BB /* MessageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C98C7A256E4DD9004E21BB /* MessageData.swift */; };
-		9B17EA4C20F228F797D5B17E /* Pods_GanClientUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80ED1F72E0E8681552E096F2 /* Pods_GanClientUnitTests.framework */; };
 		C5BFAA35280544D500F72059 /* TCPConnectionFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BFAA34280544D500F72059 /* TCPConnectionFactory.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,9 +58,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		26F44A6FD4FEBD47EA5C4718 /* Pods-GanClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GanClient.release.xcconfig"; path = "Target Support Files/Pods-GanClient/Pods-GanClient.release.xcconfig"; sourceTree = "<group>"; };
-		42F309BB0F499F7866C31337 /* Pods_GanClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GanClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		658A514410A8859FD7BEE9DA /* Pods-GanClientUnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GanClientUnitTests.debug.xcconfig"; path = "Target Support Files/Pods-GanClientUnitTests/Pods-GanClientUnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		65D7B0D92572D05400A1A9EB /* SocketConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketConnection.swift; sourceTree = "<group>"; };
 		65F111D22621B1D600605DF1 /* MessageAck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageAck.swift; sourceTree = "<group>"; };
 		6869D909256CA4E9001AE211 /* yudpsocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = yudpsocket.c; sourceTree = "<group>"; };
@@ -102,9 +97,6 @@
 		68C98C71256E02CF004E21BB /* ImpThread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImpThread.swift; sourceTree = "<group>"; };
 		68C98C76256E3DE3004E21BB /* MessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
 		68C98C7A256E4DD9004E21BB /* MessageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageData.swift; sourceTree = "<group>"; };
-		6A7F2A1002A83AEA3BC49C27 /* Pods-GanClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GanClient.debug.xcconfig"; path = "Target Support Files/Pods-GanClient/Pods-GanClient.debug.xcconfig"; sourceTree = "<group>"; };
-		80ED1F72E0E8681552E096F2 /* Pods_GanClientUnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GanClientUnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		ACF3FB1A807D3045F4FD27C5 /* Pods-GanClientUnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GanClientUnitTests.release.xcconfig"; path = "Target Support Files/Pods-GanClientUnitTests/Pods-GanClientUnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		C5BFAA34280544D500F72059 /* TCPConnectionFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCPConnectionFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,7 +106,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				65FD9B14300D42F50080215D /* ObjectMapper in Frameworks */,
-				15C7E54AAA06F201AE455628 /* Pods_GanClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,7 +114,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				68908A7F261FDF7300CB0865 /* GanClient.framework in Frameworks */,
-				9B17EA4C20F228F797D5B17E /* Pods_GanClientUnitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,7 +147,6 @@
 				687D6414256B826F00A90D48 /* GanClient */,
 				68908A7B261FDF7300CB0865 /* GanClientUnitTests */,
 				687D6413256B826F00A90D48 /* Products */,
-				C48274F6FEBDE5456954210A /* Pods */,
 				85D8523791EE5B7D6BF0C368 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -277,22 +266,8 @@
 		85D8523791EE5B7D6BF0C368 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				42F309BB0F499F7866C31337 /* Pods_GanClient.framework */,
-				80ED1F72E0E8681552E096F2 /* Pods_GanClientUnitTests.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		C48274F6FEBDE5456954210A /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				6A7F2A1002A83AEA3BC49C27 /* Pods-GanClient.debug.xcconfig */,
-				26F44A6FD4FEBD47EA5C4718 /* Pods-GanClient.release.xcconfig */,
-				658A514410A8859FD7BEE9DA /* Pods-GanClientUnitTests.debug.xcconfig */,
-				ACF3FB1A807D3045F4FD27C5 /* Pods-GanClientUnitTests.release.xcconfig */,
-			);
-			name = Pods;
-			path = ../Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,7 +288,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 687D641A256B826F00A90D48 /* Build configuration list for PBXNativeTarget "GanClient" */;
 			buildPhases = (
-				1545AB34B404CA9788D890C6 /* [CP] Check Pods Manifest.lock */,
 				687D640D256B826F00A90D48 /* Headers */,
 				687D640E256B826F00A90D48 /* Sources */,
 				687D640F256B826F00A90D48 /* Frameworks */,
@@ -332,7 +306,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 68908A84261FDF7300CB0865 /* Build configuration list for PBXNativeTarget "GanClientUnitTests" */;
 			buildPhases = (
-				58DD2F8A07AD71D17B2801F8 /* [CP] Check Pods Manifest.lock */,
 				68908A76261FDF7300CB0865 /* Sources */,
 				68908A77261FDF7300CB0865 /* Frameworks */,
 				68908A78261FDF7300CB0865 /* Resources */,
@@ -402,53 +375,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		1545AB34B404CA9788D890C6 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-GanClient-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		58DD2F8A07AD71D17B2801F8 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-GanClientUnitTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		687D640E256B826F00A90D48 /* Sources */ = {
@@ -637,7 +563,6 @@
 		};
 		687D641B256B826F00A90D48 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6A7F2A1002A83AEA3BC49C27 /* Pods-GanClient.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -662,7 +587,6 @@
 		};
 		687D641C256B826F00A90D48 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 26F44A6FD4FEBD47EA5C4718 /* Pods-GanClient.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -687,7 +611,6 @@
 		};
 		68908A82261FDF7300CB0865 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 658A514410A8859FD7BEE9DA /* Pods-GanClientUnitTests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = GanClientUnitTests/Info.plist;
@@ -706,7 +629,6 @@
 		};
 		68908A83261FDF7300CB0865 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ACF3FB1A807D3045F4FD27C5 /* Pods-GanClientUnitTests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = GanClientUnitTests/Info.plist;

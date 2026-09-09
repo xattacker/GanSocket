@@ -8,7 +8,7 @@
 import Foundation
 
 
-internal protocol CallbackServiceDelegate: class
+internal protocol CallbackServiceDelegate: AnyObject
 {
     func onLoggedOut(account: String)
     func onMessageReceived(message: MessageData)
